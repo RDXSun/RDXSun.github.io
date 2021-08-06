@@ -6,7 +6,7 @@
   <link href="https://rdxsun.github.io/atom.xml" rel="self"/>
   
   <link href="https://rdxsun.github.io/"/>
-  <updated>2021-08-05T04:06:56.835Z</updated>
+  <updated>2021-08-06T09:30:36.728Z</updated>
   <id>https://rdxsun.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>剑指offer03</title>
+    <link href="https://rdxsun.github.io/2021/08/06/%E5%89%91%E6%8C%87offer03/"/>
+    <id>https://rdxsun.github.io/2021/08/06/%E5%89%91%E6%8C%87offer03/</id>
+    <published>2021-08-06T08:08:55.000Z</published>
+    <updated>2021-08-06T09:30:36.728Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;介绍：找出数组中重复的数字。&lt;/p&gt;
+&lt;p&gt;在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。&lt;/p&gt;
+&lt;p&gt;示例 1：&lt;/p&gt;
+&lt;p&gt;输入：&lt;br&gt;[2, 3, 1, 0, 2, 5, 3]&lt;br&gt;输出：2 或 3 &lt;/p&gt;
+&lt;p&gt;限制：&lt;/p&gt;
+&lt;p&gt;2 &amp;lt;= n &amp;lt;= 100000&lt;/p&gt;
+&lt;p&gt;来源：力扣（LeetCode）&lt;br&gt;链接：&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof&quot;&gt;https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof&lt;/a&gt;&lt;br&gt;著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>留存纪念的介绍</title>
