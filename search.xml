@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Cpp基础知识</title>
+    <url>/2021/08/06/C-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>仅作个人笔记，侵删，通过①  <a href="https://light-city.club/sc">https://light-city.club/sc</a> ② 《C++primer》等途径复习及完全掌握C++，本文包含以下内容：</p>
+<ol>
+<li>类型修饰符const</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p><strong>原则：const离谁近，谁就不能被修改</strong></p>
+<h4 id="1-作用"><a href="#1-作用" class="headerlink" title="1 作用"></a>1 作用</h4><p><strong>（1）定义常量。</strong></p>
+<p><strong>需要注意几个问题：</strong></p>
+<p><strong>① 与C语言的区别：C值可改，C++不可改</strong></p>
+<p>  需要注意的是在C语言中，const定义的常量可以通过指针修改，但是C++不行。</p>
+<p>如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> *p = &amp;a;</span><br><span class="line">    *p = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %d&quot;</span>,a) </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：a = 1</p>
+<p>如果上面这段代码出现在C++中那么编译器会报错：<strong>试图将 const int* 型赋给 int * 型</strong>，</p>
+<p>​    若改正，则只需将 int *p 改为 const int *p (<strong>意思为(*p)的值不能改变</strong>(指针p的值可以改变）<strong>与 int * const p 有区别</strong>）</p>
+<p><strong>② 使用const定义常量时，必须初始化（因为定义后不能被修改，所以定义时必须初始化）</strong></p>
+<p><strong>（2）类型检查</strong></p>
+<p>const常量与#define宏定义常量的区别与联系：</p>
+<ol>
+<li><p>安全检查不同</p>
+<p>define的宏定义也存在类型，但是不做任何检查，仅仅是字符替换，并且在字符替换时可能会产生意想不到的错误；而const常量有明确的类型，在编译阶段会进行类型检查。</p>
+</li>
+<li><p>处理阶段不同</p>
+<p>define是在预处理阶段，define常量从未被编译器看见，因为在预处理截断就已经替换了；</p>
+</li>
+</ol>
+<p>　　const常量在编译阶段使用</p>
+<ol start="3">
+<li><p>存储方式不同</p>
+<p>define是字符替换，有多少地方使用，就会替换多少次，在内存中有若干个拷贝；</p>
+<p>编译器通常不会为const常量分配空间，只是将它们保存在符号表内，使他们成为一个编译期间的一个常量，没有读取内存的操作，效率也很高。</p>
+</li>
+</ol>
+<p>⭐注意！！：<code>const</code> 定义的变量只有类型为整数或枚举，且以常量表达式初始化时才能作为常量表达式。其他情况下它只是一个 <code>const</code> 限定的变量，不要将与常量混淆。</p>
+<p>​    </p>
+<p><strong>（3）防止修改，起保护作用，增强程序健壮性</strong>。</p>
+<p>​    比如用const修饰函数的参数，</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	i++;<span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（4）可以节省空间，避免不必要的内存分配。</strong></p>
+<p>const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是像#define一样给出的是立即数，所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干个拷贝。</p>
+<h4 id="2、-用法："><a href="#2、-用法：" class="headerlink" title="2、 用法："></a>2、 用法：</h4><p>​    </p>
+<h5 id="1-修饰变量。"><a href="#1-修饰变量。" class="headerlink" title="1.修饰变量。"></a>1.修饰变量。</h5><p>​            </p>
+]]></content>
+      <categories>
+        <category>Cpp基础</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>留存纪念的介绍</title>
     <url>/2021/08/05/hello-world/</url>
     <content><![CDATA[<p>系统生成介绍，忽略就好</p>
@@ -24,7 +80,7 @@
   <entry>
     <title>剑指offer03</title>
     <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
-    <content><![CDATA[<p>介绍：找出数组中重复的数字。</p>
+    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
 <p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
 <p>示例 1：</p>
 <p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
@@ -79,5 +135,17 @@
 <p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
 <p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
 ]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>原地置换</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>sort排序</tag>
+        <tag>map</tag>
+        <tag>unordered_map</tag>
+        <tag>原地置换</tag>
+      </tags>
   </entry>
 </search>

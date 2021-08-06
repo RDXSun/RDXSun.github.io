@@ -6,7 +6,7 @@
   <link href="https://rdxsun.github.io/atom.xml" rel="self"/>
   
   <link href="https://rdxsun.github.io/"/>
-  <updated>2021-08-06T09:30:36.728Z</updated>
+  <updated>2021-08-06T09:33:11.313Z</updated>
   <id>https://rdxsun.github.io/</id>
   
   <author>
@@ -21,10 +21,10 @@
     <link href="https://rdxsun.github.io/2021/08/06/%E5%89%91%E6%8C%87offer03/"/>
     <id>https://rdxsun.github.io/2021/08/06/%E5%89%91%E6%8C%87offer03/</id>
     <published>2021-08-06T08:08:55.000Z</published>
-    <updated>2021-08-06T09:30:36.728Z</updated>
+    <updated>2021-08-06T09:33:11.313Z</updated>
     
     
-    <summary type="html">&lt;p&gt;介绍：找出数组中重复的数字。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;&lt;strong&gt;介绍：找出数组中重复的数字。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。&lt;/p&gt;
 &lt;p&gt;示例 1：&lt;/p&gt;
 &lt;p&gt;输入：&lt;br&gt;[2, 3, 1, 0, 2, 5, 3]&lt;br&gt;输出：2 或 3 &lt;/p&gt;
@@ -34,6 +34,44 @@
     
     
     
+    <category term="leetcode" scheme="https://rdxsun.github.io/categories/leetcode/"/>
+    
+    <category term="算法" scheme="https://rdxsun.github.io/categories/leetcode/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="原地置换" scheme="https://rdxsun.github.io/categories/leetcode/%E7%AE%97%E6%B3%95/%E5%8E%9F%E5%9C%B0%E7%BD%AE%E6%8D%A2/"/>
+    
+    
+    <category term="Cpp" scheme="https://rdxsun.github.io/tags/Cpp/"/>
+    
+    <category term="sort排序" scheme="https://rdxsun.github.io/tags/sort%E6%8E%92%E5%BA%8F/"/>
+    
+    <category term="map" scheme="https://rdxsun.github.io/tags/map/"/>
+    
+    <category term="unordered_map" scheme="https://rdxsun.github.io/tags/unordered-map/"/>
+    
+    <category term="原地置换" scheme="https://rdxsun.github.io/tags/%E5%8E%9F%E5%9C%B0%E7%BD%AE%E6%8D%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Cpp基础知识</title>
+    <link href="https://rdxsun.github.io/2021/08/06/C-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>https://rdxsun.github.io/2021/08/06/C-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</id>
+    <published>2021-08-06T06:32:11.000Z</published>
+    <updated>2021-08-06T09:49:15.465Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;介绍：&lt;/strong&gt;仅作个人笔记，侵删，通过①  &lt;a href=&quot;https://light-city.club/sc&quot;&gt;https://light-city.club/sc&lt;/a&gt; ② 《C++primer》等途径复习及完全掌握C++，本文包含以下内容：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;类型修饰符const&lt;/li&gt;
+&lt;/ol&gt;</summary>
+    
+    
+    
+    <category term="Cpp基础" scheme="https://rdxsun.github.io/categories/Cpp%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="Cpp基础" scheme="https://rdxsun.github.io/tags/Cpp%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
