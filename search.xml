@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>剑指offer03</title>
+    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
+    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
+<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p>示例 1：</p>
+<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
+<p>限制：</p>
+<p>2 &lt;= n &lt;= 100000</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<span id="more"></span>
+
+<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
+<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
+<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
+<p>参数：sort（start，end，cmp）</p>
+<p>（1）若是数组：则可以sort(a, a+10)</p>
+<p>（2）若是vector：sort(a.start(), a.end() )</p>
+<p>（3）若想降序排列，可以</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
+<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
+<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
+<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
+<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
+<p>在VC中编译： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p> 在GCC中编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p>所以使用unordered_map（与map用法一致）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>发现也没有自己的解法高</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
+<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
+<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
+<p><strong>算法流程：</strong></p>
+<ol>
+<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
+<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
+<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
+<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
+</ol>
+</li>
+<li>若遍历完毕尚未返回，则返回 -1 。</li>
+</ol>
+<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
+<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>由此写出代码如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
+<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>原地置换</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>sort排序</tag>
+        <tag>哈希表</tag>
+        <tag>原地置换</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cpp基础知识</title>
     <url>/2021/08/06/C-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<p><strong>介绍：</strong>仅作个人笔记，侵删，通过①  <a href="https://light-city.club/sc">https://light-city.club/sc</a> ② 《C++primer》等途径复习及完全掌握C++，本文包含以下内容：</p>
@@ -76,76 +146,5 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>剑指offer03</title>
-    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
-    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
-<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
-<p>示例 1：</p>
-<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
-<p>限制：</p>
-<p>2 &lt;= n &lt;= 100000</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<span id="more"></span>
-
-<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
-<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
-<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
-<p>参数：sort（start，end，cmp）</p>
-<p>（1）若是数组：则可以sort(a, a+10)</p>
-<p>（2）若是vector：sort(a.start(), a.end() )</p>
-<p>（3）若想降序排列，可以</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
-
-<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
-<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
-<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
-<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
-<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
-<p>在VC中编译： </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
-
-<p> 在GCC中编译：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
-
-<p>所以使用unordered_map（与map用法一致）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>发现也没有自己的解法高</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
-<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
-<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
-<p><strong>算法流程：</strong></p>
-<ol>
-<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
-<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
-<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
-<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
-</ol>
-</li>
-<li>若遍历完毕尚未返回，则返回 -1 。</li>
-</ol>
-<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
-<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>由此写出代码如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
-<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-        <category>算法</category>
-        <category>原地置换</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>sort排序</tag>
-        <tag>map</tag>
-        <tag>unordered_map</tag>
-        <tag>原地置换</tag>
-      </tags>
   </entry>
 </search>
