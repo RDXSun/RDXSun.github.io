@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="CS BUPT" />
+       
+      <meta name="description" content="知识仓库 计算机" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>侯捷C++面向对象笔记 |  The Box of Sun</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="The Box of Sun" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-侯捷C-面向对象笔记"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  侯捷C++面向对象笔记
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/08/07/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2021-08-07T01:27:30.000Z" itemprop="datePublished">2021-08-07</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/cpp%E5%9F%BA%E7%A1%80/">cpp基础</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">6 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><strong>介绍：</strong>侯捷老师面向对象高级编程的笔记</p>
+<span id="more"></span>
+
+<h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
+<li>以良好的方式编写C++ class （基于对象）</li>
+<li>学习classes之间的关系（面向对象）</li>
+</ul>
+<h2 id="C-演化"><a href="#C-演化" class="headerlink" title="C++演化"></a>C++演化</h2><ul>
+<li>C++98（本门课主要内容）</li>
+<li>C++03</li>
+<li>C++11</li>
+<li>C++14</li>
+</ul>
+<h2 id="C-包含"><a href="#C-包含" class="headerlink" title="C++包含"></a>C++包含</h2><ul>
+<li>C++语言</li>
+<li>C++标准库（使用标准库非常重要）</li>
+</ul>
+<h1 id="需要看的书籍"><a href="#需要看的书籍" class="headerlink" title="需要看的书籍"></a>需要看的书籍</h1><p>《C++ primer》</p>
+<p>《Effective C++》</p>
+<p>《The C++ STANDARD LIBRARY》</p>
+<p>《STL源码剖析》</p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><h3 id="零-C-与C的区别以及C-的数据和函数"><a href="#零-C-与C的区别以及C-的数据和函数" class="headerlink" title="零 C++与C的区别以及C++的数据和函数"></a>零 C++与C的区别以及C++的数据和函数</h3><p>C++的struct几乎等同于Class</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807102745.png" style="zoom:50%;" />
+
+<h3 id="一-头文件与类的声明"><a href="#一-头文件与类的声明" class="headerlink" title="一 头文件与类的声明"></a>一 头文件与类的声明</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807103109.png" style="zoom: 50%;" />
+
+<p>标准库用&lt;&gt;，自己声明的库为” “</p>
+<p>关于头文件标准库的写法</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807103337.png" style="zoom:50%;" />
+
+<p>把cout想象成一个屏幕，那“i=”这些就是往cout（屏幕）丢‘</p>
+<h4 id="头文件的正规写法"><a href="#头文件的正规写法" class="headerlink" title="头文件的正规写法"></a>头文件的正规写法</h4><p>防卫式声明（guard）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __COMPLEX__  <span class="comment">//if not define 这个变量，那么就define它；如果define了，就不会重复进行</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __COMPLES__</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>编译器对头文件进行以下预处理：</p>
+<ol>
+<li> 编译器将处理掉所有注释，以空格代替；</li>
+<li> 删除#define，展开所有宏定义；</li>
+<li> 处理条件编译指令#if、#ifdef、#elif、#else、#endif；</li>
+<li> 处理#include，展开被包含的头文件（直接将头文件复制进文件）</li>
+<li> 保留编译器需要使用的#progma指令等等。</li>
+</ol>
+<p>从第四点可知，如果不对头文件进行防卫式声明，那么可能会对某一个头文件进行多次处理，势必会产生重复定义和声明，也会让文件的大小变得很庞大（因为多次将头文件内容进行复制）。</p>
+<h4 id="头文件的布局"><a href="#头文件的布局" class="headerlink" title="头文件的布局"></a>头文件的布局</h4><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210807112506731.png" alt="image-20210807112506731" style="zoom: 50%;" />
+
+<h4 id="class的声明"><a href="#class的声明" class="headerlink" title="class的声明"></a>class的声明</h4><p>函数可以在声明内部定义，也可以在body之外定义</p>
+<img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210807112632635.png" alt="image-20210807112632635" style="zoom: 50%;" />
+
+<p><strong>如果要设计另外一个复数，里面的re和im不是double，是float的，那应该怎么办？多定义一个class又麻烦</strong></p>
+<h4 id="使用模板class-template"><a href="#使用模板class-template" class="headerlink" title="使用模板class template"></a>使用模板class template</h4><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807112822.png" style="zoom:67%;" />
+
+<p>上面是声明，下面是使用</p>
+<hr>
+<h3 id="二-inline（内联）函数"><a href="#二-inline（内联）函数" class="headerlink" title="二 inline（内联）函数"></a>二 inline（内联）函数</h3><p>像上图，real和imag函数在函数内部定义完成，成为<strong>inline候选人</strong>。<strong>如果函数是一个inline function，会比较快而且好。</strong>但是有些function就算写成inline，编译器也没有能力把它做成inline，分界点就在于：函数如果太复杂就没办法了。（<strong>是不是inline由编译器来决定，程序员是不知道的，只能通过复杂或简单来主观判断</strong>）</p>
+<p>如果不在body内定义，想要做成inline的话，可以如下写：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">double</span></span></span><br><span class="line"><span class="function"><span class="title">image</span><span class="params">(<span class="keyword">const</span> complex &amp;x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.<span class="built_in">imag</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="三-access-level（访问级别）"><a href="#三-access-level（访问级别）" class="headerlink" title="三 access level（访问级别）"></a>三 access level（访问级别）</h3><p><strong>public、private和protected</strong></p>
+<p>C++的数据应该private（只给自己用），而函数一般public，也有自己用的是private。而public和private并不是一定要分成两段，可以写多个。</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807114114.png" style="zoom:80%;" />
+
+<p>如上如所示，re和im是private的，所以不能直接通过对象来拿他的数据，但是可以通过函数real和imag来拿。</p>
+<hr>
+<h3 id="四-构造函数"><a href="#四-构造函数" class="headerlink" title="四 构造函数"></a>四 构造函数</h3><p>构造函数不需要有返回类型，因为就是要创建对象的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">complex</span>(<span class="keyword">double</span> r = <span class="number">0</span>, <span class="keyword">double</span> i = <span class="number">0</span> )&#123; <span class="comment">//默认参数，default argument，若是初始化不添加参数则为默认值</span></span><br><span class="line">        re = r;</span><br><span class="line">        im = i;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> re, im;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只有构造函数才有的写法，大气的特殊写法：<strong>初值列，初始列</strong>，如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">complex</span>(<span class="keyword">double</span> r = <span class="number">0</span>, <span class="keyword">double</span> i = <span class="number">0</span> )</span><br><span class="line">    : <span class="built_in">re</span>(r), <span class="built_in">im</span>(i) <span class="comment">//这样相当于赋值，但是最准确的是设初值，</span></span><br><span class="line">    &#123; &#125;</span><br><span class="line">   	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> re, im;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样书写效率比上面那种直接赋值的要高很多，最后结果是一样的。这两种的区别简单讲起来就是一个变量的值来源于两个阶段：初始化和赋值，上面的初始列就相当于设置初值。如果不在冒号后面做而是在大括号里做，就相当于放弃了初始化这件事，效率差（<strong>这里有问题：为什么效率差了一些</strong>）。</p>
+<p>冒号后面能做很多事，最常看见的就是初始化。</p>
+<p><strong>对象的创建</strong>有多种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">complex c1(2,1);</span><br><span class="line">complex c2; //没有赋值则是默认值</span><br><span class="line">complex* p = new complex(4);</span><br></pre></td></tr></table></figure>
+
+<p>在程序里不能直接调用构造函数，只能从对象的创建时顺带调用。</p>
+<p>与构造函数相反的是，析构函数，<strong>class有两种经典分类：带指针和不带指针，而上述截图的就是不带指针的，不带指针的类多半不用写析构函数，因为不需要释放内存。</strong></p>
+<h4 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h4><p>构造函数可以有很多个——overloading（重载）。就算函数名字相同，编译后的实际名称是不同的（所以在编译器是不会有名字相同的函数的），如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807201626.png"></p>
+<p>两个real函数在编译后的实际名称不同。</p>
+<p>在上述代码中要注意，两个complex构造函数能不能这样写呢？<strong>不行！</strong>因为第一个complex构造函数<strong>有默认值</strong>，比如如果创建对象<code>complex c1;</code>不给参数，两个构造函数都能调用，所以这时候就不允许2这么写。</p>
+<h4 id="把构造函数放入private区"><a href="#把构造函数放入private区" class="headerlink" title="把构造函数放入private区"></a>把构造函数放入private区</h4><p>这样子就不能创建对象，但<strong>还是会有人将构造函数放入private区</strong>中。</p>
+<p>如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807203331.png" style="zoom:80%;" />
+
+<p>class A的实例只有一份，不允许别人创建，而那一份需要通过getInstance来取得。这种写法<strong>叫Singleton</strong></p>
+<hr>
+<h3 id="五-常量成员函数"><a href="#五-常量成员函数" class="headerlink" title="五 常量成员函数"></a>五 常量成员函数</h3><p>const member functions，如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">real</span> <span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> re;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">imag</span> <span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> im;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">double</span> re, im;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在class里的函数会分为：<strong>会改变private数据和不会改变数据的函数</strong>。上述就是不会改变数据内容的，所以声明时<strong>一定要加const</strong>，<strong>不加会有什么后果？</strong></p>
+<p>如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807204228.png"></p>
+<p>对于右边的对象实例化，由于用const声明，所以c1是一个不可改变的对象。但是如果read和imag没有加const的话，就说明这个对象可能会被改变，<strong>这与对象的不可修改性矛盾</strong>，所以不让其调用这个函数。</p>
+<hr>
+<h3 id="六-参数传递：pass-by-value-vs-pass-by-reference-to-const"><a href="#六-参数传递：pass-by-value-vs-pass-by-reference-to-const" class="headerlink" title="六 参数传递：pass by value vs. pass by reference(to const)"></a>六 参数传递：pass by value vs. pass by reference(to const)</h3><p>pass by value就是把整个变量都压入栈中，若是这个变量超级大，那就不好。</p>
+<p>所以如果传引用（pass by reference）的话，就是传这个变量在内存中的地址，传引用就相当于传指针，所以<strong>最好都是传引用</strong>。</p>
+<p>但是传引用在函数内部修改会影响函数外部，所以出现了<strong>pass by reference to const</strong>，这样如果函数内部修改引用处内容<strong>就会出错</strong>，如下就是参数传递的三种形式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807205121.png"></p>
+<h3 id="七-返回值传递：return-by-value-vs-return-by-reference（to-const）"><a href="#七-返回值传递：return-by-value-vs-return-by-reference（to-const）" class="headerlink" title="七 返回值传递：return by value vs. return by reference（to const）"></a>七 返回值传递：return by value vs. return by reference（to const）</h3><p>下图是一些用法，有&amp;就是by reference</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807205729.png"></p>
+<p>虽然这个点很小，但是<strong>会影响程序运行的效率</strong>。返回值也<strong>尽量by reference</strong></p>
+<p><strong>但也有时候不可以，这个问题留待后讲</strong></p>
+<hr>
+<h3 id="八-friend-友元"><a href="#八-friend-友元" class="headerlink" title="八 friend 友元"></a>八 friend 友元</h3><p>类比于日常身份的朋友，日常的朋友可以来拿钱，而类比后就是拿数据。</p>
+<p>比如上面的friend声明了__doapl是complex的朋友，于是就可以直接拿数据，如下直接就可以引用complex的数据：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807213842.png"></p>
+<p>如果通过函数来拿就会慢一点，用friend就会快。</p>
+<p>一个很</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rdxsun.github.io/2021/08/07/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cpp%E5%9F%BA%E7%A1%80/" rel="tag">Cpp基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/" rel="tag">侯捷课程</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/08/06/%E5%89%91%E6%8C%87offer03/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">剑指offer03</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2021
+        <i class="ri-heart-fill heart_icon"></i> 孙震
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='src=&#34;https://s9.cnzz.com/z_stat.php?id=1280186316&amp;web_id=1280186316'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="The Box of Sun"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友情链接</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+ 
+<script src="/js/clickBoom2.js"></script>
+ 
+<!-- CodeCopy -->
+
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
