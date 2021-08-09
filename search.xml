@@ -127,28 +127,7 @@
       </tags>
   </entry>
   <entry>
-    <title>留存纪念的介绍</title>
-    <url>/2021/08/05/hello-world/</url>
-    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
-<span id="more"></span>
-
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>侯捷C++面向对象笔记</title>
+    <title>侯捷C++面向对象笔记（一）不带指针类的部分</title>
     <url>/2021/08/07/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><strong>介绍：</strong>侯捷老师面向对象高级编程的笔记</p>
 <span id="more"></span>
@@ -255,12 +234,54 @@
 <p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807205729.png"></p>
 <p>虽然这个点很小，但是<strong>会影响程序运行的效率</strong>。返回值也<strong>尽量by reference</strong></p>
 <p><strong>但也有时候不可以，这个问题留待后讲</strong></p>
+<h4 id="什么时候不能return-by-reference"><a href="#什么时候不能return-by-reference" class="headerlink" title="什么时候不能return by reference"></a>什么时候不能return by reference</h4><p>函数返回值有两种情况：</p>
+<p>① 必须新建一个变量来存储返回值。</p>
+<p>② 可以将返回值存储至传进来的参数里面。</p>
+<p>很明显第一种情况不能传引用，因为这个变量所在的内存在函数结束后就被释放了，所以第一种情况就不能传引用。如下是一个可传引用的例子：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808123311.png"></p>
+<h4 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808124625.png"></p>
+<p>上图代码，定义的函数是&amp;传引用的，但是return确实指针所指向的东西，那这样对吗？<strong>对的！</strong></p>
+<p>虽然我返回的是value，但是<strong>传递者无需知道接收者以reference形式接收</strong>。</p>
+<p>比如上面的*ths就是传递者，而complex就是接收端。</p>
+<p>再比如<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808124948.png"></p>
+<p>c1是传递者，const complex &amp;r是接收者，那c1也不需要管传的是value还是reference，这就是reference的好处。</p>
+<p>**连串赋值c3+=c2+=c1;**分析</p>
+<p>先是c1加到c2，c2再加到c3。但是上面重载时，如果返回类型是void，那c2就无法加到c3，所以对于操作符重载的时候要考虑连串赋值的问题。</p>
 <hr>
 <h3 id="八-friend-友元"><a href="#八-friend-友元" class="headerlink" title="八 friend 友元"></a>八 friend 友元</h3><p>类比于日常身份的朋友，日常的朋友可以来拿钱，而类比后就是拿数据。</p>
 <p>比如上面的friend声明了__doapl是complex的朋友，于是就可以直接拿数据，如下直接就可以引用complex的数据：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807213842.png"></p>
-<p>如果通过函数来拿就会慢一点，用friend就会快。</p>
-<p>一个很</p>
+<p>如果通过函数来拿就会慢一点，用friend就会快。朋友不能太多，因为friend是打开了封装，而C++就是封装的。</p>
+<h4 id="一个很重要的问题：相同class的各个objects互为friends"><a href="#一个很重要的问题：相同class的各个objects互为friends" class="headerlink" title="一个很重要的问题：相同class的各个objects互为friends"></a>一个很重要的问题：相同class的各个objects互为friends</h4><p>所以以下的行为（直接调用另一个对象的数据）看似打破了封装，但是也是成立的。</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808120159.png" style="zoom:67%;" />
+
+
+
+<hr>
+<h3 id="总结-设计一个类注意的地方"><a href="#总结-设计一个类注意的地方" class="headerlink" title="总结 设计一个类注意的地方"></a>总结 设计一个类注意的地方</h3><p>1、数据一定放在private里</p>
+<p>2、参数尽可能的以reference来传</p>
+<p>3、返回值尽可能以reference来传</p>
+<p>4、在类里面的函数要加一定要加const</p>
+<p>5、构造函数尽量用初始列</p>
+<hr>
+<h3 id="九-操作符重载"><a href="#九-操作符重载" class="headerlink" title="九 操作符重载"></a>九 操作符重载</h3><p>是C++很重要的特性，在C++里面，操作符（比如+、-等）相当于函数，可以对操作符进行重载。</p>
+<h4 id="操作符重载一：成员函数"><a href="#操作符重载一：成员函数" class="headerlink" title="操作符重载一：成员函数"></a>操作符重载一：成员函数</h4><p>+=是二元操作符，如c2+=c1，所有的操作符只要有左右的，都是作用到左边，而调用操作符函数的规则也一样。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808123856.png"></p>
+<p>图中两个函数是一样的，this是所有成员函数都会带有的隐藏变量（<strong>写代码不能写也不必写出来</strong>），调用者就是this，比如c2+=c1，c2调用函数，则c2就是this，this是一个指针。</p>
+<h4 id="操作符重载二：非成员函数（无this）"><a href="#操作符重载二：非成员函数（无this）" class="headerlink" title="操作符重载二：非成员函数（无this）"></a>操作符重载二：非成员函数（无this）</h4><p>如下是虚数加法的三种写法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808155703.png"></p>
+<h5 id="问题：为什么上面不用reference而是value？"><a href="#问题：为什么上面不用reference而是value？" class="headerlink" title="问题：为什么上面不用reference而是value？"></a>问题：为什么上面不用reference而是value？</h5><p>上面的函数绝不可以return by reference，因为它们返回必定是local object，因为加好之后肯定是需要在外面创个东西来存储。</p>
+<h5 id="typename直接加小括号是创建“临时对象”（temp-object）"><a href="#typename直接加小括号是创建“临时对象”（temp-object）" class="headerlink" title="typename直接加小括号是创建“临时对象”（temp object）"></a>typename直接加小括号是创建“临时对象”（temp object）</h5><p>该临时对象在下一行就消失了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809162544.png"></p>
+<p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809162618745.png" alt="image-20210809162618745"></p>
+<p>上面最后三个也是临时变量，只有一行的生命周期。</p>
+<p><strong>对于特殊操作符&lt;&lt;，只能选择全局函数</strong>，因为cout是早就有的，不可能认识新的类型？（没理解）</p>
+<p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809163613689.png" alt="image-20210809163613689"></p>
+<p>上面这个函数不能用const来修饰，虽然看起来没有更改，但是在输出至os的时候，会改变os的状态。（ostream本身决定的）</p>
+<p>虽然没有人关心输出的是什么，可以用void，但是如果连串输出的时候不能是void，所以最后还要用ostream。</p>
+<p>因为os不是函数内部创建的，所以可以return by reference</p>
+<hr>
+<h3 id="十-class-body之外的各种定义"><a href="#十-class-body之外的各种定义" class="headerlink" title="十 class body之外的各种定义"></a>十 class body之外的各种定义</h3><p>class body外的函数分为两种函数：成员函数或全局函数</p>
 ]]></content>
       <categories>
         <category>cpp基础</category>
@@ -269,5 +290,26 @@
         <tag>Cpp基础</tag>
         <tag>侯捷课程</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>留存纪念的介绍</title>
+    <url>/2021/08/05/hello-world/</url>
+    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
+<span id="more"></span>
+
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
 </search>
