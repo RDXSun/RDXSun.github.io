@@ -1,153 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Cpp基础知识</title>
-    <url>/2021/08/06/C-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>仅作个人笔记，侵删，通过①  <a href="https://light-city.club/sc">https://light-city.club/sc</a> ② 《C++primer》等途径复习及完全掌握C++，本文包含以下内容：</p>
-<ol>
-<li>类型修饰符const</li>
-</ol>
-<span id="more"></span>
-
-<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p><strong>原则：const离谁近，谁就不能被修改</strong></p>
-<h4 id="1-作用"><a href="#1-作用" class="headerlink" title="1 作用"></a>1 作用</h4><p><strong>（1）定义常量。</strong></p>
-<p><strong>需要注意几个问题：</strong></p>
-<p><strong>① 与C语言的区别：C值可改，C++不可改</strong></p>
-<p>  需要注意的是在C语言中，const定义的常量可以通过指针修改，但是C++不行。</p>
-<p>如下：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> *p = &amp;a;</span><br><span class="line">    *p = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %d&quot;</span>,a) </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出：a = 1</p>
-<p>如果上面这段代码出现在C++中那么编译器会报错：<strong>试图将 const int* 型赋给 int * 型</strong>，</p>
-<p>​    若改正，则只需将 int *p 改为 const int *p (<strong>意思为(*p)的值不能改变</strong>(指针p的值可以改变）<strong>与 int * const p 有区别</strong>）</p>
-<p><strong>② 使用const定义常量时，必须初始化（因为定义后不能被修改，所以定义时必须初始化）</strong></p>
-<p><strong>（2）类型检查</strong></p>
-<p>const常量与#define宏定义常量的区别与联系：</p>
-<ol>
-<li><p>安全检查不同</p>
-<p>define的宏定义也存在类型，但是不做任何检查，仅仅是字符替换，并且在字符替换时可能会产生意想不到的错误；而const常量有明确的类型，在编译阶段会进行类型检查。</p>
-</li>
-<li><p>处理阶段不同</p>
-<p>define是在预处理阶段，define常量从未被编译器看见，因为在预处理截断就已经替换了；</p>
-</li>
-</ol>
-<p>　　const常量在编译阶段使用</p>
-<ol start="3">
-<li><p>存储方式不同</p>
-<p>define是字符替换，有多少地方使用，就会替换多少次，在内存中有若干个拷贝；</p>
-<p>编译器通常不会为const常量分配空间，只是将它们保存在符号表内，使他们成为一个编译期间的一个常量，没有读取内存的操作，效率也很高。</p>
-</li>
-</ol>
-<p>⭐注意！！：<code>const</code> 定义的变量只有类型为整数或枚举，且以常量表达式初始化时才能作为常量表达式。其他情况下它只是一个 <code>const</code> 限定的变量，不要将与常量混淆。</p>
-<p>​    </p>
-<p><strong>（3）防止修改，起保护作用，增强程序健壮性</strong>。</p>
-<p>​    比如用const修饰函数的参数，</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	i++;<span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>（4）可以节省空间，避免不必要的内存分配。</strong></p>
-<p>const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是像#define一样给出的是立即数，所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干个拷贝。</p>
-<h4 id="2、-用法："><a href="#2、-用法：" class="headerlink" title="2、 用法："></a>2、 用法：</h4><p>​    </p>
-<h5 id="1-修饰变量。"><a href="#1-修饰变量。" class="headerlink" title="1.修饰变量。"></a>1.修饰变量。</h5><p>​            </p>
-]]></content>
-      <categories>
-        <category>Cpp基础</category>
-      </categories>
-      <tags>
-        <tag>Cpp基础</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>剑指offer03</title>
-    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
-    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
-<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
-<p>示例 1：</p>
-<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
-<p>限制：</p>
-<p>2 &lt;= n &lt;= 100000</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<span id="more"></span>
-
-<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
-<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
-<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
-<p>参数：sort（start，end，cmp）</p>
-<p>（1）若是数组：则可以sort(a, a+10)</p>
-<p>（2）若是vector：sort(a.start(), a.end() )</p>
-<p>（3）若想降序排列，可以</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
-
-<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
-<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
-<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
-<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
-<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
-<p>在VC中编译： </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
-
-<p> 在GCC中编译：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
-
-<p>所以使用unordered_map（与map用法一致）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>发现也没有自己的解法高</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
-<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
-<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
-<p><strong>算法流程：</strong></p>
-<ol>
-<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
-<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
-<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
-<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
-</ol>
-</li>
-<li>若遍历完毕尚未返回，则返回 -1 。</li>
-</ol>
-<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
-<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>由此写出代码如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
-<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-        <category>算法</category>
-        <category>原地置换</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>sort排序</tag>
-        <tag>哈希表</tag>
-        <tag>原地置换</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>留存纪念的介绍</title>
-    <url>/2021/08/05/hello-world/</url>
-    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
-<span id="more"></span>
-
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>侯捷C++面向对象笔记（一）不带指针类的部分</title>
     <url>/2021/08/07/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><strong>介绍：</strong>侯捷老师面向对象高级编程的笔记</p>
@@ -308,9 +161,154 @@
         <category>cpp基础</category>
       </categories>
       <tags>
-        <tag>Cpp基础</tag>
         <tag>侯捷课程</tag>
+        <tag>Cpp基础</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>剑指offer03</title>
+    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
+    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
+<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p>示例 1：</p>
+<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
+<p>限制：</p>
+<p>2 &lt;= n &lt;= 100000</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<span id="more"></span>
+
+<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
+<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
+<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
+<p>参数：sort（start，end，cmp）</p>
+<p>（1）若是数组：则可以sort(a, a+10)</p>
+<p>（2）若是vector：sort(a.start(), a.end() )</p>
+<p>（3）若想降序排列，可以</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
+<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
+<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
+<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
+<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
+<p>在VC中编译： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p> 在GCC中编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p>所以使用unordered_map（与map用法一致）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>发现也没有自己的解法高</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
+<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
+<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
+<p><strong>算法流程：</strong></p>
+<ol>
+<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
+<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
+<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
+<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
+</ol>
+</li>
+<li>若遍历完毕尚未返回，则返回 -1 。</li>
+</ol>
+<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
+<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>由此写出代码如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
+<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>原地置换</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>sort排序</tag>
+        <tag>哈希表</tag>
+        <tag>原地置换</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Cpp基础知识</title>
+    <url>/2021/08/06/C-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>仅作个人笔记，侵删，通过①  <a href="https://light-city.club/sc">https://light-city.club/sc</a> ② 《C++primer》等途径复习及完全掌握C++，本文包含以下内容：</p>
+<ol>
+<li>类型修饰符const</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="const"><a href="#const" class="headerlink" title="const"></a>const</h2><p><strong>原则：const离谁近，谁就不能被修改</strong></p>
+<h4 id="1-作用"><a href="#1-作用" class="headerlink" title="1 作用"></a>1 作用</h4><p><strong>（1）定义常量。</strong></p>
+<p><strong>需要注意几个问题：</strong></p>
+<p><strong>① 与C语言的区别：C值可改，C++不可改</strong></p>
+<p>  需要注意的是在C语言中，const定义的常量可以通过指针修改，但是C++不行。</p>
+<p>如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> *p = &amp;a;</span><br><span class="line">    *p = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %d&quot;</span>,a) </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：a = 1</p>
+<p>如果上面这段代码出现在C++中那么编译器会报错：<strong>试图将 const int* 型赋给 int * 型</strong>，</p>
+<p>​    若改正，则只需将 int *p 改为 const int *p (<strong>意思为(*p)的值不能改变</strong>(指针p的值可以改变）<strong>与 int * const p 有区别</strong>）</p>
+<p><strong>② 使用const定义常量时，必须初始化（因为定义后不能被修改，所以定义时必须初始化）</strong></p>
+<p><strong>（2）类型检查</strong></p>
+<p>const常量与#define宏定义常量的区别与联系：</p>
+<ol>
+<li><p>安全检查不同</p>
+<p>define的宏定义也存在类型，但是不做任何检查，仅仅是字符替换，并且在字符替换时可能会产生意想不到的错误；而const常量有明确的类型，在编译阶段会进行类型检查。</p>
+</li>
+<li><p>处理阶段不同</p>
+<p>define是在预处理阶段，define常量从未被编译器看见，因为在预处理截断就已经替换了；</p>
+</li>
+</ol>
+<p>　　const常量在编译阶段使用</p>
+<ol start="3">
+<li><p>存储方式不同</p>
+<p>define是字符替换，有多少地方使用，就会替换多少次，在内存中有若干个拷贝；</p>
+<p>编译器通常不会为const常量分配空间，只是将它们保存在符号表内，使他们成为一个编译期间的一个常量，没有读取内存的操作，效率也很高。</p>
+</li>
+</ol>
+<p>⭐注意！！：<code>const</code> 定义的变量只有类型为整数或枚举，且以常量表达式初始化时才能作为常量表达式。其他情况下它只是一个 <code>const</code> 限定的变量，不要将与常量混淆。</p>
+<p>​    </p>
+<p><strong>（3）防止修改，起保护作用，增强程序健壮性</strong>。</p>
+<p>​    比如用const修饰函数的参数，</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">	i++;<span class="comment">//错误</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>（4）可以节省空间，避免不必要的内存分配。</strong></p>
+<p>const定义常量从汇编的角度来看，只是给出了对应的内存地址，而不是像#define一样给出的是立即数，所以，const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中有若干个拷贝。</p>
+<h4 id="2、-用法："><a href="#2、-用法：" class="headerlink" title="2、 用法："></a>2、 用法：</h4><p>​    </p>
+<h5 id="1-修饰变量。"><a href="#1-修饰变量。" class="headerlink" title="1.修饰变量。"></a>1.修饰变量。</h5><p>​            </p>
+]]></content>
+      <categories>
+        <category>Cpp基础</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>new_milestone</title>
+    <url>/2021/08/10/new-milestone/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>这不是一篇笔记</p>
+<span id="more"></span>
+
+<p>​    “ 人生不要在乎一时的长短，如果你失败了别人成功了，就跟他说一声你先走吧，我慢一点来。”</p>
+<p>​    最近花了十天左右的时间在思考，到底是考研还是工作，一边是更多的可能性，一边是更好的稳定性。我花了九天的时间说服自己工作是一件稳赚不赔的事，因为准备就秋招了，虽然很多东西都没准备，但是学习工作的知识是稳赚不赔的，迟早都会找到合适的工作，这不就是最好的吗？</p>
+<p>​    作为一个二十一年，都是按照大多数正常中国学生的轨迹行走的我来说，失败是多么可怕的一件事。我一直觉得，既然没有稳定下来，那我就不能去干一些什么事，比如谈恋爱，比如减肥，比如发展自己的爱好。所以我潜意识的就偏向安稳，安稳能带给我舒服的感觉，这大概也是我考研学不下去的原因，太多人失败了，我学的不是很久，大概率会成为其中一个。</p>
+<p>​    我很羡慕那些能同时进行很多事的人，比如一边学习一边还能发展一些爱好，还能去谈个恋爱，我不行，因为不知道从什么时候起，我总觉得自己比别人慢一步，这就决定了我没有时间去分心，至于打游戏，都是带着破罐子破摔的心理才敢触碰。</p>
+<p>​    或许我活了二十一年的活法，是越活越错吧，人生是一场马拉松，我总觉得每一段都是五十米，所以不停的赶，最后没有快乐，也没有处理好很多关系。我大学后总在进行自我否定，不管是拿了什么奖，还是做成了什么事，我都觉得自己没用，总有人比我厉害。</p>
+<p>​    对于关系的处理，我觉得都可以拖，拖到我安稳了，拖到我从五十米中结束了再处理，所以很多关系恶化到了一定的程度我也总想着先放着。我成为了一个优柔寡断的人，这是我觉得不好的。</p>
+<p>​    “人生急于一时，因为人生马上就要没了，与其花时间急，不如花时间躺平。”</p>
+<p>​    今天在路上的时候，我哥问我，我的人生理念是什么？我说：我的人生理念是赚很多钱。因为赚了很多钱后，我就能给很多我在意的人花钱。我觉得迫不及待，因为不知道现在陪伴我的人在未来会不会还继续陪着我。或许我应该换一种理念，去多体验一下人生的各种可能性。对于我这种五十米的活法，失败了就真的什么都没了，因为什么也不顾，可是如果是一场马拉松，就算不是那个第一，也是非常有意义的吧。</p>
+<p>​    我曾经执着于我的过去，觉得我那些过去都很厉害，以此来要求自己未来必须更厉害，所以就连打游戏都要沉溺于评分与段位，也因此跟许多朋友大吵大闹。</p>
+<p>​    不知道我的人生未来是怎么样的，但是我想从现在开始减肥。</p>
+<p>​    过去因为五十米而忽视的东西，我也想重新拾起来。但其实不是什么事都会有第二次机会，我很清楚，尽力吧。</p>
+]]></content>
   </entry>
   <entry>
     <title>侯捷C++面向对象笔记（二）</title>
@@ -378,8 +376,29 @@
         <category>cpp基础</category>
       </categories>
       <tags>
-        <tag>Cpp基础</tag>
         <tag>侯捷课程</tag>
+        <tag>Cpp基础</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>留存纪念的介绍</title>
+    <url>/2021/08/05/hello-world/</url>
+    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
+<span id="more"></span>
+
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
 </search>

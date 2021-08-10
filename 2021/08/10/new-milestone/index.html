@@ -15,7 +15,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>侯捷C++面向对象笔记（二） |  The Box of Sun</title>
+      <title>new_milestone |  The Box of Sun</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -62,7 +62,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-侯捷C-面向对象笔记（二）"
+  id="post-new-milestone"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -73,7 +73,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  侯捷C++面向对象笔记（二）
+  new_milestone
 </h1>
  
 
@@ -81,19 +81,15 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-date">
-  <time datetime="2021-08-09T08:48:26.000Z" itemprop="datePublished">2021-08-09</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/cpp%E5%9F%BA%E7%A1%80/">cpp基础</a>
-  </div>
-  
+      <a href="/2021/08/10/new-milestone/" class="article-date">
+  <time datetime="2021-08-10T12:23:29.000Z" itemprop="datePublished">2021-08-10</time>
+</a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">914</span>
         </span>
     </span>
 
@@ -102,79 +98,33 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">4 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
-    <div class="tocbot"></div>
-
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
+  <p><strong>介绍：</strong>这不是一篇笔记</p>
 <span id="more"></span>
 
-<h3 id="一-复习Complex类的实现过程"><a href="#一-复习Complex类的实现过程" class="headerlink" title="一 复习Complex类的实现过程"></a>一 复习Complex类的实现过程</h3><p>1 好习惯：防卫式声明</p>
-<p>2 写出class 的head</p>
-<p>3 写class的body：数据和函数</p>
-<p>4 写构造函数，考虑是否需要默认值，在考虑函数传递是by value还是reference</p>
-<p>5 考虑写构造函数的初值列</p>
-<p>6 考虑功能，设计操作数：成员函数还是全局函数</p>
-<p>7 设计成员函数：考虑传递参数和返回值是否能用reference</p>
-<p><strong>没想清楚的问题：为什么有的全局函数也要用inline修饰</strong></p>
-<p>以String作为例子讲述带指针的类，先通过一些字符串的用法来确定如何编写，重点在“<strong>拷贝构造</strong>”和“<strong>拷贝赋值</strong>”，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202250.png"></p>
-<p>如果不写拷贝赋值的话，那编译器默认的是一个位一个位的<strong>拷贝构造</strong>和<strong>拷贝赋值</strong>，但是对于指针时，是拷贝那个地址，两个指针指向同一个地址，这并不是常规意义的拷贝。</p>
-<p>如下就是String的class</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202718.png"></p>
-<p>上述四个函数，二三四在西方叫做big three</p>
-<p>第二个函数是拷贝构造，第三个函数是拷贝赋值，</p>
-<p>第四个函数<strong>析构函数</strong>，当这个类死亡的时候，析构函数会被调出。</p>
-<p>第五个函数就是普通的成员函数，是一个inline function</p>
-<h3 id="二-ctor和dtor（构造函数和析构函数）"><a href="#二-ctor和dtor（构造函数和析构函数）" class="headerlink" title="二 ctor和dtor（构造函数和析构函数）"></a>二 ctor和dtor（构造函数和析构函数）</h3><p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809203608657.png" alt="image-20210809203608657"></p>
-<p>因为构造函数里动态分配了内存，如果不释放就会造成内存泄漏，所以要采用析构函数来<strong>释放空间</strong>。</p>
-<h3 id="三-拷贝构造与拷贝赋值"><a href="#三-拷贝构造与拷贝赋值" class="headerlink" title="三 拷贝构造与拷贝赋值"></a>三 拷贝构造与拷贝赋值</h3><p>⭐ 注意：带指针的类必须要有<strong>拷贝赋值</strong>和<strong>拷贝构造</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809204828.png"></p>
-<p>上述例子讲述了如果没有这两个操作，就会有两个指针指向同一个地址，那另一个地址的内存就算内存泄露了。这被称作<strong>浅拷贝</strong>，拷贝赋值和拷贝构造是<strong>深拷贝</strong>。</p>
-<p>a的别名（alias）是b，别名是一件很危险的事。</p>
-<h4 id="3-1-拷贝构造函数"><a href="#3-1-拷贝构造函数" class="headerlink" title="3.1 拷贝构造函数"></a>3.1 拷贝构造函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205124.png"></p>
-<p>蓝色的这两行其实是完全相同的意思，第三句因为s2也是新创建出来的对象，也需要构造函数，所以第二和第三是完全一致的。</p>
-<h4 id="3-2-拷贝赋值函数"><a href="#3-2-拷贝赋值函数" class="headerlink" title="3.2 拷贝赋值函数"></a>3.2 拷贝赋值函数</h4><p>拷贝赋值需要先清空原来的空间，再分配一块与赋值相同的内存，最后进行拷贝。但是需要检测是不是<strong>自己给自己赋值</strong>，不仅是为了效率，实际上也是为了正确性。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205617.png"></p>
-<p>如果不检测自我赋值，会出现下述问题：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809210356.png"></p>
-<h3 id="四-output函数"><a href="#四-output函数" class="headerlink" title="四 output函数"></a>四 output函数</h3><p>重载操作符&lt;&lt;，<strong>不可以是一个成员函数</strong>，因为如果是字符串的成员函数，用的时候方向会相反，cout本来在左边现在在右边（？没动）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213623.png"></p>
-<h3 id="五-栈（stack）和堆（heap）"><a href="#五-栈（stack）和堆（heap）" class="headerlink" title="五 栈（stack）和堆（heap）"></a>五 栈（stack）和堆（heap）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213756.png"></p>
-<p>stack还会存放local object（在函数内部创建的对象）</p>
-<p>上述两种创建方式的不同在于，new可以在程序的任何地方创建，创建就要对它负责，需要delete。因为它是在堆里，如果在栈里的话，离开该作用域就会消失。</p>
-<h4 id="5-1-stack-objects的生命期"><a href="#5-1-stack-objects的生命期" class="headerlink" title="5.1 stack objects的生命期"></a>5.1 stack objects的生命期</h4><p>离开作用域就消失了，会调用析构函数清理自己，所以也叫做auto object。</p>
-<h4 id="5-2-static-local-objects的生命期"><a href="#5-2-static-local-objects的生命期" class="headerlink" title="5.2 static local objects的生命期"></a>5.2 static local objects的生命期</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line">&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c2是static object，生命周期在整个作用域，结束之后仍然存在，直到整个程序结束。</p>
-<h4 id="5-3-global-objects的生命期"><a href="#5-3-global-objects的生命期" class="headerlink" title="5.3 global objects的生命期"></a>5.3 global objects的生命期</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> main</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c3是global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，但是作用域为<strong>整个程序</strong>！</p>
-<h4 id="5-4-heap-objects的生命期"><a href="#5-4-heap-objects的生命期" class="headerlink" title="5.4 heap objects的生命期"></a>5.4 heap objects的生命期</h4><p>new的正确写法是在同一个作用域里创建和释放</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214649.png"></p>
-<h4 id="5-5-new的机制"><a href="#5-5-new的机制" class="headerlink" title="5.5 new的机制"></a>5.5 new的机制</h4><p>绝大多数都是变成以下三个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214929.png"></p>
-<h4 id="5-6-delete的机制"><a href="#5-6-delete的机制" class="headerlink" title="5.6 delete的机制"></a>5.6 delete的机制</h4><p>转换为以下两个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220305.png"></p>
-<h3 id="六-动态分配所得到的内存块（很宝贵的知识）"><a href="#六-动态分配所得到的内存块（很宝贵的知识）" class="headerlink" title="六 动态分配所得到的内存块（很宝贵的知识）"></a>六 动态分配所得到的内存块（很宝贵的知识）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220538.png"></p>
-<p>第一张图：在调试模式下，不止得到了所要分配的内存，还得到了灰色和下面的内存。由于在VC下，每一块内存都是16的倍数，所以就要填补深绿色的pad成64字节。上下的红色为cookie，记录整块的大小，为什么要记录？因为系统回收的时候只给了指针，必须要有个地方记录大小。</p>
-<p>第二张图是release模式。</p>
-<h3 id="七-动态分配所得的数组"><a href="#七-动态分配所得的数组" class="headerlink" title="七 动态分配所得的数组"></a>七 动态分配所得的数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221403.png"></p>
-<p>vc的做法，需要用一个整数记录数组中元素的个数。</p>
-<p><strong>为什么动态分配的数组要搭配delete [] 呢？</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221731.png"></p>
-<p>不管加不加[]，都不会影响删掉的大小，因为已经记录了是21h，问题是出在如果不加[]，只会调用一次析构函数；而加了[]，才会把各自的对象用析构函数释放内存。</p>
+<p>​    “ 人生不要在乎一时的长短，如果你失败了别人成功了，就跟他说一声你先走吧，我慢一点来。”</p>
+<p>​    最近花了十天左右的时间在思考，到底是考研还是工作，一边是更多的可能性，一边是更好的稳定性。我花了九天的时间说服自己工作是一件稳赚不赔的事，因为准备就秋招了，虽然很多东西都没准备，但是学习工作的知识是稳赚不赔的，迟早都会找到合适的工作，这不就是最好的吗？</p>
+<p>​    作为一个二十一年，都是按照大多数正常中国学生的轨迹行走的我来说，失败是多么可怕的一件事。我一直觉得，既然没有稳定下来，那我就不能去干一些什么事，比如谈恋爱，比如减肥，比如发展自己的爱好。所以我潜意识的就偏向安稳，安稳能带给我舒服的感觉，这大概也是我考研学不下去的原因，太多人失败了，我学的不是很久，大概率会成为其中一个。</p>
+<p>​    我很羡慕那些能同时进行很多事的人，比如一边学习一边还能发展一些爱好，还能去谈个恋爱，我不行，因为不知道从什么时候起，我总觉得自己比别人慢一步，这就决定了我没有时间去分心，至于打游戏，都是带着破罐子破摔的心理才敢触碰。</p>
+<p>​    或许我活了二十一年的活法，是越活越错吧，人生是一场马拉松，我总觉得每一段都是五十米，所以不停的赶，最后没有快乐，也没有处理好很多关系。我大学后总在进行自我否定，不管是拿了什么奖，还是做成了什么事，我都觉得自己没用，总有人比我厉害。</p>
+<p>​    对于关系的处理，我觉得都可以拖，拖到我安稳了，拖到我从五十米中结束了再处理，所以很多关系恶化到了一定的程度我也总想着先放着。我成为了一个优柔寡断的人，这是我觉得不好的。</p>
+<p>​    “人生急于一时，因为人生马上就要没了，与其花时间急，不如花时间躺平。”</p>
+<p>​    今天在路上的时候，我哥问我，我的人生理念是什么？我说：我的人生理念是赚很多钱。因为赚了很多钱后，我就能给很多我在意的人花钱。我觉得迫不及待，因为不知道现在陪伴我的人在未来会不会还继续陪着我。或许我应该换一种理念，去多体验一下人生的各种可能性。对于我这种五十米的活法，失败了就真的什么都没了，因为什么也不顾，可是如果是一场马拉松，就算不是那个第一，也是非常有意义的吧。</p>
+<p>​    我曾经执着于我的过去，觉得我那些过去都很厉害，以此来要求自己未来必须更厉害，所以就连打游戏都要沉溺于评分与段位，也因此跟许多朋友大吵大闹。</p>
+<p>​    不知道我的人生未来是怎么样的，但是我想从现在开始减肥。</p>
+<p>​    过去因为五十米而忽视的东西，我也想重新拾起来。但其实不是什么事都会有第二次机会，我很清楚，尽力吧。</p>
  
       <!-- reward -->
       
@@ -245,32 +195,21 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rdxsun.github.io/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rdxsun.github.io/2021/08/10/new-milestone/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cpp%E5%9F%BA%E7%A1%80/" rel="tag">Cpp基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/" rel="tag">侯捷课程</a></li></ul>
-
     </footer>
   </div>
 
    
   <nav class="article-nav">
     
-      <a href="/2021/08/10/new-milestone/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            new_milestone
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/08/07/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0/" class="article-nav-link">
+      <a href="/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">侯捷C++面向对象笔记（一）不带指针类的部分</div>
+        <div class="article-nav-title">侯捷C++面向对象笔记（二）</div>
       </a>
     
   </nav>
