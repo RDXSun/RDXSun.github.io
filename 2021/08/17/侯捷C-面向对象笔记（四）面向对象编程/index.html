@@ -15,7 +15,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>侯捷C++面向对象笔记（三）补充 |  The Box of Sun</title>
+      <title>侯捷C++面向对象笔记（四）OOP，OOD |  The Box of Sun</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -62,7 +62,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-侯捷C-面向对象笔记（三）补充"
+  id="post-侯捷C-面向对象笔记（四）面向对象编程"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -73,7 +73,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  侯捷C++面向对象笔记（三）补充
+  侯捷C++面向对象笔记（四）OOP，OOD
 </h1>
  
 
@@ -81,8 +81,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/" class="article-date">
-  <time datetime="2021-08-14T12:42:38.000Z" itemprop="datePublished">2021-08-14</time>
+      <a href="/2021/08/17/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" class="article-date">
+  <time datetime="2021-08-17T00:55:51.000Z" itemprop="datePublished">2021-08-17</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/cpp%E5%9F%BA%E7%A1%80/">cpp基础</a>
@@ -93,7 +93,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">257</span>
+            <span class="post-count">725</span>
         </span>
     </span>
 
@@ -102,7 +102,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -117,30 +117,52 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
+  <p><strong>介绍：</strong>侯捷课程的基于对象设计，面向对象的编程</p>
 <span id="more"></span>
 
-<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
-<p>注意：</p>
-<p>1 static的函数没有this指针</p>
-<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
-<p><strong>一个例子</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
-<p>静态的数据一定要在class外定义它初值。</p>
-<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
-<p><strong>前面的例子：只能创建一个对象</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
-<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
-<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
-<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
-<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
-<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
-<p>算法的那个库用了很多函数模板</p>
-<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
-<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
+
+
+<h3 id="一-Composition（复合）其实就是组合"><a href="#一-Composition（复合）其实就是组合" class="headerlink" title="一 Composition（复合）其实就是组合"></a>一 Composition（复合）其实就是组合</h3><p>代表has - a关系</p>
+<p>整体由多种部分组成，当整体不在了则部分就消失了。生命周期是同步的。</p>
+<p>下面是一个特殊的例子，是Adapter的设计模式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817090712.png"></p>
+<h4 id="复合关系下的构造和析构"><a href="#复合关系下的构造和析构" class="headerlink" title="复合关系下的构造和析构"></a>复合关系下的构造和析构</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817091045.png"></p>
+<p>构造由内而外，析构由外而内</p>
+<h3 id="二-Delegation（委托）其实就是聚合"><a href="#二-Delegation（委托）其实就是聚合" class="headerlink" title="二 Delegation（委托）其实就是聚合"></a>二 Delegation（委托）其实就是聚合</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817091617.png"></p>
+<p>有一个指针指向另一个东西。跟复合的关系其实就像是Composition by reference。</p>
+<p>如果整个东西不存在了，那聚合的东西仍然存在。生命周期是不同步的。</p>
+<p>上述的设计模式是Handle/Body（编译防火墙）。右边去实现不影响左边。</p>
+<h3 id="三-Inheritance（继承）"><a href="#三-Inheritance（继承）" class="headerlink" title="三 Inheritance（继承）"></a>三 Inheritance（继承）</h3><p>代表is - a关系</p>
+<p>C++有三种继承关系：private、public、protected，JAVA只有private一种。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817092632.png"></p>
+<h4 id="问题：struct和class的关系"><a href="#问题：struct和class的关系" class="headerlink" title="问题：struct和class的关系"></a>问题：struct和class的关系</h4><p>从内存的角度来看继承</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817092751.png"></p>
+<p>与组成的过程差不多。</p>
+<h4 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171055302.jpg"></p>
+<p><strong>非常常见的调用：子类调用父类的函数</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171104416.png"></p>
+<p>但是如果子类对于父类函数里调用的一个函数进行了重载，那就会执行子类重载的函数。</p>
+<p>这种设计模式叫做Template Method 模板方法 </p>
+<h4 id="继承-组成关系下的构造和析构"><a href="#继承-组成关系下的构造和析构" class="headerlink" title="继承+组成关系下的构造和析构"></a>继承+组成关系下的构造和析构</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171233019.png"></p>
+<p>第一种情况谁先谁后自己探究，</p>
+<p>第二种情况是最先调用component，再Base，再到Derived</p>
+<h4 id="聚合-继承的关系最经典写法"><a href="#聚合-继承的关系最经典写法" class="headerlink" title="聚合+继承的关系最经典写法"></a>聚合+继承的关系最经典写法</h4><p>用于实现只有一份数据，但是有多种表现，如下图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171237850.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171238141.png"></p>
+<p>子类都是Observer，最上图就是不同的observer有三个</p>
+<h3 id="四-委托相关设计"><a href="#四-委托相关设计" class="headerlink" title="四 委托相关设计"></a>四 委托相关设计</h3><p><strong>委托+继承</strong></p>
+<h4 id="Composite模式"><a href="#Composite模式" class="headerlink" title="Composite模式"></a>Composite模式</h4><p>面临的问题：要写一个Windows system或者file system</p>
+<p>考虑目录与文件的关系</p>
+<p>把Primitive当作文件，Composite当作目录。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817130003.png"></p>
+<h4 id="Prototype模式（没听懂）"><a href="#Prototype模式（没听懂）" class="headerlink" title="Prototype模式（没听懂）"></a>Prototype模式（没听懂）</h4><p>背景：需要一个树状继承，想要创建未来才会出现的子类。子类是被客户买去才创建的，那我怎么去创建子类呢？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817182635.png"></p>
+<p>解决：让下面派生的子类都创建一个自己，让父类能看到它。</p>
+<p>比如上述，在子类里安排一个静态的自己（有下划线就是<strong>静态</strong>）。</p>
+<p>构造函数是私有的，写为private，因为前面加了“-”号，若是+或者不写就是public。#号是protected </p>
+<p>clone函数让客户端通过原型制造副本。</p>
+<p><strong>为什么需要第二个构造函数？又为什么放在保护区域？</strong></p>
+<p>因为第一个构造函数是创建静态的自己，但是clone的时候是new一个新的自己，用的是第二个构造函数。因为如果调用第一个，就会又把原型加入框架中。所以才有第二个构造函数。放在私有区域或保护区域，因为不打算被外界创建，要通过原型来创建。</p>
  
       <!-- reward -->
       
@@ -211,7 +233,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rdxsun.github.io/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rdxsun.github.io/2021/08/17/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -224,19 +246,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/08/17/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            侯捷C++面向对象笔记（四）OOP，OOD
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-nav-link">
+      <a href="/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">侯捷C++面向对象笔记（二）带指针的类</div>
+        <div class="article-nav-title">侯捷C++面向对象笔记（三）补充</div>
       </a>
     
   </nav>
