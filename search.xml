@@ -57,76 +57,6 @@
       </tags>
   </entry>
   <entry>
-    <title>剑指offer03</title>
-    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
-    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
-<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
-<p>示例 1：</p>
-<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
-<p>限制：</p>
-<p>2 &lt;= n &lt;= 100000</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<span id="more"></span>
-
-<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
-<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
-<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
-<p>参数：sort（start，end，cmp）</p>
-<p>（1）若是数组：则可以sort(a, a+10)</p>
-<p>（2）若是vector：sort(a.start(), a.end() )</p>
-<p>（3）若想降序排列，可以</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
-
-<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
-<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
-<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
-<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
-<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
-<p>在VC中编译： </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
-
-<p> 在GCC中编译：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
-
-<p>所以使用unordered_map（与map用法一致）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>发现也没有自己的解法高</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
-<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
-<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
-<p><strong>算法流程：</strong></p>
-<ol>
-<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
-<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
-<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
-<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
-</ol>
-</li>
-<li>若遍历完毕尚未返回，则返回 -1 。</li>
-</ol>
-<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
-<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>由此写出代码如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
-<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
-]]></content>
-      <categories>
-        <category>leetcode</category>
-        <category>算法</category>
-        <category>原地置换</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>sort排序</tag>
-        <tag>哈希表</tag>
-        <tag>原地置换</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>侯捷C++面向对象笔记（一）不带指针类的部分</title>
     <url>/2021/08/07/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><strong>介绍：</strong>侯捷老师面向对象高级编程的笔记</p>
@@ -289,6 +219,76 @@
       <tags>
         <tag>Cpp基础</tag>
         <tag>侯捷课程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑指offer03</title>
+    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
+    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
+<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p>示例 1：</p>
+<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
+<p>限制：</p>
+<p>2 &lt;= n &lt;= 100000</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<span id="more"></span>
+
+<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
+<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
+<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
+<p>参数：sort（start，end，cmp）</p>
+<p>（1）若是数组：则可以sort(a, a+10)</p>
+<p>（2）若是vector：sort(a.start(), a.end() )</p>
+<p>（3）若想降序排列，可以</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
+<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
+<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
+<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
+<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
+<p>在VC中编译： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p> 在GCC中编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p>所以使用unordered_map（与map用法一致）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>发现也没有自己的解法高</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
+<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
+<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
+<p><strong>算法流程：</strong></p>
+<ol>
+<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
+<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
+<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
+<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
+</ol>
+</li>
+<li>若遍历完毕尚未返回，则返回 -1 。</li>
+</ol>
+<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
+<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>由此写出代码如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
+<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>原地置换</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>sort排序</tag>
+        <tag>哈希表</tag>
+        <tag>原地置换</tag>
       </tags>
   </entry>
   <entry>
@@ -457,6 +457,75 @@
       <tags>
         <tag>Cpp基础</tag>
         <tag>侯捷课程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetCode101:贪心算法</title>
+    <url>/2021/08/18/leetCode101-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>《leetCode101》——贪心算法部分</p>
+<p>作者：高畅</p>
+<span id="more"></span>
+
+<h3 id="贪心算法思路："><a href="#贪心算法思路：" class="headerlink" title="贪心算法思路："></a>贪心算法思路：</h3><p>保证每次操作都是局部最优的。</p>
+<p><strong>利用贪心法求解的问题应具备如下2个特征  。</strong></p>
+<p><strong>1、贪心选择性质</strong></p>
+<p>一个问题的整体最优解可通过一系列局部的最优解的选择达到，并且每次的选择可以依赖以前作出的选择，但不依赖于后面要作出的选择。这就是贪心选择性质。对于一个具体问题，要确定它是否具有贪心选择性质，必须证明每一步所作的贪心选择最终导致问题的整体最优解。</p>
+<p><strong>2、最优子结构性质</strong></p>
+<p>当一个问题的最优解包含其子问题的最优解时，称此问题具有最优子结构性质。问题的最优子结构性质是该问题可用贪心法求解的关键所在。在实际应用中，至于什么问题具有什么样的贪心选择性质是不确定的，需要具体问题具体分析。</p>
+<p>​    </p>
+<p>​    贪心算法不从整体最优上加以考虑，所做出的仅是在某种意义上的<strong>局部最优选择</strong>。使用贪心策略要注意<strong>局部最优与全局最优</strong>的关系，选择当前的局部最优并不一定能推导出问题的全局最优。贪心策略解题需要解决以下两个问题： </p>
+<p>1、该问题是否适合使用贪心策略求解，也就是该问题是否具有贪心选择性质；</p>
+<p>2、制定贪心策略，以达到问题的最优解或较优解。</p>
+<p>​    要确定一个问题是否适合用贪心算法求解，必须证明每一步所作的贪心选择最终导致问题的整体最优解。证明的大致过程为：首先考察问题的一个整体最优解，并证明可修改这个最优解，使其以贪心选择开始，做了贪心选择后，原问题简化为规模更小的类似子问题。然后用数学归纳法证明通过每一步做贪心选择，最终可得到问题的整体最优解。</p>
+<h3 id="455-分发饼干（简单）"><a href="#455-分发饼干（简单）" class="headerlink" title="455.分发饼干（简单）"></a>455.分发饼干（简单）</h3><p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p>
+<p>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
+<p>示例 1:</p>
+<p>输入: g = [1,2,3], s = [1,1]<br>输出: 1<br>解释:<br>你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。<br>虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。<br>所以你应该输出1。<br>示例 2:</p>
+<p>输入: g = [1,2], s = [1,2,3]<br>输出: 2<br>解释:<br>你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。<br>你拥有的饼干数量和尺寸都足以让所有孩子满足。<br>所以你应该输出2.</p>
+<p>提示：</p>
+<p>1 &lt;= g.length &lt;= 3 * 104<br>0 &lt;= s.length &lt;= 3 * 104<br>1 &lt;= g[i], s[j] &lt;= 231 - 1</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/assign-cookies">https://leetcode-cn.com/problems/assign-cookies</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h4><p>先对g和s利用sort进行升序排序，利用最小的s满足最小的g。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findContentChildren</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; g, vector&lt;<span class="keyword">int</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(g.<span class="built_in">begin</span>(), g.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>( s[j] &gt;= g[start])&#123;</span><br><span class="line">                    start++;</span><br><span class="line">                    <span class="keyword">if</span>(start == g.<span class="built_in">size</span>())&#123;</span><br><span class="line">                        <span class="keyword">return</span> start;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>跟最优解的思路和写法一致</p>
+<h3 id="135-分发糖果（困难）"><a href="#135-分发糖果（困难）" class="headerlink" title="135 分发糖果（困难）"></a>135 分发糖果（困难）</h3><p>老师想给孩子们分发糖果，有 N 个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。</p>
+<p>你需要按照以下要求，帮助老师给这些孩子分发糖果：</p>
+<p>每个孩子至少分配到 1 个糖果。<br>评分更高的孩子必须比他两侧的邻位孩子获得更多的糖果。<br>那么这样下来，老师至少需要准备多少颗糖果呢？</p>
+<p>示例 1：</p>
+<p>输入：[1,0,2]<br>输出：5<br>解释：你可以分别给这三个孩子分发 2、1、2 颗糖果。</p>
+<p>示例 2：</p>
+<p>输入：[1,2,2]<br>输出：4<br>解释：你可以分别给这三个孩子分发 1、2、1 颗糖果。<br>     第三个孩子只得到 1 颗糖果，这已满足上述两个条件。</p>
+<h4 id="我的解法："><a href="#我的解法：" class="headerlink" title="我的解法："></a>我的解法：</h4><p>刚开始想的不全面，想着只要比前面多就行了，后来碰上了[1,3,2,2,1]发现如果只考虑一侧的话，就没办法加上后面多出来的部分，所以应该先从左考虑到右边考虑权值大的，再从右考虑到左边考虑权值大的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">candy</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; ratings)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt;candy_number;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ratings.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            candy_number.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span> &amp;&amp; ratings[i] &gt; ratings[i<span class="number">-1</span>])&#123;</span><br><span class="line">                candy_number[i] = candy_number[i<span class="number">-1</span>]+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = ratings.<span class="built_in">size</span>()<span class="number">-2</span>; i &gt; <span class="number">-1</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(ratings[i] &gt; ratings[i+<span class="number">1</span>] &amp;&amp; candy_number[i] &lt;= candy_number[i+<span class="number">1</span>])&#123;</span><br><span class="line">                candy_number[i] = candy_number[i+<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; candy_number.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            number+=candy_number[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210819114211.png"></p>
+<p>第一次beat了这么多！</p>
+<p>通过题解可以看出，我的写法还可以优化，题解写法如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">candy</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; ratings)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> size = ratings.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">if</span> (size &lt; <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> size;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">num</span><span class="params">(size, <span class="number">1</span>)</span></span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ratings[i] &gt; ratings[i<span class="number">-1</span>]) &#123;</span><br><span class="line">			num[i] = num[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">		&#125; </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = size - <span class="number">1</span>; i &gt; <span class="number">0</span>; --i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ratings[i] &lt; ratings[i<span class="number">-1</span>]) &#123;</span><br><span class="line">			num[i<span class="number">-1</span>] = <span class="built_in">max</span>(num[i<span class="number">-1</span>], num[i] + <span class="number">1</span>);</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">accumulate</span>(num.<span class="built_in">begin</span>(), num.<span class="built_in">end</span>(), <span class="number">0</span>); <span class="comment">// 		std::accumulate 可以很方便 地求和 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在从右到左的时候因为如果i-1的糖果已经大于了i的糖果+1，就没必要再加了，可以直接通过max比较，就不需要像我那样写个判断了。</p>
+<p>但是这题跟贪心算法有啥关系呢？</p>
+<p><strong>这里的贪心策略即为，在每次遍历中，只考虑并更新相邻一侧的大小关系。</strong></p>
+<h3 id="435-无重叠区域（中等，但我觉得有点难）"><a href="#435-无重叠区域（中等，但我觉得有点难）" class="headerlink" title="435 无重叠区域（中等，但我觉得有点难）"></a>435 无重叠区域（中等，但我觉得有点难）</h3><p>难点有两个：1.找局部最优解 2. 题目给了个vector嵌套vector</p>
+<p>废了九牛二虎才做出来。</p>
+<h4 id="我的思路："><a href="#我的思路：" class="headerlink" title="我的思路："></a>我的思路：</h4><p>借鉴了解析的思路，先把所有区域按照右边界从小到大进行排序，因为选择的区间结尾越小，余留给其他区间的空间越大，所以贪心策略为：<strong>优先保留小且不相交的区间</strong>。但是如果按照我下面这么写，其实就麻烦了，我下面考虑以为会存在后面的区间是前面的子区间的情况，但其实根本不会存在，所以只要排序后再去掉交集就可以了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">compare</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; a, vector&lt;<span class="keyword">int</span>&gt;&amp; b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">eraseOverlapIntervals</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), compare);</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> min = intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; intervals.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(intervals[i][<span class="number">0</span>] &lt; min &amp;&amp; intervals[i][<span class="number">1</span>] &lt;= min)&#123; <span class="comment">//左边小于当前最小右边且右边也小于最小右边，则可以删一个              </span></span><br><span class="line">                    num++;</span><br><span class="line">                    min = intervals[i][<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(intervals[i][<span class="number">0</span>] &gt;= min)&#123;</span><br><span class="line">                    min = intervals[i][<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> num++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>看了解析之后可以把compare函数换成<strong>Lambda的写法</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">eraseOverlapIntervals</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (intervals.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> n = intervals.<span class="built_in">size</span>();</span><br><span class="line">	<span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), [](vector&lt;<span class="keyword">int</span>&gt; a, vector&lt;<span class="keyword">int</span>&gt; b) &#123;<span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];&#125;);</span><br><span class="line">	<span class="keyword">int</span> total = <span class="number">0</span>, prev = intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (intervals[i][<span class="number">0</span>] &lt; prev) &#123;</span><br><span class="line">			++total;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			prev = intervals[i][<span class="number">1</span>];</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="605"><a href="#605" class="headerlink" title="605"></a>605</h3>]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>贪心算法</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>算法学习</tag>
       </tags>
   </entry>
   <entry>
