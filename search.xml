@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>剑指offer03</title>
+    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
+    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
+<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p>示例 1：</p>
+<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
+<p>限制：</p>
+<p>2 &lt;= n &lt;= 100000</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<span id="more"></span>
+
+<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
+<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
+<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
+<p>参数：sort（start，end，cmp）</p>
+<p>（1）若是数组：则可以sort(a, a+10)</p>
+<p>（2）若是vector：sort(a.start(), a.end() )</p>
+<p>（3）若想降序排列，可以</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
+<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
+<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
+<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
+<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
+<p>在VC中编译： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p> 在GCC中编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p>所以使用unordered_map（与map用法一致）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>发现也没有自己的解法高</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
+<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
+<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
+<p><strong>算法流程：</strong></p>
+<ol>
+<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
+<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
+<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
+<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
+</ol>
+</li>
+<li>若遍历完毕尚未返回，则返回 -1 。</li>
+</ol>
+<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
+<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>由此写出代码如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
+<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>原地置换</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>sort排序</tag>
+        <tag>哈希表</tag>
+        <tag>原地置换</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cpp基础知识</title>
     <url>/2021/08/06/C-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<p><strong>介绍：</strong>仅作个人笔记，侵删，通过①  <a href="https://light-city.club/sc">https://light-city.club/sc</a> ② 《C++primer》等途径复习及完全掌握C++，本文包含以下内容：</p>
@@ -54,6 +124,80 @@
       </categories>
       <tags>
         <tag>Cpp基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>侯捷C++面向对象笔记（二）带指针的类</title>
+    <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
+<span id="more"></span>
+
+<h3 id="一-复习Complex类的实现过程"><a href="#一-复习Complex类的实现过程" class="headerlink" title="一 复习Complex类的实现过程"></a>一 复习Complex类的实现过程</h3><p>1 好习惯：防卫式声明</p>
+<p>2 写出class 的head</p>
+<p>3 写class的body：数据和函数</p>
+<p>4 写构造函数，考虑是否需要默认值，在考虑函数传递是by value还是reference</p>
+<p>5 考虑写构造函数的初值列</p>
+<p>6 考虑功能，设计操作数：成员函数还是全局函数</p>
+<p>7 设计成员函数：考虑传递参数和返回值是否能用reference</p>
+<p><strong>没想清楚的问题：为什么有的全局函数也要用inline修饰</strong></p>
+<p>以String作为例子讲述带指针的类，先通过一些字符串的用法来确定如何编写，重点在“<strong>拷贝构造</strong>”和“<strong>拷贝赋值</strong>”，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202250.png"></p>
+<p>如果不写拷贝赋值的话，那编译器默认的是一个位一个位的<strong>拷贝构造</strong>和<strong>拷贝赋值</strong>，但是对于指针时，是拷贝那个地址，两个指针指向同一个地址，这并不是常规意义的拷贝。</p>
+<p>如下就是String的class</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202718.png"></p>
+<p>上述四个函数，二三四在西方叫做big three</p>
+<p>第二个函数是拷贝构造，第三个函数是拷贝赋值，</p>
+<p>第四个函数<strong>析构函数</strong>，当这个类死亡的时候，析构函数会被调出。</p>
+<p>第五个函数就是普通的成员函数，是一个inline function</p>
+<h3 id="二-ctor和dtor（构造函数和析构函数）"><a href="#二-ctor和dtor（构造函数和析构函数）" class="headerlink" title="二 ctor和dtor（构造函数和析构函数）"></a>二 ctor和dtor（构造函数和析构函数）</h3><p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809203608657.png" alt="image-20210809203608657"></p>
+<p>因为构造函数里动态分配了内存，如果不释放就会造成内存泄漏，所以要采用析构函数来<strong>释放空间</strong>。</p>
+<h3 id="三-拷贝构造与拷贝赋值"><a href="#三-拷贝构造与拷贝赋值" class="headerlink" title="三 拷贝构造与拷贝赋值"></a>三 拷贝构造与拷贝赋值</h3><p>⭐ 注意：带指针的类必须要有<strong>拷贝赋值</strong>和<strong>拷贝构造</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809204828.png"></p>
+<p>上述例子讲述了如果没有这两个操作，就会有两个指针指向同一个地址，那另一个地址的内存就算内存泄露了。这被称作<strong>浅拷贝</strong>，拷贝赋值和拷贝构造是<strong>深拷贝</strong>。</p>
+<p>a的别名（alias）是b，别名是一件很危险的事。</p>
+<h4 id="3-1-拷贝构造函数"><a href="#3-1-拷贝构造函数" class="headerlink" title="3.1 拷贝构造函数"></a>3.1 拷贝构造函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205124.png"></p>
+<p>蓝色的这两行其实是完全相同的意思，第三句因为s2也是新创建出来的对象，也需要构造函数，所以第二和第三是完全一致的。</p>
+<h4 id="3-2-拷贝赋值函数"><a href="#3-2-拷贝赋值函数" class="headerlink" title="3.2 拷贝赋值函数"></a>3.2 拷贝赋值函数</h4><p>拷贝赋值需要先清空原来的空间，再分配一块与赋值相同的内存，最后进行拷贝。但是需要检测是不是<strong>自己给自己赋值</strong>，不仅是为了效率，实际上也是为了正确性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205617.png"></p>
+<p>如果不检测自我赋值，会出现下述问题：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809210356.png"></p>
+<hr>
+<h3 id="四-output函数"><a href="#四-output函数" class="headerlink" title="四 output函数"></a>四 output函数</h3><p>重载操作符&lt;&lt;，<strong>不可以是一个成员函数</strong>，因为如果是字符串的成员函数，用的时候方向会相反，cout本来在左边现在在右边（？没动）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213623.png"></p>
+<hr>
+<h3 id="五-栈（stack）和堆（heap）"><a href="#五-栈（stack）和堆（heap）" class="headerlink" title="五 栈（stack）和堆（heap）"></a>五 栈（stack）和堆（heap）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213756.png"></p>
+<p>stack还会存放local object（在函数内部创建的对象）</p>
+<p>上述两种创建方式的不同在于，new可以在程序的任何地方创建，创建就要对它负责，需要delete。因为它是在堆里，如果在栈里的话，离开该作用域就会消失。</p>
+<h4 id="5-1-stack-objects的生命期"><a href="#5-1-stack-objects的生命期" class="headerlink" title="5.1 stack objects的生命期"></a>5.1 stack objects的生命期</h4><p>离开作用域就消失了，会调用析构函数清理自己，所以也叫做auto object。</p>
+<h4 id="5-2-static-local-objects的生命期"><a href="#5-2-static-local-objects的生命期" class="headerlink" title="5.2 static local objects的生命期"></a>5.2 static local objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line">&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>c2是static object，生命周期在整个作用域，结束之后仍然存在，直到整个程序结束。</p>
+<h4 id="5-3-global-objects的生命期"><a href="#5-3-global-objects的生命期" class="headerlink" title="5.3 global objects的生命期"></a>5.3 global objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> main</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>c3是global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，但是作用域为<strong>整个程序</strong>！</p>
+<h4 id="5-4-heap-objects的生命期"><a href="#5-4-heap-objects的生命期" class="headerlink" title="5.4 heap objects的生命期"></a>5.4 heap objects的生命期</h4><p>new的正确写法是在同一个作用域里创建和释放</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214649.png"></p>
+<h4 id="5-5-new的机制"><a href="#5-5-new的机制" class="headerlink" title="5.5 new的机制"></a>5.5 new的机制</h4><p>绝大多数都是变成以下三个动作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214929.png"></p>
+<h4 id="5-6-delete的机制"><a href="#5-6-delete的机制" class="headerlink" title="5.6 delete的机制"></a>5.6 delete的机制</h4><p>转换为以下两个动作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220305.png"></p>
+<hr>
+<h3 id="六-动态分配所得到的内存块（很宝贵的知识）"><a href="#六-动态分配所得到的内存块（很宝贵的知识）" class="headerlink" title="六 动态分配所得到的内存块（很宝贵的知识）"></a>六 动态分配所得到的内存块（很宝贵的知识）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220538.png"></p>
+<p>第一张图：在调试模式下，不止得到了所要分配的内存，还得到了灰色和下面的内存。由于在VC下，每一块内存都是16的倍数，所以就要填补深绿色的pad成64字节。上下的红色为cookie，记录整块的大小，为什么要记录？因为系统回收的时候只给了指针，必须要有个地方记录大小。</p>
+<p>第二张图是release模式。</p>
+<hr>
+<h3 id="七-动态分配所得的数组"><a href="#七-动态分配所得的数组" class="headerlink" title="七 动态分配所得的数组"></a>七 动态分配所得的数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221403.png"></p>
+<p>vc的做法，需要用一个整数记录数组中元素的个数。</p>
+<p><strong>为什么动态分配的数组要搭配delete [] （array delete）呢？</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221731.png"></p>
+<p>不管加不加[]，都不会影响删掉的大小，因为已经记录了是21h，问题是出在如果不加[]，只会调用一次析构函数；而加了[]，才会把各自的对象用析构函数释放内存。</p>
+]]></content>
+      <categories>
+        <category>cpp基础</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+        <tag>侯捷课程</tag>
       </tags>
   </entry>
   <entry>
@@ -222,140 +366,53 @@
       </tags>
   </entry>
   <entry>
-    <title>剑指offer03</title>
-    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
-    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
-<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
-<p>示例 1：</p>
-<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
-<p>限制：</p>
-<p>2 &lt;= n &lt;= 100000</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+    <title>留存纪念的介绍</title>
+    <url>/2021/08/05/hello-world/</url>
+    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
 <span id="more"></span>
 
-<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
-<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
-<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
-<p>参数：sort（start，end，cmp）</p>
-<p>（1）若是数组：则可以sort(a, a+10)</p>
-<p>（2）若是vector：sort(a.start(), a.end() )</p>
-<p>（3）若想降序排列，可以</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
-<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
-<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
-<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
-<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
-<p>在VC中编译： </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p> 在GCC中编译：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>所以使用unordered_map（与map用法一致）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>发现也没有自己的解法高</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
-<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
-<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
-<p><strong>算法流程：</strong></p>
-<ol>
-<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
-<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
-<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
-<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
-</ol>
-</li>
-<li>若遍历完毕尚未返回，则返回 -1 。</li>
-</ol>
-<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
-<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>由此写出代码如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
-<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-      <categories>
-        <category>leetcode</category>
-        <category>算法</category>
-        <category>原地置换</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>sort排序</tag>
-        <tag>哈希表</tag>
-        <tag>原地置换</tag>
-      </tags>
   </entry>
   <entry>
-    <title>侯捷C++面向对象笔记（二）带指针的类</title>
-    <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
+    <title>侯捷C++面向对象笔记（三）补充</title>
+    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
 <span id="more"></span>
 
-<h3 id="一-复习Complex类的实现过程"><a href="#一-复习Complex类的实现过程" class="headerlink" title="一 复习Complex类的实现过程"></a>一 复习Complex类的实现过程</h3><p>1 好习惯：防卫式声明</p>
-<p>2 写出class 的head</p>
-<p>3 写class的body：数据和函数</p>
-<p>4 写构造函数，考虑是否需要默认值，在考虑函数传递是by value还是reference</p>
-<p>5 考虑写构造函数的初值列</p>
-<p>6 考虑功能，设计操作数：成员函数还是全局函数</p>
-<p>7 设计成员函数：考虑传递参数和返回值是否能用reference</p>
-<p><strong>没想清楚的问题：为什么有的全局函数也要用inline修饰</strong></p>
-<p>以String作为例子讲述带指针的类，先通过一些字符串的用法来确定如何编写，重点在“<strong>拷贝构造</strong>”和“<strong>拷贝赋值</strong>”，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202250.png"></p>
-<p>如果不写拷贝赋值的话，那编译器默认的是一个位一个位的<strong>拷贝构造</strong>和<strong>拷贝赋值</strong>，但是对于指针时，是拷贝那个地址，两个指针指向同一个地址，这并不是常规意义的拷贝。</p>
-<p>如下就是String的class</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202718.png"></p>
-<p>上述四个函数，二三四在西方叫做big three</p>
-<p>第二个函数是拷贝构造，第三个函数是拷贝赋值，</p>
-<p>第四个函数<strong>析构函数</strong>，当这个类死亡的时候，析构函数会被调出。</p>
-<p>第五个函数就是普通的成员函数，是一个inline function</p>
-<h3 id="二-ctor和dtor（构造函数和析构函数）"><a href="#二-ctor和dtor（构造函数和析构函数）" class="headerlink" title="二 ctor和dtor（构造函数和析构函数）"></a>二 ctor和dtor（构造函数和析构函数）</h3><p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809203608657.png" alt="image-20210809203608657"></p>
-<p>因为构造函数里动态分配了内存，如果不释放就会造成内存泄漏，所以要采用析构函数来<strong>释放空间</strong>。</p>
-<h3 id="三-拷贝构造与拷贝赋值"><a href="#三-拷贝构造与拷贝赋值" class="headerlink" title="三 拷贝构造与拷贝赋值"></a>三 拷贝构造与拷贝赋值</h3><p>⭐ 注意：带指针的类必须要有<strong>拷贝赋值</strong>和<strong>拷贝构造</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809204828.png"></p>
-<p>上述例子讲述了如果没有这两个操作，就会有两个指针指向同一个地址，那另一个地址的内存就算内存泄露了。这被称作<strong>浅拷贝</strong>，拷贝赋值和拷贝构造是<strong>深拷贝</strong>。</p>
-<p>a的别名（alias）是b，别名是一件很危险的事。</p>
-<h4 id="3-1-拷贝构造函数"><a href="#3-1-拷贝构造函数" class="headerlink" title="3.1 拷贝构造函数"></a>3.1 拷贝构造函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205124.png"></p>
-<p>蓝色的这两行其实是完全相同的意思，第三句因为s2也是新创建出来的对象，也需要构造函数，所以第二和第三是完全一致的。</p>
-<h4 id="3-2-拷贝赋值函数"><a href="#3-2-拷贝赋值函数" class="headerlink" title="3.2 拷贝赋值函数"></a>3.2 拷贝赋值函数</h4><p>拷贝赋值需要先清空原来的空间，再分配一块与赋值相同的内存，最后进行拷贝。但是需要检测是不是<strong>自己给自己赋值</strong>，不仅是为了效率，实际上也是为了正确性。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205617.png"></p>
-<p>如果不检测自我赋值，会出现下述问题：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809210356.png"></p>
-<hr>
-<h3 id="四-output函数"><a href="#四-output函数" class="headerlink" title="四 output函数"></a>四 output函数</h3><p>重载操作符&lt;&lt;，<strong>不可以是一个成员函数</strong>，因为如果是字符串的成员函数，用的时候方向会相反，cout本来在左边现在在右边（？没动）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213623.png"></p>
-<hr>
-<h3 id="五-栈（stack）和堆（heap）"><a href="#五-栈（stack）和堆（heap）" class="headerlink" title="五 栈（stack）和堆（heap）"></a>五 栈（stack）和堆（heap）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213756.png"></p>
-<p>stack还会存放local object（在函数内部创建的对象）</p>
-<p>上述两种创建方式的不同在于，new可以在程序的任何地方创建，创建就要对它负责，需要delete。因为它是在堆里，如果在栈里的话，离开该作用域就会消失。</p>
-<h4 id="5-1-stack-objects的生命期"><a href="#5-1-stack-objects的生命期" class="headerlink" title="5.1 stack objects的生命期"></a>5.1 stack objects的生命期</h4><p>离开作用域就消失了，会调用析构函数清理自己，所以也叫做auto object。</p>
-<h4 id="5-2-static-local-objects的生命期"><a href="#5-2-static-local-objects的生命期" class="headerlink" title="5.2 static local objects的生命期"></a>5.2 static local objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line">&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c2是static object，生命周期在整个作用域，结束之后仍然存在，直到整个程序结束。</p>
-<h4 id="5-3-global-objects的生命期"><a href="#5-3-global-objects的生命期" class="headerlink" title="5.3 global objects的生命期"></a>5.3 global objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> main</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c3是global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，但是作用域为<strong>整个程序</strong>！</p>
-<h4 id="5-4-heap-objects的生命期"><a href="#5-4-heap-objects的生命期" class="headerlink" title="5.4 heap objects的生命期"></a>5.4 heap objects的生命期</h4><p>new的正确写法是在同一个作用域里创建和释放</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214649.png"></p>
-<h4 id="5-5-new的机制"><a href="#5-5-new的机制" class="headerlink" title="5.5 new的机制"></a>5.5 new的机制</h4><p>绝大多数都是变成以下三个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214929.png"></p>
-<h4 id="5-6-delete的机制"><a href="#5-6-delete的机制" class="headerlink" title="5.6 delete的机制"></a>5.6 delete的机制</h4><p>转换为以下两个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220305.png"></p>
-<hr>
-<h3 id="六-动态分配所得到的内存块（很宝贵的知识）"><a href="#六-动态分配所得到的内存块（很宝贵的知识）" class="headerlink" title="六 动态分配所得到的内存块（很宝贵的知识）"></a>六 动态分配所得到的内存块（很宝贵的知识）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220538.png"></p>
-<p>第一张图：在调试模式下，不止得到了所要分配的内存，还得到了灰色和下面的内存。由于在VC下，每一块内存都是16的倍数，所以就要填补深绿色的pad成64字节。上下的红色为cookie，记录整块的大小，为什么要记录？因为系统回收的时候只给了指针，必须要有个地方记录大小。</p>
-<p>第二张图是release模式。</p>
-<hr>
-<h3 id="七-动态分配所得的数组"><a href="#七-动态分配所得的数组" class="headerlink" title="七 动态分配所得的数组"></a>七 动态分配所得的数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221403.png"></p>
-<p>vc的做法，需要用一个整数记录数组中元素的个数。</p>
-<p><strong>为什么动态分配的数组要搭配delete [] （array delete）呢？</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221731.png"></p>
-<p>不管加不加[]，都不会影响删掉的大小，因为已经记录了是21h，问题是出在如果不加[]，只会调用一次析构函数；而加了[]，才会把各自的对象用析构函数释放内存。</p>
+<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
+<p>注意：</p>
+<p>1 static的函数没有this指针</p>
+<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
+<p><strong>一个例子</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
+<p>静态的数据一定要在class外定义它初值。</p>
+<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
+<p><strong>前面的例子：只能创建一个对象</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
+<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
+<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
+<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
+<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
+<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
+<p>算法的那个库用了很多函数模板</p>
+<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
+<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
 ]]></content>
       <categories>
         <category>cpp基础</category>
@@ -424,42 +481,6 @@
       </tags>
   </entry>
   <entry>
-    <title>侯捷C++面向对象笔记（三）补充</title>
-    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
-<span id="more"></span>
-
-<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
-<p>注意：</p>
-<p>1 static的函数没有this指针</p>
-<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
-<p><strong>一个例子</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
-<p>静态的数据一定要在class外定义它初值。</p>
-<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
-<p><strong>前面的例子：只能创建一个对象</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
-<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
-<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
-<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
-<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
-<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
-<p>算法的那个库用了很多函数模板</p>
-<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
-<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
-]]></content>
-      <categories>
-        <category>cpp基础</category>
-      </categories>
-      <tags>
-        <tag>Cpp基础</tag>
-        <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>leetCode101:贪心算法</title>
     <url>/2021/08/18/leetCode101-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p><strong>介绍：</strong>《leetCode101》——贪心算法部分</p>
@@ -515,9 +536,19 @@
 <p>看了解析之后可以把compare函数换成<strong>Lambda的写法</strong>。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">eraseOverlapIntervals</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (intervals.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> n = intervals.<span class="built_in">size</span>();</span><br><span class="line">	<span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), [](vector&lt;<span class="keyword">int</span>&gt; a, vector&lt;<span class="keyword">int</span>&gt; b) &#123;<span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];&#125;);</span><br><span class="line">	<span class="keyword">int</span> total = <span class="number">0</span>, prev = intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (intervals[i][<span class="number">0</span>] &lt; prev) &#123;</span><br><span class="line">			++total;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			prev = intervals[i][<span class="number">1</span>];</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>同时要注意空集！！</p>
+<h3 id="605-种花问题"><a href="#605-种花问题" class="headerlink" title="605 种花问题"></a>605 种花问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210821215028.png"></p>
+<h4 id="我的思路：-1"><a href="#我的思路：-1" class="headerlink" title="我的思路："></a>我的思路：</h4><p>这题虽然是简单难度但是我错了很多次，因为刚开始走了弯路，没有用贪心策略，也没有仔细读题，后来的贪心策略为：<strong>如果一朵花满足种植条件，那就种植</strong>。代码如下</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canPlaceFlowers</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; flowerbed, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>((<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(flowerbed[<span class="number">0</span>] == <span class="number">0</span>)count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(flowerbed[i] == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i == <span class="number">0</span> &amp;&amp; flowerbed[i+<span class="number">1</span>] == <span class="number">0</span>)&#123; <span class="comment">//第一个且数量大于等于2</span></span><br><span class="line">                    count++;</span><br><span class="line">                    flowerbed[i] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(i == (<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>()<span class="number">-1</span> &amp;&amp; flowerbed[i<span class="number">-1</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    flowerbed[i] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; i &lt; (<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>()<span class="number">-1</span> &amp;&amp; flowerbed[i<span class="number">-1</span>] == <span class="number">0</span> &amp;&amp; flowerbed[i+<span class="number">1</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    flowerbed[i] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count &gt;= n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
-<h3 id="605"><a href="#605" class="headerlink" title="605"></a>605</h3>]]></content>
+
+<h3 id="452-用最少数量的箭引爆气球"><a href="#452-用最少数量的箭引爆气球" class="headerlink" title="452. 用最少数量的箭引爆气球"></a>452. 用最少数量的箭引爆气球</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210821214739.png" style="zoom:80%;" />
+
+<h4 id="我的思路：-2"><a href="#我的思路：-2" class="headerlink" title="我的思路："></a>我的思路：</h4><p>这题与435 差不多，我用的是左边界进行排序，然后找相交的区域，如果一个区间的右边界比较小的话就把它作为新的右边界限制。问题是运行速度挺慢的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findMinArrowShots</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; points)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(points.<span class="built_in">size</span>() == <span class="number">0</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">        <span class="built_in">sort</span>(points.<span class="built_in">begin</span>(), points.<span class="built_in">end</span>(), [](vector&lt;<span class="keyword">int</span>&gt; a, vector&lt;<span class="keyword">int</span>&gt;b)&#123;<span class="keyword">return</span> a[<span class="number">0</span>] &lt; b[<span class="number">0</span>] ;&#125;);</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = points[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; points.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(points[i][<span class="number">0</span>] &gt; right )&#123;</span><br><span class="line">                right = points[i][<span class="number">1</span>];</span><br><span class="line">                count++;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(right &gt; points[i][<span class="number">1</span>])&#123;</span><br><span class="line">                    right = points[i][<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
         <category>leetcode</category>
         <category>算法</category>
@@ -527,26 +558,5 @@
         <tag>Cpp</tag>
         <tag>算法学习</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>留存纪念的介绍</title>
-    <url>/2021/08/05/hello-world/</url>
-    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
-<span id="more"></span>
-
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
 </search>
