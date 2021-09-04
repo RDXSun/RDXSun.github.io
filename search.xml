@@ -57,171 +57,6 @@
       </tags>
   </entry>
   <entry>
-    <title>侯捷C++面向对象笔记（一）不带指针类的部分</title>
-    <url>/2021/08/07/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>侯捷老师面向对象高级编程的笔记</p>
-<span id="more"></span>
-
-<h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
-<li>以良好的方式编写C++ class （基于对象）</li>
-<li>学习classes之间的关系（面向对象）</li>
-</ul>
-<h2 id="C-演化"><a href="#C-演化" class="headerlink" title="C++演化"></a>C++演化</h2><ul>
-<li>C++98（本门课主要内容）</li>
-<li>C++03</li>
-<li>C++11</li>
-<li>C++14</li>
-</ul>
-<h2 id="C-包含"><a href="#C-包含" class="headerlink" title="C++包含"></a>C++包含</h2><ul>
-<li>C++语言</li>
-<li>C++标准库（使用标准库非常重要）</li>
-</ul>
-<h1 id="需要看的书籍"><a href="#需要看的书籍" class="headerlink" title="需要看的书籍"></a>需要看的书籍</h1><p>《C++ primer》</p>
-<p>《Effective C++》</p>
-<p>《The C++ STANDARD LIBRARY》</p>
-<p>《STL源码剖析》</p>
-<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><h3 id="零-C-与C的区别以及C-的数据和函数"><a href="#零-C-与C的区别以及C-的数据和函数" class="headerlink" title="零 C++与C的区别以及C++的数据和函数"></a>零 C++与C的区别以及C++的数据和函数</h3><p>C++的struct几乎等同于Class</p>
-<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807102745.png" style="zoom:50%;" />
-
-<h3 id="一-头文件与类的声明"><a href="#一-头文件与类的声明" class="headerlink" title="一 头文件与类的声明"></a>一 头文件与类的声明</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807103109.png" style="zoom: 50%;" />
-
-<p>标准库用&lt;&gt;，自己声明的库为” “</p>
-<p>关于头文件标准库的写法</p>
-<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807103337.png" style="zoom:50%;" />
-
-<p>把cout想象成一个屏幕，那“i=”这些就是往cout（屏幕）丢‘</p>
-<h4 id="头文件的正规写法"><a href="#头文件的正规写法" class="headerlink" title="头文件的正规写法"></a>头文件的正规写法</h4><p>防卫式声明（guard）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __COMPLEX__  <span class="comment">//if not define 这个变量，那么就define它；如果define了，就不会重复进行</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __COMPLES__</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-<p>编译器对头文件进行以下预处理：</p>
-<ol>
-<li> 编译器将处理掉所有注释，以空格代替；</li>
-<li> 删除#define，展开所有宏定义；</li>
-<li> 处理条件编译指令#if、#ifdef、#elif、#else、#endif；</li>
-<li> 处理#include，展开被包含的头文件（直接将头文件复制进文件）</li>
-<li> 保留编译器需要使用的#progma指令等等。</li>
-</ol>
-<p>从第四点可知，如果不对头文件进行防卫式声明，那么可能会对某一个头文件进行多次处理，势必会产生重复定义和声明，也会让文件的大小变得很庞大（因为多次将头文件内容进行复制）。</p>
-<h4 id="头文件的布局"><a href="#头文件的布局" class="headerlink" title="头文件的布局"></a>头文件的布局</h4><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210807112506731.png" alt="image-20210807112506731" style="zoom: 50%;" />
-
-<h4 id="class的声明"><a href="#class的声明" class="headerlink" title="class的声明"></a>class的声明</h4><p>函数可以在声明内部定义，也可以在body之外定义</p>
-<img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210807112632635.png" alt="image-20210807112632635" style="zoom: 50%;" />
-
-<p><strong>如果要设计另外一个复数，里面的re和im不是double，是float的，那应该怎么办？多定义一个class又麻烦</strong></p>
-<h4 id="使用模板class-template"><a href="#使用模板class-template" class="headerlink" title="使用模板class template"></a>使用模板class template</h4><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807112822.png" style="zoom:67%;" />
-
-<p>上面是声明，下面是使用</p>
-<hr>
-<h3 id="二-inline（内联）函数"><a href="#二-inline（内联）函数" class="headerlink" title="二 inline（内联）函数"></a>二 inline（内联）函数</h3><p>像上图，real和imag函数在函数内部定义完成，成为<strong>inline候选人</strong>。<strong>如果函数是一个inline function，会比较快而且好。</strong>但是有些function就算写成inline，编译器也没有能力把它做成inline，分界点就在于：函数如果太复杂就没办法了。（<strong>是不是inline由编译器来决定，程序员是不知道的，只能通过复杂或简单来主观判断</strong>）</p>
-<p>如果不在body内定义，想要做成inline的话，可以如下写：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">double</span></span></span><br><span class="line"><span class="function"><span class="title">image</span><span class="params">(<span class="keyword">const</span> complex &amp;x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.<span class="built_in">imag</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-<h3 id="三-access-level（访问级别）"><a href="#三-access-level（访问级别）" class="headerlink" title="三 access level（访问级别）"></a>三 access level（访问级别）</h3><p><strong>public、private和protected</strong></p>
-<p>C++的数据应该private（只给自己用），而函数一般public，也有自己用的是private。而public和private并不是一定要分成两段，可以写多个。</p>
-<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807114114.png" style="zoom:80%;" />
-
-<p>如上如所示，re和im是private的，所以不能直接通过对象来拿他的数据，但是可以通过函数real和imag来拿。</p>
-<hr>
-<h3 id="四-构造函数"><a href="#四-构造函数" class="headerlink" title="四 构造函数"></a>四 构造函数</h3><p>构造函数不需要有返回类型，因为就是要创建对象的</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">complex</span>(<span class="keyword">double</span> r = <span class="number">0</span>, <span class="keyword">double</span> i = <span class="number">0</span> )&#123; <span class="comment">//默认参数，default argument，若是初始化不添加参数则为默认值</span></span><br><span class="line">        re = r;</span><br><span class="line">        im = i;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> re, im;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>只有构造函数才有的写法，大气的特殊写法：<strong>初值列，初始列</strong>，如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">complex</span>(<span class="keyword">double</span> r = <span class="number">0</span>, <span class="keyword">double</span> i = <span class="number">0</span> )</span><br><span class="line">    : <span class="built_in">re</span>(r), <span class="built_in">im</span>(i) <span class="comment">//这样相当于赋值，但是最准确的是设初值，</span></span><br><span class="line">    &#123; &#125;</span><br><span class="line">   	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> re, im;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样书写效率比上面那种直接赋值的要高很多，最后结果是一样的。这两种的区别简单讲起来就是一个变量的值来源于两个阶段：初始化和赋值，上面的初始列就相当于设置初值。如果不在冒号后面做而是在大括号里做，就相当于放弃了初始化这件事，效率差（<strong>这里有问题：为什么效率差了一些</strong>）。</p>
-<p>冒号后面能做很多事，最常看见的就是初始化。</p>
-<p><strong>对象的创建</strong>有多种方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">complex c1(2,1);</span><br><span class="line">complex c2; //没有赋值则是默认值</span><br><span class="line">complex* p = new complex(4);</span><br></pre></td></tr></table></figure>
-
-<p>在程序里不能直接调用构造函数，只能从对象的创建时顺带调用。</p>
-<p>与构造函数相反的是，析构函数，<strong>class有两种经典分类：带指针和不带指针，而上述截图的就是不带指针的，不带指针的类多半不用写析构函数，因为不需要释放内存。</strong></p>
-<h4 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h4><p>构造函数可以有很多个——overloading（重载）。就算函数名字相同，编译后的实际名称是不同的（所以在编译器是不会有名字相同的函数的），如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807201626.png"></p>
-<p>两个real函数在编译后的实际名称不同。</p>
-<p>在上述代码中要注意，两个complex构造函数能不能这样写呢？<strong>不行！</strong>因为第一个complex构造函数<strong>有默认值</strong>，比如如果创建对象<code>complex c1;</code>不给参数，两个构造函数都能调用，所以这时候就不允许2这么写。</p>
-<h4 id="把构造函数放入private区"><a href="#把构造函数放入private区" class="headerlink" title="把构造函数放入private区"></a>把构造函数放入private区</h4><p>这样子就不能创建对象，但<strong>还是会有人将构造函数放入private区</strong>中。</p>
-<p>如下：</p>
-<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807203331.png" style="zoom:80%;" />
-
-<p>class A的实例只有一份，不允许别人创建，而那一份需要通过getInstance来取得。这种写法<strong>叫Singleton</strong></p>
-<hr>
-<h3 id="五-常量成员函数"><a href="#五-常量成员函数" class="headerlink" title="五 常量成员函数"></a>五 常量成员函数</h3><p>const member functions，如下</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">real</span> <span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> re;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">imag</span> <span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> im;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">double</span> re, im;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在class里的函数会分为：<strong>会改变private数据和不会改变数据的函数</strong>。上述就是不会改变数据内容的，所以声明时<strong>一定要加const</strong>，<strong>不加会有什么后果？</strong></p>
-<p>如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807204228.png"></p>
-<p>对于右边的对象实例化，由于用const声明，所以c1是一个不可改变的对象。但是如果read和imag没有加const的话，就说明这个对象可能会被改变，<strong>这与对象的不可修改性矛盾</strong>，所以不让其调用这个函数。</p>
-<hr>
-<h3 id="六-参数传递：pass-by-value-vs-pass-by-reference-to-const"><a href="#六-参数传递：pass-by-value-vs-pass-by-reference-to-const" class="headerlink" title="六 参数传递：pass by value vs. pass by reference(to const)"></a>六 参数传递：pass by value vs. pass by reference(to const)</h3><p>pass by value就是把整个变量都压入栈中，若是这个变量超级大，那就不好。</p>
-<p>所以如果传引用（pass by reference）的话，就是传这个变量在内存中的地址，传引用就相当于传指针，所以<strong>最好都是传引用</strong>。</p>
-<p>但是传引用在函数内部修改会影响函数外部，所以出现了<strong>pass by reference to const</strong>，这样如果函数内部修改引用处内容<strong>就会出错</strong>，如下就是参数传递的三种形式：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807205121.png"></p>
-<h3 id="七-返回值传递：return-by-value-vs-return-by-reference（to-const）"><a href="#七-返回值传递：return-by-value-vs-return-by-reference（to-const）" class="headerlink" title="七 返回值传递：return by value vs. return by reference（to const）"></a>七 返回值传递：return by value vs. return by reference（to const）</h3><p>下图是一些用法，有&amp;就是by reference</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807205729.png"></p>
-<p>虽然这个点很小，但是<strong>会影响程序运行的效率</strong>。返回值也<strong>尽量by reference</strong></p>
-<p><strong>但也有时候不可以，这个问题留待后讲</strong></p>
-<h4 id="什么时候不能return-by-reference"><a href="#什么时候不能return-by-reference" class="headerlink" title="什么时候不能return by reference"></a>什么时候不能return by reference</h4><p>函数返回值有两种情况：</p>
-<p>① 必须新建一个变量来存储返回值。</p>
-<p>② 可以将返回值存储至传进来的参数里面。</p>
-<p>很明显第一种情况不能传引用，因为这个变量所在的内存在函数结束后就被释放了，所以第一种情况就不能传引用。如下是一个可传引用的例子：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808123311.png"></p>
-<h4 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808124625.png"></p>
-<p>上图代码，定义的函数是&amp;传引用的，但是return确实指针所指向的东西，那这样对吗？<strong>对的！</strong></p>
-<p>虽然我返回的是value，但是<strong>传递者无需知道接收者以reference形式接收</strong>。</p>
-<p>比如上面的*ths就是传递者，而complex就是接收端。</p>
-<p>再比如<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808124948.png"></p>
-<p>c1是传递者，const complex &amp;r是接收者，那c1也不需要管传的是value还是reference，这就是reference的好处。</p>
-<p>**连串赋值c3+=c2+=c1;**分析</p>
-<p>先是c1加到c2，c2再加到c3。但是上面重载时，如果返回类型是void，那c2就无法加到c3，所以对于操作符重载的时候要考虑连串赋值的问题。</p>
-<hr>
-<h3 id="八-friend-友元"><a href="#八-friend-友元" class="headerlink" title="八 friend 友元"></a>八 friend 友元</h3><p>类比于日常身份的朋友，日常的朋友可以来拿钱，而类比后就是拿数据。</p>
-<p>比如上面的friend声明了__doapl是complex的朋友，于是就可以直接拿数据，如下直接就可以引用complex的数据：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807213842.png"></p>
-<p>如果通过函数来拿就会慢一点，用friend就会快。朋友不能太多，因为friend是打开了封装，而C++就是封装的。</p>
-<h4 id="一个很重要的问题：相同class的各个objects互为friends"><a href="#一个很重要的问题：相同class的各个objects互为friends" class="headerlink" title="一个很重要的问题：相同class的各个objects互为friends"></a>一个很重要的问题：相同class的各个objects互为friends</h4><p>所以以下的行为（直接调用另一个对象的数据）看似打破了封装，但是也是成立的。</p>
-<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808120159.png" style="zoom:67%;" />
-
-
-
-<hr>
-<h3 id="总结-设计一个类注意的地方"><a href="#总结-设计一个类注意的地方" class="headerlink" title="总结 设计一个类注意的地方"></a>总结 设计一个类注意的地方</h3><p>1、数据一定放在private里</p>
-<p>2、参数尽可能的以reference来传</p>
-<p>3、返回值尽可能以reference来传</p>
-<p>4、在类里面的函数要加一定要加const</p>
-<p>5、构造函数尽量用初始列</p>
-<hr>
-<h3 id="九-操作符重载"><a href="#九-操作符重载" class="headerlink" title="九 操作符重载"></a>九 操作符重载</h3><p>是C++很重要的特性，在C++里面，操作符（比如+、-等）相当于函数，可以对操作符进行重载。</p>
-<h4 id="操作符重载一：成员函数"><a href="#操作符重载一：成员函数" class="headerlink" title="操作符重载一：成员函数"></a>操作符重载一：成员函数</h4><p>+=是二元操作符，如c2+=c1，所有的操作符只要有左右的，都是作用到左边，而调用操作符函数的规则也一样。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808123856.png"></p>
-<p>图中两个函数是一样的，this是所有成员函数都会带有的隐藏变量（<strong>写代码不能写也不必写出来</strong>），调用者就是this，比如c2+=c1，c2调用函数，则c2就是this，this是一个指针。</p>
-<h4 id="操作符重载二：非成员函数（无this）"><a href="#操作符重载二：非成员函数（无this）" class="headerlink" title="操作符重载二：非成员函数（无this）"></a>操作符重载二：非成员函数（无this）</h4><p>如下是虚数加法的三种写法：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808155703.png"></p>
-<h5 id="问题：为什么上面不用reference而是value？"><a href="#问题：为什么上面不用reference而是value？" class="headerlink" title="问题：为什么上面不用reference而是value？"></a>问题：为什么上面不用reference而是value？</h5><p>上面的函数绝不可以return by reference，因为它们返回必定是local object，因为加好之后肯定是需要在外面创个东西来存储。</p>
-<h5 id="typename直接加小括号是创建“临时对象”（temp-object）"><a href="#typename直接加小括号是创建“临时对象”（temp-object）" class="headerlink" title="typename直接加小括号是创建“临时对象”（temp object）"></a>typename直接加小括号是创建“临时对象”（temp object）</h5><p>该临时对象在下一行就消失了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809162544.png"></p>
-<p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809162618745.png" alt="image-20210809162618745"></p>
-<p>上面最后三个也是临时变量，只有一行的生命周期。</p>
-<p><strong>对于特殊操作符&lt;&lt;，只能选择全局函数</strong>，因为cout是早就有的，不可能认识新的类型？（没理解）</p>
-<p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809163613689.png" alt="image-20210809163613689"></p>
-<p>上面这个函数不能用const来修饰，虽然看起来没有更改，但是在输出至os的时候，会改变os的状态。（ostream本身决定的）</p>
-<p>虽然没有人关心输出的是什么，可以用void，但是如果连串输出的时候不能是void，所以最后还要用ostream。</p>
-<p>因为os不是函数内部创建的，所以可以return by reference</p>
-<hr>
-<h3 id="十-class-body之外的各种定义"><a href="#十-class-body之外的各种定义" class="headerlink" title="十 class body之外的各种定义"></a>十 class body之外的各种定义</h3><p>class body外的函数分为两种函数：成员函数或全局函数</p>
-]]></content>
-      <categories>
-        <category>cpp基础</category>
-      </categories>
-      <tags>
-        <tag>Cpp基础</tag>
-        <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>剑指offer03</title>
     <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
     <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
@@ -402,6 +237,171 @@
       </tags>
   </entry>
   <entry>
+    <title>侯捷C++面向对象笔记（一）不带指针类的部分</title>
+    <url>/2021/08/07/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>侯捷老师面向对象高级编程的笔记</p>
+<span id="more"></span>
+
+<h1 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h1><ul>
+<li>以良好的方式编写C++ class （基于对象）</li>
+<li>学习classes之间的关系（面向对象）</li>
+</ul>
+<h2 id="C-演化"><a href="#C-演化" class="headerlink" title="C++演化"></a>C++演化</h2><ul>
+<li>C++98（本门课主要内容）</li>
+<li>C++03</li>
+<li>C++11</li>
+<li>C++14</li>
+</ul>
+<h2 id="C-包含"><a href="#C-包含" class="headerlink" title="C++包含"></a>C++包含</h2><ul>
+<li>C++语言</li>
+<li>C++标准库（使用标准库非常重要）</li>
+</ul>
+<h1 id="需要看的书籍"><a href="#需要看的书籍" class="headerlink" title="需要看的书籍"></a>需要看的书籍</h1><p>《C++ primer》</p>
+<p>《Effective C++》</p>
+<p>《The C++ STANDARD LIBRARY》</p>
+<p>《STL源码剖析》</p>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><h3 id="零-C-与C的区别以及C-的数据和函数"><a href="#零-C-与C的区别以及C-的数据和函数" class="headerlink" title="零 C++与C的区别以及C++的数据和函数"></a>零 C++与C的区别以及C++的数据和函数</h3><p>C++的struct几乎等同于Class</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807102745.png" style="zoom:50%;" />
+
+<h3 id="一-头文件与类的声明"><a href="#一-头文件与类的声明" class="headerlink" title="一 头文件与类的声明"></a>一 头文件与类的声明</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807103109.png" style="zoom: 50%;" />
+
+<p>标准库用&lt;&gt;，自己声明的库为” “</p>
+<p>关于头文件标准库的写法</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807103337.png" style="zoom:50%;" />
+
+<p>把cout想象成一个屏幕，那“i=”这些就是往cout（屏幕）丢‘</p>
+<h4 id="头文件的正规写法"><a href="#头文件的正规写法" class="headerlink" title="头文件的正规写法"></a>头文件的正规写法</h4><p>防卫式声明（guard）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __COMPLEX__  <span class="comment">//if not define 这个变量，那么就define它；如果define了，就不会重复进行</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __COMPLES__</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>编译器对头文件进行以下预处理：</p>
+<ol>
+<li> 编译器将处理掉所有注释，以空格代替；</li>
+<li> 删除#define，展开所有宏定义；</li>
+<li> 处理条件编译指令#if、#ifdef、#elif、#else、#endif；</li>
+<li> 处理#include，展开被包含的头文件（直接将头文件复制进文件）</li>
+<li> 保留编译器需要使用的#progma指令等等。</li>
+</ol>
+<p>从第四点可知，如果不对头文件进行防卫式声明，那么可能会对某一个头文件进行多次处理，势必会产生重复定义和声明，也会让文件的大小变得很庞大（因为多次将头文件内容进行复制）。</p>
+<h4 id="头文件的布局"><a href="#头文件的布局" class="headerlink" title="头文件的布局"></a>头文件的布局</h4><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210807112506731.png" alt="image-20210807112506731" style="zoom: 50%;" />
+
+<h4 id="class的声明"><a href="#class的声明" class="headerlink" title="class的声明"></a>class的声明</h4><p>函数可以在声明内部定义，也可以在body之外定义</p>
+<img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210807112632635.png" alt="image-20210807112632635" style="zoom: 50%;" />
+
+<p><strong>如果要设计另外一个复数，里面的re和im不是double，是float的，那应该怎么办？多定义一个class又麻烦</strong></p>
+<h4 id="使用模板class-template"><a href="#使用模板class-template" class="headerlink" title="使用模板class template"></a>使用模板class template</h4><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807112822.png" style="zoom:67%;" />
+
+<p>上面是声明，下面是使用</p>
+<hr>
+<h3 id="二-inline（内联）函数"><a href="#二-inline（内联）函数" class="headerlink" title="二 inline（内联）函数"></a>二 inline（内联）函数</h3><p>像上图，real和imag函数在函数内部定义完成，成为<strong>inline候选人</strong>。<strong>如果函数是一个inline function，会比较快而且好。</strong>但是有些function就算写成inline，编译器也没有能力把它做成inline，分界点就在于：函数如果太复杂就没办法了。（<strong>是不是inline由编译器来决定，程序员是不知道的，只能通过复杂或简单来主观判断</strong>）</p>
+<p>如果不在body内定义，想要做成inline的话，可以如下写：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">double</span></span></span><br><span class="line"><span class="function"><span class="title">image</span><span class="params">(<span class="keyword">const</span> complex &amp;x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x.<span class="built_in">imag</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="三-access-level（访问级别）"><a href="#三-access-level（访问级别）" class="headerlink" title="三 access level（访问级别）"></a>三 access level（访问级别）</h3><p><strong>public、private和protected</strong></p>
+<p>C++的数据应该private（只给自己用），而函数一般public，也有自己用的是private。而public和private并不是一定要分成两段，可以写多个。</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807114114.png" style="zoom:80%;" />
+
+<p>如上如所示，re和im是private的，所以不能直接通过对象来拿他的数据，但是可以通过函数real和imag来拿。</p>
+<hr>
+<h3 id="四-构造函数"><a href="#四-构造函数" class="headerlink" title="四 构造函数"></a>四 构造函数</h3><p>构造函数不需要有返回类型，因为就是要创建对象的</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">complex</span>(<span class="keyword">double</span> r = <span class="number">0</span>, <span class="keyword">double</span> i = <span class="number">0</span> )&#123; <span class="comment">//默认参数，default argument，若是初始化不添加参数则为默认值</span></span><br><span class="line">        re = r;</span><br><span class="line">        im = i;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> re, im;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只有构造函数才有的写法，大气的特殊写法：<strong>初值列，初始列</strong>，如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">complex</span>(<span class="keyword">double</span> r = <span class="number">0</span>, <span class="keyword">double</span> i = <span class="number">0</span> )</span><br><span class="line">    : <span class="built_in">re</span>(r), <span class="built_in">im</span>(i) <span class="comment">//这样相当于赋值，但是最准确的是设初值，</span></span><br><span class="line">    &#123; &#125;</span><br><span class="line">   	</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> re, im;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样书写效率比上面那种直接赋值的要高很多，最后结果是一样的。这两种的区别简单讲起来就是一个变量的值来源于两个阶段：初始化和赋值，上面的初始列就相当于设置初值。如果不在冒号后面做而是在大括号里做，就相当于放弃了初始化这件事，效率差（<strong>这里有问题：为什么效率差了一些</strong>）。</p>
+<p>冒号后面能做很多事，最常看见的就是初始化。</p>
+<p><strong>对象的创建</strong>有多种方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">complex c1(2,1);</span><br><span class="line">complex c2; //没有赋值则是默认值</span><br><span class="line">complex* p = new complex(4);</span><br></pre></td></tr></table></figure>
+
+<p>在程序里不能直接调用构造函数，只能从对象的创建时顺带调用。</p>
+<p>与构造函数相反的是，析构函数，<strong>class有两种经典分类：带指针和不带指针，而上述截图的就是不带指针的，不带指针的类多半不用写析构函数，因为不需要释放内存。</strong></p>
+<h4 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h4><p>构造函数可以有很多个——overloading（重载）。就算函数名字相同，编译后的实际名称是不同的（所以在编译器是不会有名字相同的函数的），如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807201626.png"></p>
+<p>两个real函数在编译后的实际名称不同。</p>
+<p>在上述代码中要注意，两个complex构造函数能不能这样写呢？<strong>不行！</strong>因为第一个complex构造函数<strong>有默认值</strong>，比如如果创建对象<code>complex c1;</code>不给参数，两个构造函数都能调用，所以这时候就不允许2这么写。</p>
+<h4 id="把构造函数放入private区"><a href="#把构造函数放入private区" class="headerlink" title="把构造函数放入private区"></a>把构造函数放入private区</h4><p>这样子就不能创建对象，但<strong>还是会有人将构造函数放入private区</strong>中。</p>
+<p>如下：</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807203331.png" style="zoom:80%;" />
+
+<p>class A的实例只有一份，不允许别人创建，而那一份需要通过getInstance来取得。这种写法<strong>叫Singleton</strong></p>
+<hr>
+<h3 id="五-常量成员函数"><a href="#五-常量成员函数" class="headerlink" title="五 常量成员函数"></a>五 常量成员函数</h3><p>const member functions，如下</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">real</span> <span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> re;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">double</span> <span class="title">imag</span> <span class="params">()</span> <span class="keyword">const</span> </span>&#123;<span class="keyword">return</span> im;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">double</span> re, im;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在class里的函数会分为：<strong>会改变private数据和不会改变数据的函数</strong>。上述就是不会改变数据内容的，所以声明时<strong>一定要加const</strong>，<strong>不加会有什么后果？</strong></p>
+<p>如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807204228.png"></p>
+<p>对于右边的对象实例化，由于用const声明，所以c1是一个不可改变的对象。但是如果read和imag没有加const的话，就说明这个对象可能会被改变，<strong>这与对象的不可修改性矛盾</strong>，所以不让其调用这个函数。</p>
+<hr>
+<h3 id="六-参数传递：pass-by-value-vs-pass-by-reference-to-const"><a href="#六-参数传递：pass-by-value-vs-pass-by-reference-to-const" class="headerlink" title="六 参数传递：pass by value vs. pass by reference(to const)"></a>六 参数传递：pass by value vs. pass by reference(to const)</h3><p>pass by value就是把整个变量都压入栈中，若是这个变量超级大，那就不好。</p>
+<p>所以如果传引用（pass by reference）的话，就是传这个变量在内存中的地址，传引用就相当于传指针，所以<strong>最好都是传引用</strong>。</p>
+<p>但是传引用在函数内部修改会影响函数外部，所以出现了<strong>pass by reference to const</strong>，这样如果函数内部修改引用处内容<strong>就会出错</strong>，如下就是参数传递的三种形式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807205121.png"></p>
+<h3 id="七-返回值传递：return-by-value-vs-return-by-reference（to-const）"><a href="#七-返回值传递：return-by-value-vs-return-by-reference（to-const）" class="headerlink" title="七 返回值传递：return by value vs. return by reference（to const）"></a>七 返回值传递：return by value vs. return by reference（to const）</h3><p>下图是一些用法，有&amp;就是by reference</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807205729.png"></p>
+<p>虽然这个点很小，但是<strong>会影响程序运行的效率</strong>。返回值也<strong>尽量by reference</strong></p>
+<p><strong>但也有时候不可以，这个问题留待后讲</strong></p>
+<h4 id="什么时候不能return-by-reference"><a href="#什么时候不能return-by-reference" class="headerlink" title="什么时候不能return by reference"></a>什么时候不能return by reference</h4><p>函数返回值有两种情况：</p>
+<p>① 必须新建一个变量来存储返回值。</p>
+<p>② 可以将返回值存储至传进来的参数里面。</p>
+<p>很明显第一种情况不能传引用，因为这个变量所在的内存在函数结束后就被释放了，所以第一种情况就不能传引用。如下是一个可传引用的例子：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808123311.png"></p>
+<h4 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808124625.png"></p>
+<p>上图代码，定义的函数是&amp;传引用的，但是return确实指针所指向的东西，那这样对吗？<strong>对的！</strong></p>
+<p>虽然我返回的是value，但是<strong>传递者无需知道接收者以reference形式接收</strong>。</p>
+<p>比如上面的*ths就是传递者，而complex就是接收端。</p>
+<p>再比如<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808124948.png"></p>
+<p>c1是传递者，const complex &amp;r是接收者，那c1也不需要管传的是value还是reference，这就是reference的好处。</p>
+<p>**连串赋值c3+=c2+=c1;**分析</p>
+<p>先是c1加到c2，c2再加到c3。但是上面重载时，如果返回类型是void，那c2就无法加到c3，所以对于操作符重载的时候要考虑连串赋值的问题。</p>
+<hr>
+<h3 id="八-friend-友元"><a href="#八-friend-友元" class="headerlink" title="八 friend 友元"></a>八 friend 友元</h3><p>类比于日常身份的朋友，日常的朋友可以来拿钱，而类比后就是拿数据。</p>
+<p>比如上面的friend声明了__doapl是complex的朋友，于是就可以直接拿数据，如下直接就可以引用complex的数据：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210807213842.png"></p>
+<p>如果通过函数来拿就会慢一点，用friend就会快。朋友不能太多，因为friend是打开了封装，而C++就是封装的。</p>
+<h4 id="一个很重要的问题：相同class的各个objects互为friends"><a href="#一个很重要的问题：相同class的各个objects互为friends" class="headerlink" title="一个很重要的问题：相同class的各个objects互为friends"></a>一个很重要的问题：相同class的各个objects互为friends</h4><p>所以以下的行为（直接调用另一个对象的数据）看似打破了封装，但是也是成立的。</p>
+<img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808120159.png" style="zoom:67%;" />
+
+
+
+<hr>
+<h3 id="总结-设计一个类注意的地方"><a href="#总结-设计一个类注意的地方" class="headerlink" title="总结 设计一个类注意的地方"></a>总结 设计一个类注意的地方</h3><p>1、数据一定放在private里</p>
+<p>2、参数尽可能的以reference来传</p>
+<p>3、返回值尽可能以reference来传</p>
+<p>4、在类里面的函数要加一定要加const</p>
+<p>5、构造函数尽量用初始列</p>
+<hr>
+<h3 id="九-操作符重载"><a href="#九-操作符重载" class="headerlink" title="九 操作符重载"></a>九 操作符重载</h3><p>是C++很重要的特性，在C++里面，操作符（比如+、-等）相当于函数，可以对操作符进行重载。</p>
+<h4 id="操作符重载一：成员函数"><a href="#操作符重载一：成员函数" class="headerlink" title="操作符重载一：成员函数"></a>操作符重载一：成员函数</h4><p>+=是二元操作符，如c2+=c1，所有的操作符只要有左右的，都是作用到左边，而调用操作符函数的规则也一样。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808123856.png"></p>
+<p>图中两个函数是一样的，this是所有成员函数都会带有的隐藏变量（<strong>写代码不能写也不必写出来</strong>），调用者就是this，比如c2+=c1，c2调用函数，则c2就是this，this是一个指针。</p>
+<h4 id="操作符重载二：非成员函数（无this）"><a href="#操作符重载二：非成员函数（无this）" class="headerlink" title="操作符重载二：非成员函数（无this）"></a>操作符重载二：非成员函数（无this）</h4><p>如下是虚数加法的三种写法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210808155703.png"></p>
+<h5 id="问题：为什么上面不用reference而是value？"><a href="#问题：为什么上面不用reference而是value？" class="headerlink" title="问题：为什么上面不用reference而是value？"></a>问题：为什么上面不用reference而是value？</h5><p>上面的函数绝不可以return by reference，因为它们返回必定是local object，因为加好之后肯定是需要在外面创个东西来存储。</p>
+<h5 id="typename直接加小括号是创建“临时对象”（temp-object）"><a href="#typename直接加小括号是创建“临时对象”（temp-object）" class="headerlink" title="typename直接加小括号是创建“临时对象”（temp object）"></a>typename直接加小括号是创建“临时对象”（temp object）</h5><p>该临时对象在下一行就消失了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809162544.png"></p>
+<p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809162618745.png" alt="image-20210809162618745"></p>
+<p>上面最后三个也是临时变量，只有一行的生命周期。</p>
+<p><strong>对于特殊操作符&lt;&lt;，只能选择全局函数</strong>，因为cout是早就有的，不可能认识新的类型？（没理解）</p>
+<p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809163613689.png" alt="image-20210809163613689"></p>
+<p>上面这个函数不能用const来修饰，虽然看起来没有更改，但是在输出至os的时候，会改变os的状态。（ostream本身决定的）</p>
+<p>虽然没有人关心输出的是什么，可以用void，但是如果连串输出的时候不能是void，所以最后还要用ostream。</p>
+<p>因为os不是函数内部创建的，所以可以return by reference</p>
+<hr>
+<h3 id="十-class-body之外的各种定义"><a href="#十-class-body之外的各种定义" class="headerlink" title="十 class body之外的各种定义"></a>十 class body之外的各种定义</h3><p>class body外的函数分为两种函数：成员函数或全局函数</p>
+]]></content>
+      <categories>
+        <category>cpp基础</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+        <tag>侯捷课程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>侯捷C++面向对象笔记（四）OOP，OOD</title>
     <url>/2021/08/17/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<p><strong>介绍：</strong>侯捷课程的基于对象设计，面向对象的编程</p>
@@ -537,6 +537,49 @@
 
 <p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210828085138.png"></p>
 <p>为什么4ms才击败了67.28%？？？？？？？</p>
+<h3 id="122-买卖股票的最佳时机"><a href="#122-买卖股票的最佳时机" class="headerlink" title="122 买卖股票的最佳时机"></a>122 买卖股票的最佳时机</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904155648.png"></p>
+<h4 id="我的思路：-4"><a href="#我的思路：-4" class="headerlink" title="我的思路："></a>我的思路：</h4><p>目标是获得最大利润，那就要再小的时候买入，大的时候卖出。股票的价格涨涨跌跌，所以就要在涨到最高点，价格下降的时候买入，跌倒最低点，价格升高的时候卖出。本题最重要是注意边界。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> min = prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> key = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> size = (<span class="keyword">int</span>)prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(key == <span class="number">0</span> &amp;&amp; prices[i] &lt; min) <span class="comment">//找小</span></span><br><span class="line">            &#123;</span><br><span class="line">                min = prices[i];</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="number">0</span> &amp;&amp; prices[i] &gt; min)&#123; <span class="comment">//找到最小了，开始找大</span></span><br><span class="line">                key = <span class="number">1</span>;</span><br><span class="line">                max = prices[i];</span><br><span class="line">                <span class="keyword">if</span>(i == size <span class="number">-1</span> )&#123;</span><br><span class="line">                    profit += max-min;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(key == <span class="number">1</span> &amp;&amp; prices[i] &gt;= max)&#123; <span class="comment">//找大</span></span><br><span class="line">                max=prices[i];</span><br><span class="line">                <span class="keyword">if</span>(i == size <span class="number">-1</span> )&#123;</span><br><span class="line">                    profit += max-min;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="number">1</span> &amp;&amp; prices[i] &lt; max)&#123; <span class="comment">//找到最大了，或者没有最大</span></span><br><span class="line">                profit += max-min;</span><br><span class="line">                min = prices[i];</span><br><span class="line">                key = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">return</span> profit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>贪心算法</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>算法学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetCode101:双指针</title>
+    <url>/2021/09/04/leetCode101-%E5%8F%8C%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>玩转双指针部分</p>
+<span id="more"></span>
+
+<h3 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a>167. 两数之和 II - 输入有序数组</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904183144.png" style="zoom:80%;" />
+
+<h4 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h4><p>这题没什么难度，但是我的写法虽然和答案写法一致，但是慢了很多。</p>
+<p>我的如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum = numbers[i] + numbers[j];</span><br><span class="line">        <span class="keyword">while</span>( sum != target)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sum &gt; target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>答案写法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum;</span><br><span class="line">        <span class="keyword">while</span>( i &lt; j)&#123;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">            <span class="keyword">if</span>(sum  == target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                ++i;</span><br><span class="line">            &#125;<span class="keyword">else</span> --j;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我觉得是使用if else的话，整个循环只需要判断两次，但是我写的需要判断三次。还有就是**++i和i++的速度区别**</p>
+<p>由这篇文章可见<a href="https://cloud.tencent.com/developer/article/1506229">https://cloud.tencent.com/developer/article/1506229</a></p>
+<h3 id="88-合并两个有序数组"><a href="#88-合并两个有序数组" class="headerlink" title="88 合并两个有序数组"></a>88 合并两个有序数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904223243.png"></p>
+<h4 id="我的思路-1"><a href="#我的思路-1" class="headerlink" title="我的思路"></a>我的思路</h4><p>这其实就是归并排序其中一步。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p3 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            <span class="keyword">if</span>(p1 &lt; <span class="number">0</span> )&#123;</span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">                --p3;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(p2 &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>( nums1[p1] &gt; nums2[p2])&#123;</span><br><span class="line">                nums1[p3] = nums1[p1];</span><br><span class="line">                cout&lt;&lt;nums1[p3]&lt;&lt;endl;</span><br><span class="line">                --p1;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                </span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">            &#125;</span><br><span class="line">            --p3;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>答案的解法看起来更加的简短，但是意思就是一样的，因为两个数组合并到最后会有两种情况，1：第一个数组完了，第二个数组没完 2：第一个数组没完，第二个数组完了，对于第二种情况来说，已经结束了，因为数组1是已经排序好的。由此可见可以写出以下规范代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span>  &amp;&amp; p2 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            nums1[p3--] =nums1[p1] &gt; nums2[p2]?nums1[p1--]:nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p2 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            nums1[p3--] = nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>leetcode</category>
