@@ -292,6 +292,42 @@
       </tags>
   </entry>
   <entry>
+    <title>侯捷C++面向对象笔记（三）补充</title>
+    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
+<span id="more"></span>
+
+<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
+<p>注意：</p>
+<p>1 static的函数没有this指针</p>
+<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
+<p><strong>一个例子</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
+<p>静态的数据一定要在class外定义它初值。</p>
+<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
+<p><strong>前面的例子：只能创建一个对象</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
+<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
+<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
+<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
+<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
+<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
+<p>算法的那个库用了很多函数模板</p>
+<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
+<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
+]]></content>
+      <categories>
+        <category>cpp基础</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+        <tag>侯捷课程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>侯捷C++面向对象笔记（二）带指针的类</title>
     <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
@@ -414,42 +450,6 @@
 <p>clone函数让客户端通过原型制造副本。</p>
 <p><strong>为什么需要第二个构造函数？又为什么放在保护区域？</strong></p>
 <p>因为第一个构造函数是创建静态的自己，但是clone的时候是new一个新的自己，用的是第二个构造函数。因为如果调用第一个，就会又把原型加入框架中。所以才有第二个构造函数。放在私有区域或保护区域，因为不打算被外界创建，要通过原型来创建。</p>
-]]></content>
-      <categories>
-        <category>cpp基础</category>
-      </categories>
-      <tags>
-        <tag>Cpp基础</tag>
-        <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>侯捷C++面向对象笔记（三）补充</title>
-    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
-<span id="more"></span>
-
-<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
-<p>注意：</p>
-<p>1 static的函数没有this指针</p>
-<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
-<p><strong>一个例子</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
-<p>静态的数据一定要在class外定义它初值。</p>
-<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
-<p><strong>前面的例子：只能创建一个对象</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
-<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
-<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
-<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
-<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
-<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
-<p>算法的那个库用了很多函数模板</p>
-<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
-<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
 ]]></content>
       <categories>
         <category>cpp基础</category>
@@ -601,13 +601,155 @@
       </tags>
   </entry>
   <entry>
+    <title>留存纪念的介绍</title>
+    <url>/2021/08/05/hello-world/</url>
+    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
+<span id="more"></span>
+
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>雅思精读1</title>
     <url>/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/</url>
     <content><![CDATA[<p>介绍：精读雅思笔记</p>
 <span id="more"></span>
 
-<h3 id="剑7-test3-p1-Ant-Intelligence"><a href="#剑7-test3-p1-Ant-Intelligence" class="headerlink" title="剑7 test3 p1 Ant Intelligence"></a>剑7 test3 p1 Ant Intelligence</h3><p><strong>关键词：</strong>生物 蚂蚁群落</p>
+<h3 id="剑7-test-1-p1-Let‘s-Go-Bats"><a href="#剑7-test-1-p1-Let‘s-Go-Bats" class="headerlink" title="剑7 test 1 p1 Let‘s Go Bats"></a>剑7 test 1 p1 Let‘s Go Bats</h3><p><strong>关键词：生物 蝙蝠 雷达和声呐</strong></p>
 <h4 id="单词："><a href="#单词：" class="headerlink" title="单词："></a>单词：</h4><table>
+<thead>
+<tr>
+<th>学科词</th>
+<th></th>
+<th>生词</th>
+<th></th>
+<th>眼熟词</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>prey （n.被捕食地猎物，猎物）</td>
+<td>mammalian</td>
+<td>nocturnal</td>
+<td>manoeuvre</td>
+<td>obstacle</td>
+<td>exploited</td>
+</tr>
+<tr>
+<td>ancestry</td>
+<td>whale</td>
+<td>prohibitive（过分高昂的；负担不起的，引申为巨大的）</td>
+<td>pinprick</td>
+<td>extinction与existence</td>
+<td>scrape a life（勉强的活着，一线生机）</td>
+</tr>
+<tr>
+<td>serchlight</td>
+<td>lantern</td>
+<td>uncanny</td>
+<td>tricycle</td>
+<td>substantial member（成群结队）</td>
+<td>go way back in 追溯到</td>
+</tr>
+<tr>
+<td>mate</td>
+<td>firefile</td>
+<td>codename</td>
+<td>coin（v. 创造，捏造）</td>
+<td>favour（有利于，便于）</td>
+<td>obstruct</td>
+</tr>
+<tr>
+<td>referred pain</td>
+<td>ficial version</td>
+<td>zoologist</td>
+<td><strong>⭐perceive</strong>感知；感觉；察觉</td>
+<td>muddy不止有泥泞的意思，还有模糊的等意思</td>
+<td>in the absence of 缺乏，没有</td>
+</tr>
+<tr>
+<td>phantom limb</td>
+<td>sensation</td>
+<td></td>
+<td></td>
+<td>weird</td>
+<td>immensely</td>
+</tr>
+<tr>
+<td>asdic</td>
+<td>sonar</td>
+<td></td>
+<td></td>
+<td>presence</td>
+<td>feat</td>
+</tr>
+<tr>
+<td>echo</td>
+<td>natural selection</td>
+<td></td>
+<td></td>
+<td>strike sb. dumb(让某人哑口无言)</td>
+<td>uderlying</td>
+</tr>
+<tr>
+<td>navigation</td>
+<td>detection</td>
+<td></td>
+<td></td>
+<td>referred</td>
+<td></td>
+</tr>
+<tr>
+<td>radio wave</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="同义替换："><a href="#同义替换：" class="headerlink" title="同义替换："></a>同义替换：</h4><table>
+<thead>
+<tr>
+<th>survive = avoid dying out</th>
+<th>arm, leg = limb</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>measure = calculated</td>
+<td>detect = find</td>
+</tr>
+</tbody></table>
+<h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><p>1、填空题第七题。</p>
+<p>原因：不知道perceive是感知，感觉的意思，所以填错了。</p>
+<h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、Given that there is a living to be made at night, and given that alternative daytime trades are thoroughly occupied, natural selection has facored bars that <strong>make a go of the night-huting trade.</strong></p>
+<p><strong>笔记：</strong> ① given that… 鉴于；考虑到；如果</p>
+<p>② favour的用法，本文中翻译为有利于，有助于</p>
+<p><strong>翻译：</strong>鉴于有些生物要夜间谋生，并且白天的猎物资源都已经被占用，自然选择最终使蝙蝠们在夜间捕猎行动里大显身手。</p>
+<p>2、The Sonar and Radar pioneers didn’t know it then, but all the world now knows that bats, or rather natural selection working on bats, had <strong>perfected</strong> the system tens of millions of years earlier, and their “radar” achieves feats of detection and navigation that would strike an engineer dumb with admiration.</p>
+<p><strong>笔记：</strong>① perfect作为动词：使完美；改善；提高；使完全；使精通</p>
+<p>② strike sb. dumb 使某人哑口无言，使某人目瞪口呆。</p>
+<p><strong>翻译：</strong>当时的雷达声纳技术先驱们毫不知情，但现在所有人都明白了正是蝙蝠，或者说自然选择在蝙蝠身上的鬼斧神工，早在几百万年前就已经使这种技术达到完美境界，蝙蝠的”雷达“在探测及导航方面取得的完美成果足以让人类工程师佩服到哑口无言。</p>
+<h4 id="段落中心句位置与文章结构积累："><a href="#段落中心句位置与文章结构积累：" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><p>第一段以蝙蝠怎么在黑夜里找到路开头。但是行文一转先是研究它们为什么需要在夜里捕食，而不是早上，以哺乳动物祖先进行类比。</p>
+<p>第二段研究了其他与蝙蝠一样的夜行动物。</p>
+<p>第三段提出怎么解决在黑暗里看清的问题，其中一种是有动物可以发光，但是用发光找路的动物只有人类。</p>
+<p>第四段讲了面部视觉以及由此发明的雷达等设备的应用。</p>
+<p>第五段讲了雷达和声纳与蝙蝠的的关系。</p>
+<hr>
+<h3 id="剑7-test3-p1-Ant-Intelligence"><a href="#剑7-test3-p1-Ant-Intelligence" class="headerlink" title="剑7 test3 p1 Ant Intelligence"></a>剑7 test3 p1 Ant Intelligence</h3><p><strong>关键词：</strong>生物 蚂蚁群落</p>
+<h4 id="单词：-1"><a href="#单词：-1" class="headerlink" title="单词："></a>单词：</h4><table>
 <thead>
 <tr>
 <th>学科词</th>
@@ -739,7 +881,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h4 id="同义替换："><a href="#同义替换：" class="headerlink" title="同义替换："></a>同义替换：</h4><table>
+<h4 id="同义替换：-1"><a href="#同义替换：-1" class="headerlink" title="同义替换："></a>同义替换：</h4><table>
 <thead>
 <tr>
 <th>urban life = city life</th>
@@ -755,13 +897,13 @@
 <td></td>
 </tr>
 </tbody></table>
-<h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><p>错的原因可能有：关键词画错了、找的地方找错了（为什么会找错）</p>
+<h4 id="错题及蒙题复盘：-1"><a href="#错题及蒙题复盘：-1" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><p>错的原因可能有：关键词画错了、找的地方找错了（为什么会找错）</p>
 <p>1、T/F/NG第二小题</p>
 <p>原因：找错地方了，以为这一句对应的是第三段，但是没有出现定位词，所以觉得NG。<strong>这么做肯定是不对的，如果判断NG，应该从下一题往之前找，但是这一题得知道forcing house是温床的意思</strong></p>
 <p>2、第三题的话，蚂蚁的建造速度与人类建造速度本身是两个无法比较的项目，因此该题属于典型的”不存在的比较关系“，在考场可直接凭借解题技巧判定为NOT GIVEN</p>
 <p>3、第五题错在没有仔细看到原文的<strong>odour clue</strong>，所以错选了NG</p>
 <p>4、对于summary类型（选词填空）的题目，首先对词进行词性划分。</p>
-<h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、But in fact the social lives of some members of the insect kingdom are sufficiently complex to suggest more than a hint of intelligence.</p>
+<h4 id="长难句不回读阅读训练：（每天练五个）-1"><a href="#长难句不回读阅读训练：（每天练五个）-1" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、But in fact the social lives of some members of the insect kingdom are sufficiently complex to suggest more than a hint of intelligence.</p>
 <p><strong>难点：</strong>两个of和这个suggest的翻译</p>
 <p><strong>笔记：</strong>A of B = B 的A，suggest在雅思里经常翻译为显示</p>
 <p><strong>翻译：</strong>事实上，在昆虫界，某些成员的社会生活的复杂成都显示出了相当程度的智能.</p>
@@ -780,7 +922,7 @@
 <p><strong>翻译：</strong>史前人类没有机会接触城市生活方式——这一孕育智能的文创，但是有证据显示蚂蚁已经居住在城市环境一亿年了。</p>
 <p>6、They combine the evidence of visual landmarks with a mental library of local directions, all within a framework which is <strong>consulted（咨询，在这里的意思是使用）</strong> and updated.</p>
 <p> <strong>翻译：</strong>它们会将可见的地标与记忆库中的区域方向结合起来愤懑别类储存，并不断地使用和更新（玄学的翻译）</p>
-<h4 id="段落中心句位置与文章结构积累："><a href="#段落中心句位置与文章结构积累：" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><p>第一段首先用人们常以为的猿和猴是最聪明的，利用But转折引出昆虫界的某些生物也很智能，最后引出本文的描述对象——蚂蚁</p>
+<h4 id="段落中心句位置与文章结构积累：-1"><a href="#段落中心句位置与文章结构积累：-1" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><p>第一段首先用人们常以为的猿和猴是最聪明的，利用But转折引出昆虫界的某些生物也很智能，最后引出本文的描述对象——蚂蚁</p>
 <p>第二段首先描述了一下蚂蚁的一些行为，然后将蚂蚁的化学交流方式类比人类，然后科学家LT说蚂蚁的一些行为让人类自愧不如。（本段承接上一段所说的蚂蚁显示了一定的认知力）</p>
 <p>第三段however开始转折，说了蚂蚁不如人类的地方：没有文化的传播，所有技能都在基因里等等。</p>
 <p>第四段的or have they？又开始转折，开始描述蚂蚁的种植方式是可持续化的，有很多优点，然后强调蚂蚁的农耕方式比我们所认为的要成熟和灵活。从而引出下文</p>
@@ -791,33 +933,148 @@
 <p>第十段讲了对蚂蚁的另一个研究——蚂蚁觅食怎么找路。</p>
 <p>第十一段讲了研究的具体过程。</p>
 <p>第十二段重复了蚂蚁是一种有智能的生物，讲了一个人R对蚂蚁的感情，呼吁人们不要伤害蚂蚁。</p>
+<hr>
+<h3 id="剑-test-p"><a href="#剑-test-p" class="headerlink" title="剑 test  p"></a>剑 test  p</h3><p><strong>关键词：生物 蝙蝠</strong></p>
+<h4 id="单词：-2"><a href="#单词：-2" class="headerlink" title="单词："></a>单词：</h4><table>
+<thead>
+<tr>
+<th>学科词</th>
+<th></th>
+<th>生词</th>
+<th></th>
+<th>眼熟词</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="同义替换：-2"><a href="#同义替换：-2" class="headerlink" title="同义替换："></a>同义替换：</h4><h4 id="错题及蒙题复盘：-2"><a href="#错题及蒙题复盘：-2" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><h4 id="长难句不回读阅读训练：（每天练五个）-2"><a href="#长难句不回读阅读训练：（每天练五个）-2" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><h4 id="段落中心句位置与文章结构积累：-2"><a href="#段落中心句位置与文章结构积累：-2" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><hr>
 ]]></content>
       <categories>
         <category>雅思</category>
       </categories>
       <tags>
         <tag>雅思精读</tag>
+        <tag>生物自然类</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>留存纪念的介绍</title>
-    <url>/2021/08/05/hello-world/</url>
-    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
-<span id="more"></span>
-
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
 </search>
