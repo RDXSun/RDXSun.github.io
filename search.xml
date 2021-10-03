@@ -127,116 +127,6 @@
       </tags>
   </entry>
   <entry>
-    <title>侯捷C++面向对象笔记（二）带指针的类</title>
-    <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
-<span id="more"></span>
-
-<h3 id="一-复习Complex类的实现过程"><a href="#一-复习Complex类的实现过程" class="headerlink" title="一 复习Complex类的实现过程"></a>一 复习Complex类的实现过程</h3><p>1 好习惯：防卫式声明</p>
-<p>2 写出class 的head</p>
-<p>3 写class的body：数据和函数</p>
-<p>4 写构造函数，考虑是否需要默认值，在考虑函数传递是by value还是reference</p>
-<p>5 考虑写构造函数的初值列</p>
-<p>6 考虑功能，设计操作数：成员函数还是全局函数</p>
-<p>7 设计成员函数：考虑传递参数和返回值是否能用reference</p>
-<p><strong>没想清楚的问题：为什么有的全局函数也要用inline修饰</strong></p>
-<p>以String作为例子讲述带指针的类，先通过一些字符串的用法来确定如何编写，重点在“<strong>拷贝构造</strong>”和“<strong>拷贝赋值</strong>”，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202250.png"></p>
-<p>如果不写拷贝赋值的话，那编译器默认的是一个位一个位的<strong>拷贝构造</strong>和<strong>拷贝赋值</strong>，但是对于指针时，是拷贝那个地址，两个指针指向同一个地址，这并不是常规意义的拷贝。</p>
-<p>如下就是String的class</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202718.png"></p>
-<p>上述四个函数，二三四在西方叫做big three</p>
-<p>第二个函数是拷贝构造，第三个函数是拷贝赋值，</p>
-<p>第四个函数<strong>析构函数</strong>，当这个类死亡的时候，析构函数会被调出。</p>
-<p>第五个函数就是普通的成员函数，是一个inline function</p>
-<h3 id="二-ctor和dtor（构造函数和析构函数）"><a href="#二-ctor和dtor（构造函数和析构函数）" class="headerlink" title="二 ctor和dtor（构造函数和析构函数）"></a>二 ctor和dtor（构造函数和析构函数）</h3><p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809203608657.png" alt="image-20210809203608657"></p>
-<p>因为构造函数里动态分配了内存，如果不释放就会造成内存泄漏，所以要采用析构函数来<strong>释放空间</strong>。</p>
-<h3 id="三-拷贝构造与拷贝赋值"><a href="#三-拷贝构造与拷贝赋值" class="headerlink" title="三 拷贝构造与拷贝赋值"></a>三 拷贝构造与拷贝赋值</h3><p>⭐ 注意：带指针的类必须要有<strong>拷贝赋值</strong>和<strong>拷贝构造</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809204828.png"></p>
-<p>上述例子讲述了如果没有这两个操作，就会有两个指针指向同一个地址，那另一个地址的内存就算内存泄露了。这被称作<strong>浅拷贝</strong>，拷贝赋值和拷贝构造是<strong>深拷贝</strong>。</p>
-<p>a的别名（alias）是b，别名是一件很危险的事。</p>
-<h4 id="3-1-拷贝构造函数"><a href="#3-1-拷贝构造函数" class="headerlink" title="3.1 拷贝构造函数"></a>3.1 拷贝构造函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205124.png"></p>
-<p>蓝色的这两行其实是完全相同的意思，第三句因为s2也是新创建出来的对象，也需要构造函数，所以第二和第三是完全一致的。</p>
-<h4 id="3-2-拷贝赋值函数"><a href="#3-2-拷贝赋值函数" class="headerlink" title="3.2 拷贝赋值函数"></a>3.2 拷贝赋值函数</h4><p>拷贝赋值需要先清空原来的空间，再分配一块与赋值相同的内存，最后进行拷贝。但是需要检测是不是<strong>自己给自己赋值</strong>，不仅是为了效率，实际上也是为了正确性。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205617.png"></p>
-<p>如果不检测自我赋值，会出现下述问题：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809210356.png"></p>
-<hr>
-<h3 id="四-output函数"><a href="#四-output函数" class="headerlink" title="四 output函数"></a>四 output函数</h3><p>重载操作符&lt;&lt;，<strong>不可以是一个成员函数</strong>，因为如果是字符串的成员函数，用的时候方向会相反，cout本来在左边现在在右边（？没动）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213623.png"></p>
-<hr>
-<h3 id="五-栈（stack）和堆（heap）"><a href="#五-栈（stack）和堆（heap）" class="headerlink" title="五 栈（stack）和堆（heap）"></a>五 栈（stack）和堆（heap）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213756.png"></p>
-<p>stack还会存放local object（在函数内部创建的对象）</p>
-<p>上述两种创建方式的不同在于，new可以在程序的任何地方创建，创建就要对它负责，需要delete。因为它是在堆里，如果在栈里的话，离开该作用域就会消失。</p>
-<h4 id="5-1-stack-objects的生命期"><a href="#5-1-stack-objects的生命期" class="headerlink" title="5.1 stack objects的生命期"></a>5.1 stack objects的生命期</h4><p>离开作用域就消失了，会调用析构函数清理自己，所以也叫做auto object。</p>
-<h4 id="5-2-static-local-objects的生命期"><a href="#5-2-static-local-objects的生命期" class="headerlink" title="5.2 static local objects的生命期"></a>5.2 static local objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line">&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c2是static object，生命周期在整个作用域，结束之后仍然存在，直到整个程序结束。</p>
-<h4 id="5-3-global-objects的生命期"><a href="#5-3-global-objects的生命期" class="headerlink" title="5.3 global objects的生命期"></a>5.3 global objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> main</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c3是global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，但是作用域为<strong>整个程序</strong>！</p>
-<h4 id="5-4-heap-objects的生命期"><a href="#5-4-heap-objects的生命期" class="headerlink" title="5.4 heap objects的生命期"></a>5.4 heap objects的生命期</h4><p>new的正确写法是在同一个作用域里创建和释放</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214649.png"></p>
-<h4 id="5-5-new的机制"><a href="#5-5-new的机制" class="headerlink" title="5.5 new的机制"></a>5.5 new的机制</h4><p>绝大多数都是变成以下三个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214929.png"></p>
-<h4 id="5-6-delete的机制"><a href="#5-6-delete的机制" class="headerlink" title="5.6 delete的机制"></a>5.6 delete的机制</h4><p>转换为以下两个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220305.png"></p>
-<hr>
-<h3 id="六-动态分配所得到的内存块（很宝贵的知识）"><a href="#六-动态分配所得到的内存块（很宝贵的知识）" class="headerlink" title="六 动态分配所得到的内存块（很宝贵的知识）"></a>六 动态分配所得到的内存块（很宝贵的知识）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220538.png"></p>
-<p>第一张图：在调试模式下，不止得到了所要分配的内存，还得到了灰色和下面的内存。由于在VC下，每一块内存都是16的倍数，所以就要填补深绿色的pad成64字节。上下的红色为cookie，记录整块的大小，为什么要记录？因为系统回收的时候只给了指针，必须要有个地方记录大小。</p>
-<p>第二张图是release模式。</p>
-<hr>
-<h3 id="七-动态分配所得的数组"><a href="#七-动态分配所得的数组" class="headerlink" title="七 动态分配所得的数组"></a>七 动态分配所得的数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221403.png"></p>
-<p>vc的做法，需要用一个整数记录数组中元素的个数。</p>
-<p><strong>为什么动态分配的数组要搭配delete [] （array delete）呢？</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221731.png"></p>
-<p>不管加不加[]，都不会影响删掉的大小，因为已经记录了是21h，问题是出在如果不加[]，只会调用一次析构函数；而加了[]，才会把各自的对象用析构函数释放内存。</p>
-]]></content>
-      <categories>
-        <category>cpp基础</category>
-      </categories>
-      <tags>
-        <tag>Cpp基础</tag>
-        <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>侯捷C++面向对象笔记（三）补充</title>
-    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
-<span id="more"></span>
-
-<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
-<p>注意：</p>
-<p>1 static的函数没有this指针</p>
-<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
-<p><strong>一个例子</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
-<p>静态的数据一定要在class外定义它初值。</p>
-<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
-<p><strong>前面的例子：只能创建一个对象</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
-<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
-<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
-<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
-<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
-<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
-<p>算法的那个库用了很多函数模板</p>
-<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
-<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
-]]></content>
-      <categories>
-        <category>cpp基础</category>
-      </categories>
-      <tags>
-        <tag>Cpp基础</tag>
-        <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>侯捷C++面向对象笔记（一）不带指针类的部分</title>
     <url>/2021/08/07/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p><strong>介绍：</strong>侯捷老师面向对象高级编程的笔记</p>
@@ -402,6 +292,80 @@
       </tags>
   </entry>
   <entry>
+    <title>侯捷C++面向对象笔记（二）带指针的类</title>
+    <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
+<span id="more"></span>
+
+<h3 id="一-复习Complex类的实现过程"><a href="#一-复习Complex类的实现过程" class="headerlink" title="一 复习Complex类的实现过程"></a>一 复习Complex类的实现过程</h3><p>1 好习惯：防卫式声明</p>
+<p>2 写出class 的head</p>
+<p>3 写class的body：数据和函数</p>
+<p>4 写构造函数，考虑是否需要默认值，在考虑函数传递是by value还是reference</p>
+<p>5 考虑写构造函数的初值列</p>
+<p>6 考虑功能，设计操作数：成员函数还是全局函数</p>
+<p>7 设计成员函数：考虑传递参数和返回值是否能用reference</p>
+<p><strong>没想清楚的问题：为什么有的全局函数也要用inline修饰</strong></p>
+<p>以String作为例子讲述带指针的类，先通过一些字符串的用法来确定如何编写，重点在“<strong>拷贝构造</strong>”和“<strong>拷贝赋值</strong>”，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202250.png"></p>
+<p>如果不写拷贝赋值的话，那编译器默认的是一个位一个位的<strong>拷贝构造</strong>和<strong>拷贝赋值</strong>，但是对于指针时，是拷贝那个地址，两个指针指向同一个地址，这并不是常规意义的拷贝。</p>
+<p>如下就是String的class</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202718.png"></p>
+<p>上述四个函数，二三四在西方叫做big three</p>
+<p>第二个函数是拷贝构造，第三个函数是拷贝赋值，</p>
+<p>第四个函数<strong>析构函数</strong>，当这个类死亡的时候，析构函数会被调出。</p>
+<p>第五个函数就是普通的成员函数，是一个inline function</p>
+<h3 id="二-ctor和dtor（构造函数和析构函数）"><a href="#二-ctor和dtor（构造函数和析构函数）" class="headerlink" title="二 ctor和dtor（构造函数和析构函数）"></a>二 ctor和dtor（构造函数和析构函数）</h3><p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809203608657.png" alt="image-20210809203608657"></p>
+<p>因为构造函数里动态分配了内存，如果不释放就会造成内存泄漏，所以要采用析构函数来<strong>释放空间</strong>。</p>
+<h3 id="三-拷贝构造与拷贝赋值"><a href="#三-拷贝构造与拷贝赋值" class="headerlink" title="三 拷贝构造与拷贝赋值"></a>三 拷贝构造与拷贝赋值</h3><p>⭐ 注意：带指针的类必须要有<strong>拷贝赋值</strong>和<strong>拷贝构造</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809204828.png"></p>
+<p>上述例子讲述了如果没有这两个操作，就会有两个指针指向同一个地址，那另一个地址的内存就算内存泄露了。这被称作<strong>浅拷贝</strong>，拷贝赋值和拷贝构造是<strong>深拷贝</strong>。</p>
+<p>a的别名（alias）是b，别名是一件很危险的事。</p>
+<h4 id="3-1-拷贝构造函数"><a href="#3-1-拷贝构造函数" class="headerlink" title="3.1 拷贝构造函数"></a>3.1 拷贝构造函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205124.png"></p>
+<p>蓝色的这两行其实是完全相同的意思，第三句因为s2也是新创建出来的对象，也需要构造函数，所以第二和第三是完全一致的。</p>
+<h4 id="3-2-拷贝赋值函数"><a href="#3-2-拷贝赋值函数" class="headerlink" title="3.2 拷贝赋值函数"></a>3.2 拷贝赋值函数</h4><p>拷贝赋值需要先清空原来的空间，再分配一块与赋值相同的内存，最后进行拷贝。但是需要检测是不是<strong>自己给自己赋值</strong>，不仅是为了效率，实际上也是为了正确性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205617.png"></p>
+<p>如果不检测自我赋值，会出现下述问题：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809210356.png"></p>
+<hr>
+<h3 id="四-output函数"><a href="#四-output函数" class="headerlink" title="四 output函数"></a>四 output函数</h3><p>重载操作符&lt;&lt;，<strong>不可以是一个成员函数</strong>，因为如果是字符串的成员函数，用的时候方向会相反，cout本来在左边现在在右边（？没动）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213623.png"></p>
+<hr>
+<h3 id="五-栈（stack）和堆（heap）"><a href="#五-栈（stack）和堆（heap）" class="headerlink" title="五 栈（stack）和堆（heap）"></a>五 栈（stack）和堆（heap）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213756.png"></p>
+<p>stack还会存放local object（在函数内部创建的对象）</p>
+<p>上述两种创建方式的不同在于，new可以在程序的任何地方创建，创建就要对它负责，需要delete。因为它是在堆里，如果在栈里的话，离开该作用域就会消失。</p>
+<h4 id="5-1-stack-objects的生命期"><a href="#5-1-stack-objects的生命期" class="headerlink" title="5.1 stack objects的生命期"></a>5.1 stack objects的生命期</h4><p>离开作用域就消失了，会调用析构函数清理自己，所以也叫做auto object。</p>
+<h4 id="5-2-static-local-objects的生命期"><a href="#5-2-static-local-objects的生命期" class="headerlink" title="5.2 static local objects的生命期"></a>5.2 static local objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line">&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>c2是static object，生命周期在整个作用域，结束之后仍然存在，直到整个程序结束。</p>
+<h4 id="5-3-global-objects的生命期"><a href="#5-3-global-objects的生命期" class="headerlink" title="5.3 global objects的生命期"></a>5.3 global objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> main</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>c3是global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，但是作用域为<strong>整个程序</strong>！</p>
+<h4 id="5-4-heap-objects的生命期"><a href="#5-4-heap-objects的生命期" class="headerlink" title="5.4 heap objects的生命期"></a>5.4 heap objects的生命期</h4><p>new的正确写法是在同一个作用域里创建和释放</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214649.png"></p>
+<h4 id="5-5-new的机制"><a href="#5-5-new的机制" class="headerlink" title="5.5 new的机制"></a>5.5 new的机制</h4><p>绝大多数都是变成以下三个动作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214929.png"></p>
+<h4 id="5-6-delete的机制"><a href="#5-6-delete的机制" class="headerlink" title="5.6 delete的机制"></a>5.6 delete的机制</h4><p>转换为以下两个动作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220305.png"></p>
+<hr>
+<h3 id="六-动态分配所得到的内存块（很宝贵的知识）"><a href="#六-动态分配所得到的内存块（很宝贵的知识）" class="headerlink" title="六 动态分配所得到的内存块（很宝贵的知识）"></a>六 动态分配所得到的内存块（很宝贵的知识）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220538.png"></p>
+<p>第一张图：在调试模式下，不止得到了所要分配的内存，还得到了灰色和下面的内存。由于在VC下，每一块内存都是16的倍数，所以就要填补深绿色的pad成64字节。上下的红色为cookie，记录整块的大小，为什么要记录？因为系统回收的时候只给了指针，必须要有个地方记录大小。</p>
+<p>第二张图是release模式。</p>
+<hr>
+<h3 id="七-动态分配所得的数组"><a href="#七-动态分配所得的数组" class="headerlink" title="七 动态分配所得的数组"></a>七 动态分配所得的数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221403.png"></p>
+<p>vc的做法，需要用一个整数记录数组中元素的个数。</p>
+<p><strong>为什么动态分配的数组要搭配delete [] （array delete）呢？</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221731.png"></p>
+<p>不管加不加[]，都不会影响删掉的大小，因为已经记录了是21h，问题是出在如果不加[]，只会调用一次析构函数；而加了[]，才会把各自的对象用析构函数释放内存。</p>
+]]></content>
+      <categories>
+        <category>cpp基础</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+        <tag>侯捷课程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>侯捷C++面向对象笔记（四）OOP，OOD</title>
     <url>/2021/08/17/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<p><strong>介绍：</strong>侯捷课程的基于对象设计，面向对象的编程</p>
@@ -450,6 +414,42 @@
 <p>clone函数让客户端通过原型制造副本。</p>
 <p><strong>为什么需要第二个构造函数？又为什么放在保护区域？</strong></p>
 <p>因为第一个构造函数是创建静态的自己，但是clone的时候是new一个新的自己，用的是第二个构造函数。因为如果调用第一个，就会又把原型加入框架中。所以才有第二个构造函数。放在私有区域或保护区域，因为不打算被外界创建，要通过原型来创建。</p>
+]]></content>
+      <categories>
+        <category>cpp基础</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+        <tag>侯捷课程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>侯捷C++面向对象笔记（三）补充</title>
+    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
+<span id="more"></span>
+
+<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
+<p>注意：</p>
+<p>1 static的函数没有this指针</p>
+<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
+<p><strong>一个例子</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
+<p>静态的数据一定要在class外定义它初值。</p>
+<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
+<p><strong>前面的例子：只能创建一个对象</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
+<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
+<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
+<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
+<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
+<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
+<p>算法的那个库用了很多函数模板</p>
+<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
+<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
 ]]></content>
       <categories>
         <category>cpp基础</category>
@@ -580,7 +580,16 @@
 <p>答案的解法看起来更加的简短，但是意思就是一样的，因为两个数组合并到最后会有两种情况，1：第一个数组完了，第二个数组没完 2：第一个数组没完，第二个数组完了，对于第二种情况来说，已经结束了，因为数组1是已经排序好的。由此可见可以写出以下规范代码</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span>  &amp;&amp; p2 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            nums1[p3--] =nums1[p1] &gt; nums2[p2]?nums1[p1--]:nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p2 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            nums1[p3--] = nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-]]></content>
+
+
+<h3 id="142-环形链表II（重要：快慢指针）"><a href="#142-环形链表II（重要：快慢指针）" class="headerlink" title="142 环形链表II（重要：快慢指针）"></a>142 环形链表II（重要：快慢指针）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210907162125.png"></p>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>看答案才知道原来这种题目有固定解法，用快慢指针，快慢指针的原理如下面链接所示。快慢指针所<strong>占用的空间是O(1)。</strong></p>
+<p><a href="https://zhuanlan.zhihu.com/p/361049436">深入理解快慢指针算法 – 链表环路检测 - 知乎 (zhihu.com)</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span> <span class="comment">//思考：1、可以用map解决:不行，因为value值不是唯一的</span></span><br><span class="line">                <span class="comment">//思考：2、改变val值，用于寻找</span></span><br><span class="line">                <span class="comment">//思考3：用快慢指针</span></span><br><span class="line">                </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == <span class="literal">NULL</span> || fast-&gt;next == <span class="literal">NULL</span>)<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;<span class="keyword">while</span>(head!=<span class="literal">NULL</span> &amp;&amp; slow != fast);</span><br><span class="line">        </span><br><span class="line">        fast = head;</span><br><span class="line">        <span class="keyword">while</span>(fast!=slow)&#123;</span><br><span class="line">            fast = fast-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fast;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="76-最小覆盖字串（滑动窗口，不会做）"><a href="#76-最小覆盖字串（滑动窗口，不会做）" class="headerlink" title="76 最小覆盖字串（滑动窗口，不会做）"></a>76 最小覆盖字串（滑动窗口，不会做）</h3>]]></content>
       <categories>
         <category>leetcode</category>
         <category>算法</category>
@@ -589,6 +598,205 @@
       <tags>
         <tag>Cpp</tag>
         <tag>算法学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>雅思精读1</title>
+    <url>/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/</url>
+    <content><![CDATA[<p>介绍：精读雅思笔记</p>
+<span id="more"></span>
+
+<h3 id="剑7-test3-p1-Ant-Intelligence"><a href="#剑7-test3-p1-Ant-Intelligence" class="headerlink" title="剑7 test3 p1 Ant Intelligence"></a>剑7 test3 p1 Ant Intelligence</h3><p><strong>关键词：</strong>生物 蚂蚁群落</p>
+<h4 id="单词："><a href="#单词：" class="headerlink" title="单词："></a>单词：</h4><table>
+<thead>
+<tr>
+<th>学科词</th>
+<th></th>
+<th>生词</th>
+<th></th>
+<th>眼熟词</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>creature</td>
+<td>ape</td>
+<td>auditory</td>
+<td>enduring</td>
+<td>hint（a hint of）</td>
+<td>visual</td>
+</tr>
+<tr>
+<td>investigations</td>
+<td>insect</td>
+<td>jingles</td>
+<td>intricately</td>
+<td>cognition</td>
+<td>channel：频道、途径、手段</td>
+</tr>
+<tr>
+<td>scrutiny</td>
+<td>instinct</td>
+<td>chant</td>
+<td>meshed</td>
+<td>considerable与considerate</td>
+<td>livestock</td>
+</tr>
+<tr>
+<td>fungi（fungus）</td>
+<td>aphids</td>
+<td>ceaselessly</td>
+<td>outstrip</td>
+<td>martial</td>
+<td>craft</td>
+</tr>
+<tr>
+<td>cultural continuity文化传承</td>
+<td>cultural transmission文化传播</td>
+<td>agribusiness</td>
+<td>albeit</td>
+<td>propagate</td>
+<td>exposure</td>
+</tr>
+<tr>
+<td>sustainable</td>
+<td>cellulose</td>
+<td>adaptable</td>
+<td>exhaustive</td>
+<td>setting</td>
+<td>chamber</td>
+</tr>
+<tr>
+<td>nest</td>
+<td>antibiotics</td>
+<td>domesticate</td>
+<td></td>
+<td>magnificent（写作积累单词）</td>
+<td>territory</td>
+</tr>
+<tr>
+<td>fertilize（或se）</td>
+<td>weed</td>
+<td>prehistoric</td>
+<td></td>
+<td>hail as</td>
+<td>primitive</td>
+</tr>
+<tr>
+<td>strain（张力拉力，植物里表示品种）</td>
+<td>colony</td>
+<td>forcing house</td>
+<td></td>
+<td>integrate</td>
+<td>bearing</td>
+</tr>
+<tr>
+<td>foraging trip</td>
+<td>scout</td>
+<td>megalopolis</td>
+<td></td>
+<td>continuously</td>
+<td>mobilize</td>
+</tr>
+<tr>
+<td>forager</td>
+<td>odour</td>
+<td></td>
+<td></td>
+<td>elaborate</td>
+<td>precaution</td>
+</tr>
+<tr>
+<td>secrete</td>
+<td>cultivate</td>
+<td></td>
+<td></td>
+<td>herd</td>
+<td>whereas</td>
+</tr>
+<tr>
+<td>colony</td>
+<td>diverse</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>screen</td>
+<td>genetically</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>individual</td>
+<td>interbreed</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="同义替换："><a href="#同义替换：" class="headerlink" title="同义替换："></a>同义替换：</h4><table>
+<thead>
+<tr>
+<th>urban life = city life</th>
+<th>forcing house = encourage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>making calculations = integrating</td>
+<td>bearings = position 位置</td>
+</tr>
+<tr>
+<td>find their way = navigate</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><p>错的原因可能有：关键词画错了、找的地方找错了（为什么会找错）</p>
+<p>1、T/F/NG第二小题</p>
+<p>原因：找错地方了，以为这一句对应的是第三段，但是没有出现定位词，所以觉得NG。<strong>这么做肯定是不对的，如果判断NG，应该从下一题往之前找，但是这一题得知道forcing house是温床的意思</strong></p>
+<p>2、第三题的话，蚂蚁的建造速度与人类建造速度本身是两个无法比较的项目，因此该题属于典型的”不存在的比较关系“，在考场可直接凭借解题技巧判定为NOT GIVEN</p>
+<p>3、第五题错在没有仔细看到原文的<strong>odour clue</strong>，所以错选了NG</p>
+<p>4、对于summary类型（选词填空）的题目，首先对词进行词性划分。</p>
+<h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、But in fact the social lives of some members of the insect kingdom are sufficiently complex to suggest more than a hint of intelligence.</p>
+<p><strong>难点：</strong>两个of和这个suggest的翻译</p>
+<p><strong>笔记：</strong>A of B = B 的A，suggest在雅思里经常翻译为显示</p>
+<p><strong>翻译：</strong>事实上，在昆虫界，某些成员的社会生活的复杂成都显示出了相当程度的智能.</p>
+<p>2、Among these， the world of the ant <strong>has come in for considerable scrutiny</strong> lately, and the idea that ants demonstrate sparks of cognition has certainly not been rejected by those involved in these investigations. </p>
+<p><strong>难点：</strong> 粗体的这一句话怎么翻译；sparks of 怎么翻译; idea引导的主语从句很难翻译</p>
+<p><strong>笔记：</strong>sparks of翻译为（才智等的）焕发；火花</p>
+<p><strong>翻译：</strong>其中蚂蚁世界就在最近成了主要的观察对象，蚂蚁显示出认知力焕发的观点也得到了研究演员的肯定。</p>
+<p>3、Their fungus farming and aphid herding  crafts are sophisticated then compared to the agricultural skills of humans five thousand years ago but have been totally overtaken by modern human agribusiness.</p>
+<p><strong>难点：</strong>特别长，中心语为crafts, but前后分别为西表结构和被动结构。</p>
+<p><strong>翻译：</strong>它们培育真菌、饲养蚜虫的级数和五千年前的人类农耕技术相比还算成熟，但却被人类现代农业综合企业远远超越。</p>
+<p>⭐4、It was once though that the fungus that ants cultivate was a single type that they had propagated, essentially unchanged from the distant past.</p>
+<p><strong>笔记：</strong>这句话很适合拿来写作文</p>
+<p><strong>翻译：</strong>曾经有观点认为蚂蚁培育的真菌只是它们繁殖的单一品种，长久以来都没有本质的改变。</p>
+<p>5、Whereas prehistoric man had no exposure to urban lifestyles - the forcing house of intelligence - the evidence suggests that ants have lived in urban settings for close on a hundred million years, developing and maintaining underground cities of specialized chambers and tunnels.</p>
+<p><strong>难点：</strong> have no exposure to 怎么翻译; the forcing house怎么翻译</p>
+<p><strong>翻译：</strong>史前人类没有机会接触城市生活方式——这一孕育智能的文创，但是有证据显示蚂蚁已经居住在城市环境一亿年了。</p>
+<p>6、They combine the evidence of visual landmarks with a mental library of local directions, all within a framework which is <strong>consulted（咨询，在这里的意思是使用）</strong> and updated.</p>
+<p> <strong>翻译：</strong>它们会将可见的地标与记忆库中的区域方向结合起来愤懑别类储存，并不断地使用和更新（玄学的翻译）</p>
+<h4 id="段落中心句位置与文章结构积累："><a href="#段落中心句位置与文章结构积累：" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><p>第一段首先用人们常以为的猿和猴是最聪明的，利用But转折引出昆虫界的某些生物也很智能，最后引出本文的描述对象——蚂蚁</p>
+<p>第二段首先描述了一下蚂蚁的一些行为，然后将蚂蚁的化学交流方式类比人类，然后科学家LT说蚂蚁的一些行为让人类自愧不如。（本段承接上一段所说的蚂蚁显示了一定的认知力）</p>
+<p>第三段however开始转折，说了蚂蚁不如人类的地方：没有文化的传播，所有技能都在基因里等等。</p>
+<p>第四段的or have they？又开始转折，开始描述蚂蚁的种植方式是可持续化的，有很多优点，然后强调蚂蚁的农耕方式比我们所认为的要成熟和灵活。从而引出下文</p>
+<p>第五段承接第四段，讲什么地方体现农耕方式要好。先是讲了蚂蚁的农耕时间要更长，然后为了吃叶子种真菌，利用自身的抗生素去除杂草真菌。</p>
+<p>第六段就第五段的真菌展开其他方面的描述，研究蚂蚁的真菌是不是只有一种，但结果表明不是，还讲了蚂蚁如何培育新的真菌。<br>第七段引出了新的话题，蚂蚁城市与人类城市的对比。</p>
+<p>第八段先是描述了人类对于墨西哥、东京等城市的赞叹，接着描述了一个作者在书里写的蚂蚁的巨大城市有多大。</p>
+<p>第九段承接第八段，讲了蚂蚁造城市可能是另外一种智能。</p>
+<p>第十段讲了对蚂蚁的另一个研究——蚂蚁觅食怎么找路。</p>
+<p>第十一段讲了研究的具体过程。</p>
+<p>第十二段重复了蚂蚁是一种有智能的生物，讲了一个人R对蚂蚁的感情，呼吁人们不要伤害蚂蚁。</p>
+]]></content>
+      <categories>
+        <category>雅思</category>
+      </categories>
+      <tags>
+        <tag>雅思精读</tag>
       </tags>
   </entry>
   <entry>

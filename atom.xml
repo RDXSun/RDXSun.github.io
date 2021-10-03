@@ -6,7 +6,7 @@
   <link href="https://rdxsun.github.io/atom.xml" rel="self"/>
   
   <link href="https://rdxsun.github.io/"/>
-  <updated>2021-09-04T14:44:46.326Z</updated>
+  <updated>2021-10-03T06:28:48.595Z</updated>
   <id>https://rdxsun.github.io/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>雅思精读1</title>
+    <link href="https://rdxsun.github.io/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/"/>
+    <id>https://rdxsun.github.io/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/</id>
+    <published>2021-10-02T07:20:04.000Z</published>
+    <updated>2021-10-03T06:28:48.595Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;介绍：精读雅思笔记&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="雅思" scheme="https://rdxsun.github.io/categories/%E9%9B%85%E6%80%9D/"/>
+    
+    
+    <category term="雅思精读" scheme="https://rdxsun.github.io/tags/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>leetCode101:双指针</title>
     <link href="https://rdxsun.github.io/2021/09/04/leetCode101-%E5%8F%8C%E6%8C%87%E9%92%88/"/>
     <id>https://rdxsun.github.io/2021/09/04/leetCode101-%E5%8F%8C%E6%8C%87%E9%92%88/</id>
     <published>2021-09-04T08:05:09.000Z</published>
-    <updated>2021-09-04T14:44:46.326Z</updated>
+    <updated>2021-09-09T09:07:09.888Z</updated>
     
     
     <summary type="html">&lt;p&gt;&lt;strong&gt;介绍：&lt;/strong&gt;玩转双指针部分&lt;/p&gt;</summary>
