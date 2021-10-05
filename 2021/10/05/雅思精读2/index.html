@@ -15,7 +15,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>侯捷C++面向对象笔记（三）补充 |  The Box of Sun</title>
+      <title>雅思精读2 |  The Box of Sun</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -62,7 +62,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-侯捷C-面向对象笔记（三）补充"
+  id="post-雅思精读2"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -73,7 +73,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  侯捷C++面向对象笔记（三）补充
+  雅思精读2
 </h1>
  
 
@@ -81,11 +81,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/" class="article-date">
-  <time datetime="2021-08-14T12:42:38.000Z" itemprop="datePublished">2021-08-14</time>
+      <a href="/2021/10/05/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB2/" class="article-date">
+  <time datetime="2021-10-05T02:26:29.000Z" itemprop="datePublished">2021-10-05</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/cpp%E5%9F%BA%E7%A1%80/">cpp基础</a>
+    <a class="article-category-link" href="/categories/%E9%9B%85%E6%80%9D/">雅思</a>
   </div>
   
 <div class="word_count">
@@ -93,7 +93,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">257</span>
+            <span class="post-count">767</span>
         </span>
     </span>
 
@@ -102,7 +102,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -117,30 +117,164 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
+  <p>介绍：精读雅思笔记，社会生活类</p>
 <span id="more"></span>
 
-<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
-<p>注意：</p>
-<p>1 static的函数没有this指针</p>
-<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
-<p><strong>一个例子</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
-<p>静态的数据一定要在class外定义它初值。</p>
-<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
-<p><strong>前面的例子：只能创建一个对象</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
-<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
-<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
-<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
-<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
-<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
-<p>算法的那个库用了很多函数模板</p>
-<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
-<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
+<h3 id="剑7-test4-p2"><a href="#剑7-test4-p2" class="headerlink" title="剑7 test4  p2"></a>剑7 test4  p2</h3><p><strong>关键词：</strong>社会生活 渔业</p>
+<h4 id="单词："><a href="#单词：" class="headerlink" title="单词："></a>单词：</h4><table>
+<thead>
+<tr>
+<th>学科词</th>
+<th></th>
+<th>生词</th>
+<th></th>
+<th>眼熟词</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Russian</td>
+<td>inhibitant</td>
+<td>archipelago</td>
+<td>rhythmic</td>
+<td>vlocanic</td>
+<td>learn of(听到，获悉，发现)</td>
+</tr>
+<tr>
+<td>harvest</td>
+<td>commercial</td>
+<td>nutrient-rich</td>
+<td>circulating</td>
+<td>onset</td>
+<td>mandate</td>
+</tr>
+<tr>
+<td>herring（鲱鱼）</td>
+<td>shellfish</td>
+<td>nourishment</td>
+<td>bounty</td>
+<td>stock（股票；库存）</td>
+<td>review(复习，检阅)</td>
+</tr>
+<tr>
+<td>crustance</td>
+<td>mollusc</td>
+<td>toone</td>
+<td>streamside</td>
+<td>prompt</td>
+<td>cumulative</td>
+</tr>
+<tr>
+<td>cod（鳕鱼）</td>
+<td>groundfish</td>
+<td>per-set</td>
+<td>⭐halt</td>
+<td>culminate</td>
+<td>run（经营）</td>
+</tr>
+<tr>
+<td>sole（鳎）</td>
+<td>perch（鲈鱼）</td>
+<td>mechanism</td>
+<td>panel</td>
+<td>Pacific</td>
+<td>land mass</td>
+</tr>
+<tr>
+<td>pollock（绿青鳕）</td>
+<td>salom（鲑鱼，大马哈鱼）</td>
+<td></td>
+<td></td>
+<td>statewide</td>
+<td>approach</td>
+</tr>
+<tr>
+<td>spawner（已成熟的雌鱼）</td>
+<td>ex-vessel value（船边交易额）</td>
+<td></td>
+<td></td>
+<td>representative（n.代表；众议员）</td>
+<td></td>
+</tr>
+<tr>
+<td>statehood</td>
+<td>spawn</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>fishery</td>
+<td>chincook(奇努克大马哈鱼)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chum（马苏大马哈鱼）</td>
+<td>coho（银大马哈鱼）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>sockeye（红大马哈鱼）</td>
+<td>humpback（驼背；座头鲸；小鲑鱼）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>overfishing</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="同义替换："><a href="#同义替换：" class="headerlink" title="同义替换："></a>同义替换：</h4><table>
+<thead>
+<tr>
+<th>exceeded = more than</th>
+<th>crash  = sharp decrease</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>monitor = keep a check</td>
+<td>sufficient = abundant</td>
+</tr>
+<tr>
+<td>⭐ stop = halt</td>
+<td>proper = successful</td>
+</tr>
+<tr>
+<td>established = found</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><p>1、T/F/NG题17</p>
+<p><strong>原因：</strong>在思考的时候我觉得既然题目说90%的鱼是sockeye或pink salmon，但是文章里还列于了其他种类的大马哈鱼，所以缩小了范围，肯定是错的。但是答案说题目将五种鱼等同为同一种，是典型的“<strong>由文到题范围缩小型</strong>”，应该是NOT GIVEN</p>
+<p>2、T/F/NG题20</p>
+<p><strong>原因：</strong>太大意了，看文章和题目没仔细看，文章里说的是平均超过100million，但是题目说平均是100million</p>
+<p>3、complete题25</p>
+<p><strong>原因：</strong>定位就定位错了，文章的定位词是The state，而且我的答案来源是observer那一段，完全不对。选J就是没仔细看文章，J和文章最后一段背道而驰。</p>
+<h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、The crisis was completely unexpected, but reasechers believe it had nothing to do with impacts of fisheries.</p>
+<p><strong>笔记：</strong>have nothing to do with : not involved or connected</p>
+<p><strong>翻译：</strong>这场危机完全出乎人们的意料，但研究人员相信这并不是渔业发展引起的。</p>
+<h4 id="段落中心句位置与文章结构积累："><a href="#段落中心句位置与文章结构积累：" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><p>第一段从历史角度引出了阿拉西加岛。</p>
+<p>第二段从阿拉斯加岛的基本状况开始描述，然后引出了阿拉斯加岛的渔业。</p>
+<p>第三段承接第二段，描述了阿拉斯加的渔业有多么辉煌，然后突出大马哈鱼是最重要的鱼类之一。</p>
+<p>第四段开始转折，由于过度捕捞使大马哈鱼的种群数量下降，州政府采取措施后又开始上升。</p>
+<p>第五段解释是通过什么时候使大马哈鱼数量上升的，主要讲了生物学家的方法。</p>
+<p>第六段讲了MSC组织的成立以及对符合要求的组织发放证明</p>
+<p>第七段讲了一些观察家觉得阿拉斯加大马哈鱼渔业不会获得官方机构的认证</p>
+<p>第八段讲了评定的研究认为鱼群的减少不是因为渔业，而是因为气候变冷，但是当地政府依旧关闭了所有渔业。</p>
+<p>第九段讲了阿拉斯加成功获得资格审查。</p>
  
       <!-- reward -->
       
@@ -205,12 +339,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rdxsun.github.io/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rdxsun.github.io/2021/10/05/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB2/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cpp%E5%9F%BA%E7%A1%80/" rel="tag">Cpp基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/" rel="tag">侯捷课程</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Society-Social-Life/" rel="tag">Society/Social Life</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB/" rel="tag">雅思精读</a></li></ul>
 
     </footer>
   </div>
@@ -218,19 +352,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/08/17/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            侯捷C++面向对象笔记（四）OOP，OOD
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-nav-link">
+      <a href="/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">侯捷C++面向对象笔记（二）带指针的类</div>
+        <div class="article-nav-title">雅思精读1</div>
       </a>
     
   </nav>

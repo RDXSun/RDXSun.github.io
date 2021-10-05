@@ -6,7 +6,7 @@
   <link href="https://rdxsun.github.io/atom.xml" rel="self"/>
   
   <link href="https://rdxsun.github.io/"/>
-  <updated>2021-10-03T14:15:53.456Z</updated>
+  <updated>2021-10-05T04:00:05.308Z</updated>
   <id>https://rdxsun.github.io/</id>
   
   <author>
@@ -17,14 +17,14 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>雅思精读1</title>
-    <link href="https://rdxsun.github.io/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/"/>
-    <id>https://rdxsun.github.io/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/</id>
-    <published>2021-10-02T07:20:04.000Z</published>
-    <updated>2021-10-03T14:15:53.456Z</updated>
+    <title>雅思精读2</title>
+    <link href="https://rdxsun.github.io/2021/10/05/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB2/"/>
+    <id>https://rdxsun.github.io/2021/10/05/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB2/</id>
+    <published>2021-10-05T02:26:29.000Z</published>
+    <updated>2021-10-05T04:00:05.308Z</updated>
     
     
-    <summary type="html">&lt;p&gt;介绍：精读雅思笔记&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;介绍：精读雅思笔记，社会生活类&lt;/p&gt;</summary>
     
     
     
@@ -33,7 +33,28 @@
     
     <category term="雅思精读" scheme="https://rdxsun.github.io/tags/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB/"/>
     
-    <category term="生物自然类" scheme="https://rdxsun.github.io/tags/%E7%94%9F%E7%89%A9%E8%87%AA%E7%84%B6%E7%B1%BB/"/>
+    <category term="Society/Social Life" scheme="https://rdxsun.github.io/tags/Society-Social-Life/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>雅思精读1</title>
+    <link href="https://rdxsun.github.io/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/"/>
+    <id>https://rdxsun.github.io/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/</id>
+    <published>2021-10-02T07:20:04.000Z</published>
+    <updated>2021-10-05T07:36:22.279Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;介绍：精读雅思笔记，生物类&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="雅思" scheme="https://rdxsun.github.io/categories/%E9%9B%85%E6%80%9D/"/>
+    
+    
+    <category term="雅思精读" scheme="https://rdxsun.github.io/tags/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB/"/>
+    
+    <category term="biology" scheme="https://rdxsun.github.io/tags/biology/"/>
     
   </entry>
   
