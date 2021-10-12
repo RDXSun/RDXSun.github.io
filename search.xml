@@ -292,6 +292,42 @@
       </tags>
   </entry>
   <entry>
+    <title>侯捷C++面向对象笔记（三）补充</title>
+    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
+<span id="more"></span>
+
+<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
+<p>注意：</p>
+<p>1 static的函数没有this指针</p>
+<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
+<p><strong>一个例子</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
+<p>静态的数据一定要在class外定义它初值。</p>
+<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
+<p><strong>前面的例子：只能创建一个对象</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
+<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
+<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
+<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
+<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
+<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
+<p>算法的那个库用了很多函数模板</p>
+<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
+<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
+]]></content>
+      <categories>
+        <category>cpp基础</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+        <tag>侯捷课程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>侯捷C++面向对象笔记（二）带指针的类</title>
     <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
@@ -366,42 +402,6 @@
       </tags>
   </entry>
   <entry>
-    <title>侯捷C++面向对象笔记（三）补充</title>
-    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
-<span id="more"></span>
-
-<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
-<p>注意：</p>
-<p>1 static的函数没有this指针</p>
-<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
-<p><strong>一个例子</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
-<p>静态的数据一定要在class外定义它初值。</p>
-<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
-<p><strong>前面的例子：只能创建一个对象</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
-<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
-<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
-<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
-<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
-<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
-<p>算法的那个库用了很多函数模板</p>
-<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
-<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
-]]></content>
-      <categories>
-        <category>cpp基础</category>
-      </categories>
-      <tags>
-        <tag>Cpp基础</tag>
-        <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>侯捷C++面向对象笔记（四）OOP，OOD</title>
     <url>/2021/08/17/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<p><strong>介绍：</strong>侯捷课程的基于对象设计，面向对象的编程</p>
@@ -457,6 +457,147 @@
       <tags>
         <tag>Cpp基础</tag>
         <tag>侯捷课程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetCode101:贪心算法</title>
+    <url>/2021/08/18/leetCode101-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>《leetCode101》作者：高畅——贪心算法部分</p>
+<p>看书做题写思路</p>
+<span id="more"></span>
+
+<h3 id="贪心算法思路："><a href="#贪心算法思路：" class="headerlink" title="贪心算法思路："></a>贪心算法思路：</h3><p>保证每次操作都是局部最优的。</p>
+<p><strong>利用贪心法求解的问题应具备如下2个特征  。</strong></p>
+<p><strong>1、贪心选择性质</strong></p>
+<p>一个问题的整体最优解可通过一系列局部的最优解的选择达到，并且每次的选择可以依赖以前作出的选择，但不依赖于后面要作出的选择。这就是贪心选择性质。对于一个具体问题，要确定它是否具有贪心选择性质，必须证明每一步所作的贪心选择最终导致问题的整体最优解。</p>
+<p><strong>2、最优子结构性质</strong></p>
+<p>当一个问题的最优解包含其子问题的最优解时，称此问题具有最优子结构性质。问题的最优子结构性质是该问题可用贪心法求解的关键所在。在实际应用中，至于什么问题具有什么样的贪心选择性质是不确定的，需要具体问题具体分析。</p>
+<p>​    </p>
+<p>​    贪心算法不从整体最优上加以考虑，所做出的仅是在某种意义上的<strong>局部最优选择</strong>。使用贪心策略要注意<strong>局部最优与全局最优</strong>的关系，选择当前的局部最优并不一定能推导出问题的全局最优。贪心策略解题需要解决以下两个问题： </p>
+<p>1、该问题是否适合使用贪心策略求解，也就是该问题是否具有贪心选择性质；</p>
+<p>2、制定贪心策略，以达到问题的最优解或较优解。</p>
+<p>​    要确定一个问题是否适合用贪心算法求解，必须证明每一步所作的贪心选择最终导致问题的整体最优解。证明的大致过程为：首先考察问题的一个整体最优解，并证明可修改这个最优解，使其以贪心选择开始，做了贪心选择后，原问题简化为规模更小的类似子问题。然后用数学归纳法证明通过每一步做贪心选择，最终可得到问题的整体最优解。</p>
+<h3 id="455-分发饼干（简单）"><a href="#455-分发饼干（简单）" class="headerlink" title="455.分发饼干（简单）"></a>455.分发饼干（简单）</h3><p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p>
+<p>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
+<p>示例 1:</p>
+<p>输入: g = [1,2,3], s = [1,1]<br>输出: 1<br>解释:<br>你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。<br>虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。<br>所以你应该输出1。<br>示例 2:</p>
+<p>输入: g = [1,2], s = [1,2,3]<br>输出: 2<br>解释:<br>你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。<br>你拥有的饼干数量和尺寸都足以让所有孩子满足。<br>所以你应该输出2.</p>
+<p>提示：</p>
+<p>1 &lt;= g.length &lt;= 3 * 104<br>0 &lt;= s.length &lt;= 3 * 104<br>1 &lt;= g[i], s[j] &lt;= 231 - 1</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/assign-cookies">https://leetcode-cn.com/problems/assign-cookies</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<h4 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h4><p>先对g和s利用sort进行升序排序，利用最小的s满足最小的g。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findContentChildren</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; g, vector&lt;<span class="keyword">int</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(g.<span class="built_in">begin</span>(), g.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>( s[j] &gt;= g[start])&#123;</span><br><span class="line">                    start++;</span><br><span class="line">                    <span class="keyword">if</span>(start == g.<span class="built_in">size</span>())&#123;</span><br><span class="line">                        <span class="keyword">return</span> start;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>跟最优解的思路和写法一致</p>
+<h3 id="135-分发糖果（困难）"><a href="#135-分发糖果（困难）" class="headerlink" title="135 分发糖果（困难）"></a>135 分发糖果（困难）</h3><p>老师想给孩子们分发糖果，有 N 个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。</p>
+<p>你需要按照以下要求，帮助老师给这些孩子分发糖果：</p>
+<p>每个孩子至少分配到 1 个糖果。<br>评分更高的孩子必须比他两侧的邻位孩子获得更多的糖果。<br>那么这样下来，老师至少需要准备多少颗糖果呢？</p>
+<p>示例 1：</p>
+<p>输入：[1,0,2]<br>输出：5<br>解释：你可以分别给这三个孩子分发 2、1、2 颗糖果。</p>
+<p>示例 2：</p>
+<p>输入：[1,2,2]<br>输出：4<br>解释：你可以分别给这三个孩子分发 1、2、1 颗糖果。<br>     第三个孩子只得到 1 颗糖果，这已满足上述两个条件。</p>
+<h4 id="我的解法："><a href="#我的解法：" class="headerlink" title="我的解法："></a>我的解法：</h4><p>刚开始想的不全面，想着只要比前面多就行了，后来碰上了[1,3,2,2,1]发现如果只考虑一侧的话，就没办法加上后面多出来的部分，所以应该先从左考虑到右边考虑权值大的，再从右考虑到左边考虑权值大的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">candy</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; ratings)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt;candy_number;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ratings.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            candy_number.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span> &amp;&amp; ratings[i] &gt; ratings[i<span class="number">-1</span>])&#123;</span><br><span class="line">                candy_number[i] = candy_number[i<span class="number">-1</span>]+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = ratings.<span class="built_in">size</span>()<span class="number">-2</span>; i &gt; <span class="number">-1</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(ratings[i] &gt; ratings[i+<span class="number">1</span>] &amp;&amp; candy_number[i] &lt;= candy_number[i+<span class="number">1</span>])&#123;</span><br><span class="line">                candy_number[i] = candy_number[i+<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; candy_number.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            number+=candy_number[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210819114211.png"></p>
+<p>第一次beat了这么多！</p>
+<p>通过题解可以看出，我的写法还可以优化，题解写法如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">candy</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; ratings)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> size = ratings.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">if</span> (size &lt; <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> size;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">num</span><span class="params">(size, <span class="number">1</span>)</span></span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ratings[i] &gt; ratings[i<span class="number">-1</span>]) &#123;</span><br><span class="line">			num[i] = num[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">		&#125; </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = size - <span class="number">1</span>; i &gt; <span class="number">0</span>; --i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ratings[i] &lt; ratings[i<span class="number">-1</span>]) &#123;</span><br><span class="line">			num[i<span class="number">-1</span>] = <span class="built_in">max</span>(num[i<span class="number">-1</span>], num[i] + <span class="number">1</span>);</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">accumulate</span>(num.<span class="built_in">begin</span>(), num.<span class="built_in">end</span>(), <span class="number">0</span>); <span class="comment">// 		std::accumulate 可以很方便 地求和 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在从右到左的时候因为如果i-1的糖果已经大于了i的糖果+1，就没必要再加了，可以直接通过max比较，就不需要像我那样写个判断了。</p>
+<p>但是这题跟贪心算法有啥关系呢？</p>
+<p><strong>这里的贪心策略即为，在每次遍历中，只考虑并更新相邻一侧的大小关系。</strong></p>
+<h3 id="435-无重叠区域（中等，但我觉得有点难）"><a href="#435-无重叠区域（中等，但我觉得有点难）" class="headerlink" title="435 无重叠区域（中等，但我觉得有点难）"></a>435 无重叠区域（中等，但我觉得有点难）</h3><p>难点有两个：1.找局部最优解 2. 题目给了个vector嵌套vector</p>
+<p>废了九牛二虎才做出来。</p>
+<h4 id="我的思路："><a href="#我的思路：" class="headerlink" title="我的思路："></a>我的思路：</h4><p>借鉴了解析的思路，先把所有区域按照右边界从小到大进行排序，因为选择的区间结尾越小，余留给其他区间的空间越大，所以贪心策略为：<strong>优先保留小且不相交的区间</strong>。但是如果按照我下面这么写，其实就麻烦了，我下面考虑以为会存在后面的区间是前面的子区间的情况，但其实根本不会存在，所以只要排序后再去掉交集就可以了。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">compare</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; a, vector&lt;<span class="keyword">int</span>&gt;&amp; b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">eraseOverlapIntervals</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), compare);</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> min = intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; intervals.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(intervals[i][<span class="number">0</span>] &lt; min &amp;&amp; intervals[i][<span class="number">1</span>] &lt;= min)&#123; <span class="comment">//左边小于当前最小右边且右边也小于最小右边，则可以删一个              </span></span><br><span class="line">                    num++;</span><br><span class="line">                    min = intervals[i][<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(intervals[i][<span class="number">0</span>] &gt;= min)&#123;</span><br><span class="line">                    min = intervals[i][<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> num++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>看了解析之后可以把compare函数换成<strong>Lambda的写法</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">eraseOverlapIntervals</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (intervals.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> n = intervals.<span class="built_in">size</span>();</span><br><span class="line">	<span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), [](vector&lt;<span class="keyword">int</span>&gt; a, vector&lt;<span class="keyword">int</span>&gt; b) &#123;<span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];&#125;);</span><br><span class="line">	<span class="keyword">int</span> total = <span class="number">0</span>, prev = intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (intervals[i][<span class="number">0</span>] &lt; prev) &#123;</span><br><span class="line">			++total;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			prev = intervals[i][<span class="number">1</span>];</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时要注意空集！！</p>
+<h3 id="605-种花问题"><a href="#605-种花问题" class="headerlink" title="605 种花问题"></a>605 种花问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210821215028.png"></p>
+<h4 id="我的思路：-1"><a href="#我的思路：-1" class="headerlink" title="我的思路："></a>我的思路：</h4><p>这题虽然是简单难度但是我错了很多次，因为刚开始走了弯路，没有用贪心策略，也没有仔细读题，后来的贪心策略为：<strong>如果一朵花满足种植条件，那就种植</strong>。代码如下</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canPlaceFlowers</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; flowerbed, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>((<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(flowerbed[<span class="number">0</span>] == <span class="number">0</span>)count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(flowerbed[i] == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i == <span class="number">0</span> &amp;&amp; flowerbed[i+<span class="number">1</span>] == <span class="number">0</span>)&#123; <span class="comment">//第一个且数量大于等于2</span></span><br><span class="line">                    count++;</span><br><span class="line">                    flowerbed[i] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(i == (<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>()<span class="number">-1</span> &amp;&amp; flowerbed[i<span class="number">-1</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    flowerbed[i] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; i &lt; (<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>()<span class="number">-1</span> &amp;&amp; flowerbed[i<span class="number">-1</span>] == <span class="number">0</span> &amp;&amp; flowerbed[i+<span class="number">1</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    flowerbed[i] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count &gt;= n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="452-用最少数量的箭引爆气球"><a href="#452-用最少数量的箭引爆气球" class="headerlink" title="452. 用最少数量的箭引爆气球"></a>452. 用最少数量的箭引爆气球</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210821214739.png" style="zoom:80%;" />
+
+<h4 id="我的思路：-2"><a href="#我的思路：-2" class="headerlink" title="我的思路："></a>我的思路：</h4><p>这题与435 差不多，我用的是左边界进行排序，然后找相交的区域，如果一个区间的右边界比较小的话就把它作为新的右边界限制。问题是运行速度挺慢的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findMinArrowShots</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; points)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(points.<span class="built_in">size</span>() == <span class="number">0</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">        <span class="built_in">sort</span>(points.<span class="built_in">begin</span>(), points.<span class="built_in">end</span>(), [](vector&lt;<span class="keyword">int</span>&gt; a, vector&lt;<span class="keyword">int</span>&gt;b)&#123;<span class="keyword">return</span> a[<span class="number">0</span>] &lt; b[<span class="number">0</span>] ;&#125;);</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = points[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; points.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(points[i][<span class="number">0</span>] &gt; right )&#123;</span><br><span class="line">                right = points[i][<span class="number">1</span>];</span><br><span class="line">                count++;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(right &gt; points[i][<span class="number">1</span>])&#123;</span><br><span class="line">                    right = points[i][<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="763-划分字母区间"><a href="#763-划分字母区间" class="headerlink" title="763 划分字母区间"></a>763 划分字母区间</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210828084801.png"></p>
+<h4 id="我的思路：-3"><a href="#我的思路：-3" class="headerlink" title="我的思路："></a>我的思路：</h4><p>因为每个字母最多出现一个片段，所以一次遍历不能解决问题，因为不知道后面的情况，需要第二次遍历。</p>
+<p>第一次遍历先把每个字母最终出现的位置记录下来，然后再通过一次遍历，找到每次遍历字符最大的右边界，若是当前位置等于目前最大右边界，则可划分。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">partitionLabels</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt;reals;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">length</span>();i++)&#123; <span class="comment">//第一次遍历字符串n，统计出现的个每个字母最后出现的位置</span></span><br><span class="line">            reals[s[i]]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//再次遍历，开始切割</span></span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; cut;</span><br><span class="line">        <span class="keyword">int</span> maxlength = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; s.<span class="built_in">length</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> right = reals[s[i]];</span><br><span class="line">            <span class="keyword">if</span>(maxlength &lt; right)&#123;</span><br><span class="line">                maxlength = right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(maxlength == i)&#123;</span><br><span class="line">                cut.<span class="built_in">push_back</span>(i - left + <span class="number">1</span>);</span><br><span class="line">                left = i+<span class="number">1</span>;</span><br><span class="line">                maxlength = <span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cut;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210828085138.png"></p>
+<p>为什么4ms才击败了67.28%？？？？？？？</p>
+<h3 id="122-买卖股票的最佳时机"><a href="#122-买卖股票的最佳时机" class="headerlink" title="122 买卖股票的最佳时机"></a>122 买卖股票的最佳时机</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904155648.png"></p>
+<h4 id="我的思路：-4"><a href="#我的思路：-4" class="headerlink" title="我的思路："></a>我的思路：</h4><p>目标是获得最大利润，那就要再小的时候买入，大的时候卖出。股票的价格涨涨跌跌，所以就要在涨到最高点，价格下降的时候买入，跌倒最低点，价格升高的时候卖出。本题最重要是注意边界。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> min = prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> key = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> size = (<span class="keyword">int</span>)prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(key == <span class="number">0</span> &amp;&amp; prices[i] &lt; min) <span class="comment">//找小</span></span><br><span class="line">            &#123;</span><br><span class="line">                min = prices[i];</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="number">0</span> &amp;&amp; prices[i] &gt; min)&#123; <span class="comment">//找到最小了，开始找大</span></span><br><span class="line">                key = <span class="number">1</span>;</span><br><span class="line">                max = prices[i];</span><br><span class="line">                <span class="keyword">if</span>(i == size <span class="number">-1</span> )&#123;</span><br><span class="line">                    profit += max-min;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(key == <span class="number">1</span> &amp;&amp; prices[i] &gt;= max)&#123; <span class="comment">//找大</span></span><br><span class="line">                max=prices[i];</span><br><span class="line">                <span class="keyword">if</span>(i == size <span class="number">-1</span> )&#123;</span><br><span class="line">                    profit += max-min;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="number">1</span> &amp;&amp; prices[i] &lt; max)&#123; <span class="comment">//找到最大了，或者没有最大</span></span><br><span class="line">                profit += max-min;</span><br><span class="line">                min = prices[i];</span><br><span class="line">                key = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">return</span> profit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>贪心算法</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>算法学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetCode101:双指针</title>
+    <url>/2021/09/04/leetCode101-%E5%8F%8C%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>玩转双指针部分</p>
+<span id="more"></span>
+
+<h3 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a>167. 两数之和 II - 输入有序数组</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904183144.png" style="zoom:80%;" />
+
+<h4 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h4><p>这题没什么难度，但是我的写法虽然和答案写法一致，但是慢了很多。</p>
+<p>我的如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum = numbers[i] + numbers[j];</span><br><span class="line">        <span class="keyword">while</span>( sum != target)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sum &gt; target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>答案写法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum;</span><br><span class="line">        <span class="keyword">while</span>( i &lt; j)&#123;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">            <span class="keyword">if</span>(sum  == target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                ++i;</span><br><span class="line">            &#125;<span class="keyword">else</span> --j;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我觉得是使用if else的话，整个循环只需要判断两次，但是我写的需要判断三次。还有就是**++i和i++的速度区别**</p>
+<p>由这篇文章可见<a href="https://cloud.tencent.com/developer/article/1506229">https://cloud.tencent.com/developer/article/1506229</a></p>
+<h3 id="88-合并两个有序数组"><a href="#88-合并两个有序数组" class="headerlink" title="88 合并两个有序数组"></a>88 合并两个有序数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904223243.png"></p>
+<h4 id="我的思路-1"><a href="#我的思路-1" class="headerlink" title="我的思路"></a>我的思路</h4><p>这其实就是归并排序其中一步。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p3 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            <span class="keyword">if</span>(p1 &lt; <span class="number">0</span> )&#123;</span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">                --p3;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(p2 &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>( nums1[p1] &gt; nums2[p2])&#123;</span><br><span class="line">                nums1[p3] = nums1[p1];</span><br><span class="line">                cout&lt;&lt;nums1[p3]&lt;&lt;endl;</span><br><span class="line">                --p1;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                </span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">            &#125;</span><br><span class="line">            --p3;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>答案的解法看起来更加的简短，但是意思就是一样的，因为两个数组合并到最后会有两种情况，1：第一个数组完了，第二个数组没完 2：第一个数组没完，第二个数组完了，对于第二种情况来说，已经结束了，因为数组1是已经排序好的。由此可见可以写出以下规范代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span>  &amp;&amp; p2 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            nums1[p3--] =nums1[p1] &gt; nums2[p2]?nums1[p1--]:nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p2 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            nums1[p3--] = nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="142-环形链表II（重要：快慢指针）"><a href="#142-环形链表II（重要：快慢指针）" class="headerlink" title="142 环形链表II（重要：快慢指针）"></a>142 环形链表II（重要：快慢指针）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210907162125.png"></p>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>看答案才知道原来这种题目有固定解法，用快慢指针，快慢指针的原理如下面链接所示。快慢指针所<strong>占用的空间是O(1)。</strong></p>
+<p><a href="https://zhuanlan.zhihu.com/p/361049436">深入理解快慢指针算法 – 链表环路检测 - 知乎 (zhihu.com)</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span> <span class="comment">//思考：1、可以用map解决:不行，因为value值不是唯一的</span></span><br><span class="line">                <span class="comment">//思考：2、改变val值，用于寻找</span></span><br><span class="line">                <span class="comment">//思考3：用快慢指针</span></span><br><span class="line">                </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == <span class="literal">NULL</span> || fast-&gt;next == <span class="literal">NULL</span>)<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;<span class="keyword">while</span>(head!=<span class="literal">NULL</span> &amp;&amp; slow != fast);</span><br><span class="line">        </span><br><span class="line">        fast = head;</span><br><span class="line">        <span class="keyword">while</span>(fast!=slow)&#123;</span><br><span class="line">            fast = fast-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fast;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="76-最小覆盖字串（滑动窗口，不会做）"><a href="#76-最小覆盖字串（滑动窗口，不会做）" class="headerlink" title="76 最小覆盖字串（滑动窗口，不会做）"></a>76 最小覆盖字串（滑动窗口，不会做）</h3>]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>贪心算法</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>算法学习</tag>
       </tags>
   </entry>
   <entry>
@@ -630,174 +771,12 @@
       </tags>
   </entry>
   <entry>
-    <title>leetCode101:双指针</title>
-    <url>/2021/09/04/leetCode101-%E5%8F%8C%E6%8C%87%E9%92%88/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>玩转双指针部分</p>
-<span id="more"></span>
-
-<h3 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a>167. 两数之和 II - 输入有序数组</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904183144.png" style="zoom:80%;" />
-
-<h4 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h4><p>这题没什么难度，但是我的写法虽然和答案写法一致，但是慢了很多。</p>
-<p>我的如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum = numbers[i] + numbers[j];</span><br><span class="line">        <span class="keyword">while</span>( sum != target)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sum &gt; target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>答案写法：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum;</span><br><span class="line">        <span class="keyword">while</span>( i &lt; j)&#123;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">            <span class="keyword">if</span>(sum  == target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                ++i;</span><br><span class="line">            &#125;<span class="keyword">else</span> --j;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>我觉得是使用if else的话，整个循环只需要判断两次，但是我写的需要判断三次。还有就是**++i和i++的速度区别**</p>
-<p>由这篇文章可见<a href="https://cloud.tencent.com/developer/article/1506229">https://cloud.tencent.com/developer/article/1506229</a></p>
-<h3 id="88-合并两个有序数组"><a href="#88-合并两个有序数组" class="headerlink" title="88 合并两个有序数组"></a>88 合并两个有序数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904223243.png"></p>
-<h4 id="我的思路-1"><a href="#我的思路-1" class="headerlink" title="我的思路"></a>我的思路</h4><p>这其实就是归并排序其中一步。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p3 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            <span class="keyword">if</span>(p1 &lt; <span class="number">0</span> )&#123;</span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">                --p3;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(p2 &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>( nums1[p1] &gt; nums2[p2])&#123;</span><br><span class="line">                nums1[p3] = nums1[p1];</span><br><span class="line">                cout&lt;&lt;nums1[p3]&lt;&lt;endl;</span><br><span class="line">                --p1;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                </span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">            &#125;</span><br><span class="line">            --p3;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>答案的解法看起来更加的简短，但是意思就是一样的，因为两个数组合并到最后会有两种情况，1：第一个数组完了，第二个数组没完 2：第一个数组没完，第二个数组完了，对于第二种情况来说，已经结束了，因为数组1是已经排序好的。由此可见可以写出以下规范代码</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span>  &amp;&amp; p2 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            nums1[p3--] =nums1[p1] &gt; nums2[p2]?nums1[p1--]:nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p2 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            nums1[p3--] = nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="142-环形链表II（重要：快慢指针）"><a href="#142-环形链表II（重要：快慢指针）" class="headerlink" title="142 环形链表II（重要：快慢指针）"></a>142 环形链表II（重要：快慢指针）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210907162125.png"></p>
-<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>看答案才知道原来这种题目有固定解法，用快慢指针，快慢指针的原理如下面链接所示。快慢指针所<strong>占用的空间是O(1)。</strong></p>
-<p><a href="https://zhuanlan.zhihu.com/p/361049436">深入理解快慢指针算法 – 链表环路检测 - 知乎 (zhihu.com)</a></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span> <span class="comment">//思考：1、可以用map解决:不行，因为value值不是唯一的</span></span><br><span class="line">                <span class="comment">//思考：2、改变val值，用于寻找</span></span><br><span class="line">                <span class="comment">//思考3：用快慢指针</span></span><br><span class="line">                </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == <span class="literal">NULL</span> || fast-&gt;next == <span class="literal">NULL</span>)<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;<span class="keyword">while</span>(head!=<span class="literal">NULL</span> &amp;&amp; slow != fast);</span><br><span class="line">        </span><br><span class="line">        fast = head;</span><br><span class="line">        <span class="keyword">while</span>(fast!=slow)&#123;</span><br><span class="line">            fast = fast-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fast;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="76-最小覆盖字串（滑动窗口，不会做）"><a href="#76-最小覆盖字串（滑动窗口，不会做）" class="headerlink" title="76 最小覆盖字串（滑动窗口，不会做）"></a>76 最小覆盖字串（滑动窗口，不会做）</h3>]]></content>
-      <categories>
-        <category>leetcode</category>
-        <category>算法</category>
-        <category>贪心算法</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>算法学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>leetCode101:贪心算法</title>
-    <url>/2021/08/18/leetCode101-%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>《leetCode101》作者：高畅——贪心算法部分</p>
-<p>看书做题写思路</p>
-<span id="more"></span>
-
-<h3 id="贪心算法思路："><a href="#贪心算法思路：" class="headerlink" title="贪心算法思路："></a>贪心算法思路：</h3><p>保证每次操作都是局部最优的。</p>
-<p><strong>利用贪心法求解的问题应具备如下2个特征  。</strong></p>
-<p><strong>1、贪心选择性质</strong></p>
-<p>一个问题的整体最优解可通过一系列局部的最优解的选择达到，并且每次的选择可以依赖以前作出的选择，但不依赖于后面要作出的选择。这就是贪心选择性质。对于一个具体问题，要确定它是否具有贪心选择性质，必须证明每一步所作的贪心选择最终导致问题的整体最优解。</p>
-<p><strong>2、最优子结构性质</strong></p>
-<p>当一个问题的最优解包含其子问题的最优解时，称此问题具有最优子结构性质。问题的最优子结构性质是该问题可用贪心法求解的关键所在。在实际应用中，至于什么问题具有什么样的贪心选择性质是不确定的，需要具体问题具体分析。</p>
-<p>​    </p>
-<p>​    贪心算法不从整体最优上加以考虑，所做出的仅是在某种意义上的<strong>局部最优选择</strong>。使用贪心策略要注意<strong>局部最优与全局最优</strong>的关系，选择当前的局部最优并不一定能推导出问题的全局最优。贪心策略解题需要解决以下两个问题： </p>
-<p>1、该问题是否适合使用贪心策略求解，也就是该问题是否具有贪心选择性质；</p>
-<p>2、制定贪心策略，以达到问题的最优解或较优解。</p>
-<p>​    要确定一个问题是否适合用贪心算法求解，必须证明每一步所作的贪心选择最终导致问题的整体最优解。证明的大致过程为：首先考察问题的一个整体最优解，并证明可修改这个最优解，使其以贪心选择开始，做了贪心选择后，原问题简化为规模更小的类似子问题。然后用数学归纳法证明通过每一步做贪心选择，最终可得到问题的整体最优解。</p>
-<h3 id="455-分发饼干（简单）"><a href="#455-分发饼干（简单）" class="headerlink" title="455.分发饼干（简单）"></a>455.分发饼干（简单）</h3><p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p>
-<p>对每个孩子 i，都有一个胃口值 g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j] 。如果 s[j] &gt;= g[i]，我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
-<p>示例 1:</p>
-<p>输入: g = [1,2,3], s = [1,1]<br>输出: 1<br>解释:<br>你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。<br>虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。<br>所以你应该输出1。<br>示例 2:</p>
-<p>输入: g = [1,2], s = [1,2,3]<br>输出: 2<br>解释:<br>你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。<br>你拥有的饼干数量和尺寸都足以让所有孩子满足。<br>所以你应该输出2.</p>
-<p>提示：</p>
-<p>1 &lt;= g.length &lt;= 3 * 104<br>0 &lt;= s.length &lt;= 3 * 104<br>1 &lt;= g[i], s[j] &lt;= 231 - 1</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/assign-cookies">https://leetcode-cn.com/problems/assign-cookies</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<h4 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h4><p>先对g和s利用sort进行升序排序，利用最小的s满足最小的g。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findContentChildren</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; g, vector&lt;<span class="keyword">int</span>&gt;&amp; s)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(g.<span class="built_in">begin</span>(), g.<span class="built_in">end</span>());</span><br><span class="line">        <span class="built_in">sort</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s.<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>( s[j] &gt;= g[start])&#123;</span><br><span class="line">                    start++;</span><br><span class="line">                    <span class="keyword">if</span>(start == g.<span class="built_in">size</span>())&#123;</span><br><span class="line">                        <span class="keyword">return</span> start;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>跟最优解的思路和写法一致</p>
-<h3 id="135-分发糖果（困难）"><a href="#135-分发糖果（困难）" class="headerlink" title="135 分发糖果（困难）"></a>135 分发糖果（困难）</h3><p>老师想给孩子们分发糖果，有 N 个孩子站成了一条直线，老师会根据每个孩子的表现，预先给他们评分。</p>
-<p>你需要按照以下要求，帮助老师给这些孩子分发糖果：</p>
-<p>每个孩子至少分配到 1 个糖果。<br>评分更高的孩子必须比他两侧的邻位孩子获得更多的糖果。<br>那么这样下来，老师至少需要准备多少颗糖果呢？</p>
-<p>示例 1：</p>
-<p>输入：[1,0,2]<br>输出：5<br>解释：你可以分别给这三个孩子分发 2、1、2 颗糖果。</p>
-<p>示例 2：</p>
-<p>输入：[1,2,2]<br>输出：4<br>解释：你可以分别给这三个孩子分发 1、2、1 颗糖果。<br>     第三个孩子只得到 1 颗糖果，这已满足上述两个条件。</p>
-<h4 id="我的解法："><a href="#我的解法：" class="headerlink" title="我的解法："></a>我的解法：</h4><p>刚开始想的不全面，想着只要比前面多就行了，后来碰上了[1,3,2,2,1]发现如果只考虑一侧的话，就没办法加上后面多出来的部分，所以应该先从左考虑到右边考虑权值大的，再从右考虑到左边考虑权值大的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">candy</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; ratings)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt;candy_number;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ratings.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            candy_number.<span class="built_in">push_back</span>(<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span> &amp;&amp; ratings[i] &gt; ratings[i<span class="number">-1</span>])&#123;</span><br><span class="line">                candy_number[i] = candy_number[i<span class="number">-1</span>]+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = ratings.<span class="built_in">size</span>()<span class="number">-2</span>; i &gt; <span class="number">-1</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(ratings[i] &gt; ratings[i+<span class="number">1</span>] &amp;&amp; candy_number[i] &lt;= candy_number[i+<span class="number">1</span>])&#123;</span><br><span class="line">                candy_number[i] = candy_number[i+<span class="number">1</span>]+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; candy_number.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            number+=candy_number[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210819114211.png"></p>
-<p>第一次beat了这么多！</p>
-<p>通过题解可以看出，我的写法还可以优化，题解写法如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">candy</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; ratings)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> size = ratings.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">if</span> (size &lt; <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> size;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">num</span><span class="params">(size, <span class="number">1</span>)</span></span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ratings[i] &gt; ratings[i<span class="number">-1</span>]) &#123;</span><br><span class="line">			num[i] = num[i<span class="number">-1</span>] + <span class="number">1</span>;</span><br><span class="line">		&#125; </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = size - <span class="number">1</span>; i &gt; <span class="number">0</span>; --i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (ratings[i] &lt; ratings[i<span class="number">-1</span>]) &#123;</span><br><span class="line">			num[i<span class="number">-1</span>] = <span class="built_in">max</span>(num[i<span class="number">-1</span>], num[i] + <span class="number">1</span>);</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">accumulate</span>(num.<span class="built_in">begin</span>(), num.<span class="built_in">end</span>(), <span class="number">0</span>); <span class="comment">// 		std::accumulate 可以很方便 地求和 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在从右到左的时候因为如果i-1的糖果已经大于了i的糖果+1，就没必要再加了，可以直接通过max比较，就不需要像我那样写个判断了。</p>
-<p>但是这题跟贪心算法有啥关系呢？</p>
-<p><strong>这里的贪心策略即为，在每次遍历中，只考虑并更新相邻一侧的大小关系。</strong></p>
-<h3 id="435-无重叠区域（中等，但我觉得有点难）"><a href="#435-无重叠区域（中等，但我觉得有点难）" class="headerlink" title="435 无重叠区域（中等，但我觉得有点难）"></a>435 无重叠区域（中等，但我觉得有点难）</h3><p>难点有两个：1.找局部最优解 2. 题目给了个vector嵌套vector</p>
-<p>废了九牛二虎才做出来。</p>
-<h4 id="我的思路："><a href="#我的思路：" class="headerlink" title="我的思路："></a>我的思路：</h4><p>借鉴了解析的思路，先把所有区域按照右边界从小到大进行排序，因为选择的区间结尾越小，余留给其他区间的空间越大，所以贪心策略为：<strong>优先保留小且不相交的区间</strong>。但是如果按照我下面这么写，其实就麻烦了，我下面考虑以为会存在后面的区间是前面的子区间的情况，但其实根本不会存在，所以只要排序后再去掉交集就可以了。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">compare</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; a, vector&lt;<span class="keyword">int</span>&gt;&amp; b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">eraseOverlapIntervals</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), compare);</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> min = intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; intervals.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i != <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(intervals[i][<span class="number">0</span>] &lt; min &amp;&amp; intervals[i][<span class="number">1</span>] &lt;= min)&#123; <span class="comment">//左边小于当前最小右边且右边也小于最小右边，则可以删一个              </span></span><br><span class="line">                    num++;</span><br><span class="line">                    min = intervals[i][<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(intervals[i][<span class="number">0</span>] &gt;= min)&#123;</span><br><span class="line">                    min = intervals[i][<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> num++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>看了解析之后可以把compare函数换成<strong>Lambda的写法</strong>。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">eraseOverlapIntervals</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; intervals)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (intervals.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> n = intervals.<span class="built_in">size</span>();</span><br><span class="line">	<span class="built_in">sort</span>(intervals.<span class="built_in">begin</span>(), intervals.<span class="built_in">end</span>(), [](vector&lt;<span class="keyword">int</span>&gt; a, vector&lt;<span class="keyword">int</span>&gt; b) &#123;<span class="keyword">return</span> a[<span class="number">1</span>] &lt; b[<span class="number">1</span>];&#125;);</span><br><span class="line">	<span class="keyword">int</span> total = <span class="number">0</span>, prev = intervals[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> (intervals[i][<span class="number">0</span>] &lt; prev) &#123;</span><br><span class="line">			++total;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			prev = intervals[i][<span class="number">1</span>];</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同时要注意空集！！</p>
-<h3 id="605-种花问题"><a href="#605-种花问题" class="headerlink" title="605 种花问题"></a>605 种花问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210821215028.png"></p>
-<h4 id="我的思路：-1"><a href="#我的思路：-1" class="headerlink" title="我的思路："></a>我的思路：</h4><p>这题虽然是简单难度但是我错了很多次，因为刚开始走了弯路，没有用贪心策略，也没有仔细读题，后来的贪心策略为：<strong>如果一朵花满足种植条件，那就种植</strong>。代码如下</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">canPlaceFlowers</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; flowerbed, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>((<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(flowerbed[<span class="number">0</span>] == <span class="number">0</span>)count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(flowerbed[i] == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i == <span class="number">0</span> &amp;&amp; flowerbed[i+<span class="number">1</span>] == <span class="number">0</span>)&#123; <span class="comment">//第一个且数量大于等于2</span></span><br><span class="line">                    count++;</span><br><span class="line">                    flowerbed[i] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(i == (<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>()<span class="number">-1</span> &amp;&amp; flowerbed[i<span class="number">-1</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    flowerbed[i] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; i &lt; (<span class="keyword">int</span>)flowerbed.<span class="built_in">size</span>()<span class="number">-1</span> &amp;&amp; flowerbed[i<span class="number">-1</span>] == <span class="number">0</span> &amp;&amp; flowerbed[i+<span class="number">1</span>] == <span class="number">0</span>)&#123;</span><br><span class="line">                    count++;</span><br><span class="line">                    flowerbed[i] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count &gt;= n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="452-用最少数量的箭引爆气球"><a href="#452-用最少数量的箭引爆气球" class="headerlink" title="452. 用最少数量的箭引爆气球"></a>452. 用最少数量的箭引爆气球</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210821214739.png" style="zoom:80%;" />
-
-<h4 id="我的思路：-2"><a href="#我的思路：-2" class="headerlink" title="我的思路："></a>我的思路：</h4><p>这题与435 差不多，我用的是左边界进行排序，然后找相交的区域，如果一个区间的右边界比较小的话就把它作为新的右边界限制。问题是运行速度挺慢的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findMinArrowShots</span><span class="params">(vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt;&amp; points)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(points.<span class="built_in">size</span>() == <span class="number">0</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">        <span class="built_in">sort</span>(points.<span class="built_in">begin</span>(), points.<span class="built_in">end</span>(), [](vector&lt;<span class="keyword">int</span>&gt; a, vector&lt;<span class="keyword">int</span>&gt;b)&#123;<span class="keyword">return</span> a[<span class="number">0</span>] &lt; b[<span class="number">0</span>] ;&#125;);</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = points[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; points.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(points[i][<span class="number">0</span>] &gt; right )&#123;</span><br><span class="line">                right = points[i][<span class="number">1</span>];</span><br><span class="line">                count++;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(right &gt; points[i][<span class="number">1</span>])&#123;</span><br><span class="line">                    right = points[i][<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="763-划分字母区间"><a href="#763-划分字母区间" class="headerlink" title="763 划分字母区间"></a>763 划分字母区间</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210828084801.png"></p>
-<h4 id="我的思路：-3"><a href="#我的思路：-3" class="headerlink" title="我的思路："></a>我的思路：</h4><p>因为每个字母最多出现一个片段，所以一次遍历不能解决问题，因为不知道后面的情况，需要第二次遍历。</p>
-<p>第一次遍历先把每个字母最终出现的位置记录下来，然后再通过一次遍历，找到每次遍历字符最大的右边界，若是当前位置等于目前最大右边界，则可划分。</p>
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">partitionLabels</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="keyword">char</span>, <span class="keyword">int</span>&gt;reals;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">length</span>();i++)&#123; <span class="comment">//第一次遍历字符串n，统计出现的个每个字母最后出现的位置</span></span><br><span class="line">            reals[s[i]]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//再次遍历，开始切割</span></span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; cut;</span><br><span class="line">        <span class="keyword">int</span> maxlength = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i &lt; s.<span class="built_in">length</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> right = reals[s[i]];</span><br><span class="line">            <span class="keyword">if</span>(maxlength &lt; right)&#123;</span><br><span class="line">                maxlength = right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(maxlength == i)&#123;</span><br><span class="line">                cut.<span class="built_in">push_back</span>(i - left + <span class="number">1</span>);</span><br><span class="line">                left = i+<span class="number">1</span>;</span><br><span class="line">                maxlength = <span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cut;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210828085138.png"></p>
-<p>为什么4ms才击败了67.28%？？？？？？？</p>
-<h3 id="122-买卖股票的最佳时机"><a href="#122-买卖股票的最佳时机" class="headerlink" title="122 买卖股票的最佳时机"></a>122 买卖股票的最佳时机</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904155648.png"></p>
-<h4 id="我的思路：-4"><a href="#我的思路：-4" class="headerlink" title="我的思路："></a>我的思路：</h4><p>目标是获得最大利润，那就要再小的时候买入，大的时候卖出。股票的价格涨涨跌跌，所以就要在涨到最高点，价格下降的时候买入，跌倒最低点，价格升高的时候卖出。本题最重要是注意边界。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> min = prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> key = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> size = (<span class="keyword">int</span>)prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(key == <span class="number">0</span> &amp;&amp; prices[i] &lt; min) <span class="comment">//找小</span></span><br><span class="line">            &#123;</span><br><span class="line">                min = prices[i];</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="number">0</span> &amp;&amp; prices[i] &gt; min)&#123; <span class="comment">//找到最小了，开始找大</span></span><br><span class="line">                key = <span class="number">1</span>;</span><br><span class="line">                max = prices[i];</span><br><span class="line">                <span class="keyword">if</span>(i == size <span class="number">-1</span> )&#123;</span><br><span class="line">                    profit += max-min;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(key == <span class="number">1</span> &amp;&amp; prices[i] &gt;= max)&#123; <span class="comment">//找大</span></span><br><span class="line">                max=prices[i];</span><br><span class="line">                <span class="keyword">if</span>(i == size <span class="number">-1</span> )&#123;</span><br><span class="line">                    profit += max-min;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="number">1</span> &amp;&amp; prices[i] &lt; max)&#123; <span class="comment">//找到最大了，或者没有最大</span></span><br><span class="line">                profit += max-min;</span><br><span class="line">                min = prices[i];</span><br><span class="line">                key = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">return</span> profit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>leetcode</category>
-        <category>算法</category>
-        <category>贪心算法</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>算法学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>留存纪念的介绍</title>
-    <url>/2021/08/05/hello-world/</url>
-    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
-<span id="more"></span>
-
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>雅思精读4</title>
     <url>/2021/10/11/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB4/</url>
     <content><![CDATA[<p>介绍：雅思精读笔记，语言类</p>
 <span id="more"></span>
 
-<h3 id="剑-test-p"><a href="#剑-test-p" class="headerlink" title="剑 test  p"></a>剑 test  p</h3><p><strong>关键词：</strong></p>
+<h3 id="剑5-test2-p3"><a href="#剑5-test2-p3" class="headerlink" title="剑5 test2  p3"></a>剑5 test2  p3</h3><p><strong>关键词：Scientific English</strong></p>
 <h4 id="单词："><a href="#单词：" class="headerlink" title="单词："></a>单词：</h4><table>
 <thead>
 <tr>
@@ -810,55 +789,55 @@
 </tr>
 </thead>
 <tbody><tr>
+<td>lingua franca（通用语）</td>
+<td>encyclopedias</td>
+<td>prominence</td>
+<td>cartography</td>
+<td>empirical</td>
+<td>rational</td>
+</tr>
+<tr>
+<td>audience</td>
+<td>intellectual property</td>
+<td>curator</td>
+<td>formative</td>
+<td>original science</td>
+<td>commercial exploitation</td>
+</tr>
+<tr>
+<td>humanist notion of the individual</td>
+<td>cipher</td>
+<td>industrial revolution</td>
 <td></td>
+<td>inadequate</td>
 <td></td>
+</tr>
+<tr>
+<td>vocabulary</td>
+<td>grammatical</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
+<td>objective</td>
+<td>impersonal</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
+<td>monograph</td>
+<td>lexical</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
+<td>discipline</td>
 <td></td>
 <td></td>
 <td></td>
@@ -930,7 +909,18 @@
 <td></td>
 </tr>
 </tbody></table>
-<h4 id="同义替换："><a href="#同义替换：" class="headerlink" title="同义替换："></a>同义替换：</h4><h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><h4 id="段落中心句位置与文章结构积累："><a href="#段落中心句位置与文章结构积累：" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><hr>
+<h4 id="同义替换："><a href="#同义替换：" class="headerlink" title="同义替换："></a>同义替换：</h4><h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、cling the most keenly to something.</p>
+<p><strong>翻译：</strong>对…万分钟爱</p>
+<h4 id="段落中心句位置与文章结构积累："><a href="#段落中心句位置与文章结构积累：" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><p>第一段讲了英语是世界上使用最广泛的科学语言，但是在十七世纪以前，拉丁语才是通用语言、</p>
+<p>第二段讲了文艺复兴对于英语的影响。</p>
+<p>第三段讲了两个人促进经验科学的研究</p>
+<p>第四段讲了英语发展初期的情况</p>
+<p>第五段讲了为什么最初的科学用拉丁文来写，后来又为什么变成英文了</p>
+<p>第六段讲了用拉丁文是为了保守秘密导致其流行。</p>
+<p>第七段讲了英文被用来当作科学语言推迟了是因为没有丰富的语言进行表达。</p>
+<p>第八段讲了几个皇家协会的人丰富英语的语言。</p>
+<p>第九段讲了1665年一本新的科学杂志鼓励新的科学写作风格，简洁、重点地描绘某一特定实验。</p>
+<hr>
 ]]></content>
       <categories>
         <category>雅思</category>
@@ -939,6 +929,27 @@
         <tag>雅思精读</tag>
         <tag>language</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>留存纪念的介绍</title>
+    <url>/2021/08/05/hello-world/</url>
+    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
+<span id="more"></span>
+
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>雅思精读3</title>
@@ -1055,11 +1066,19 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>environmental data = physical surrounding</td>
+<td>environmental = physical surroundings</td>
 <td>kaleidoscope = a wide range of</td>
 </tr>
 </tbody></table>
-<h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、Animals at play often use unique signs - tail-wagging in dog , for example - to indicate that activity superficially resembling adult behavior is not really in earnest.</p>
+<h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><p>1、matching题27</p>
+<p><strong>原因：</strong>E段讲的是玩的越多脑子越大，而题目讲的是玩和大脑间一些有益处的不寻常的好处。但是E段仅停留在表面——脑子大小，而没有讲益处。</p>
+<p>2、30题</p>
+<p><strong>原因：</strong>G段虽然讲的是玩会对脑子的某些部件进行刺激，但是题目更偏重于mental activities，这题做错也是因为跟H弄乱了。</p>
+<p>3、31题</p>
+<p><strong>原因：</strong>F段讲的是玩的时机，跟题目完全前言不搭后语，这题选错是因为赶时间没耐心。</p>
+<p>4、36题</p>
+<p><strong>原因：</strong>RB虽然是承接SP说的观点，但是主要注重论证SP的观点。D选项是SP的观点。选错也是没理解physical <strong>surroundings</strong>（物理环境）的意思，与文中RB观点中的enviomental有关。</p>
+<h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、Animals at play often use unique signs - tail-wagging in dog , for example - to indicate that activity superficially resembling adult behavior is not really in earnest.</p>
 <p><strong>笔记：</strong>这种插入语方法学一下，非常的native</p>
 <p>2、I concluded it‘s to do with lerning, and with the importance of enviromental data to the brain during development.</p>
 <p><strong>笔记：</strong>1、conclude引导宾语从句，宾语从句的主语是it，指代上文提到过的玩耍</p>
@@ -1521,8 +1540,150 @@
 <p>第十一段讲了研究的具体过程。</p>
 <p>第十二段重复了蚂蚁是一种有智能的生物，讲了一个人R对蚂蚁的感情，呼吁人们不要伤害蚂蚁。</p>
 <hr>
-<h3 id="剑-test-p"><a href="#剑-test-p" class="headerlink" title="剑 test  p"></a>剑 test  p</h3><p><strong>关键词：</strong></p>
+<h3 id="剑8-test3-p2-（这篇可以多读）"><a href="#剑8-test3-p2-（这篇可以多读）" class="headerlink" title="剑8 test3  p2 （这篇可以多读）"></a>剑8 test3  p2 （这篇可以多读）</h3><p><strong>关键词：</strong>Genius</p>
 <h4 id="单词：-3"><a href="#单词：-3" class="headerlink" title="单词："></a>单词：</h4><table>
+<thead>
+<tr>
+<th>学科词</th>
+<th></th>
+<th>生词</th>
+<th></th>
+<th>眼熟词</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nature（本质）</td>
+<td>prodigy</td>
+<td>cult</td>
+<td>divinity</td>
+<td>exceptional</td>
+<td>defective</td>
+</tr>
+<tr>
+<td>characteristic</td>
+<td>mythology（神话故事，谬误）</td>
+<td>thence</td>
+<td>astrology</td>
+<td>vantage point</td>
+<td></td>
+</tr>
+<tr>
+<td>intellectual</td>
+<td>impractical</td>
+<td>ambivalent</td>
+<td>mistrust</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>eccentric</td>
+<td><strong>run in families（家族遗传）</strong></td>
+<td>denigration</td>
+<td>norm-referenced（参照模板）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>upbringing</td>
+<td>schooling</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>infant</td>
+<td>mortality</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>life expectancy（寿命）</td>
+<td>home tutoring（家教）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bullying（恃强凌弱）</td>
+<td>corporal punishment（体罚）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>independent school（私立学校）</td>
+<td>paediatrics（儿科学）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>psychology（心理学）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="段落中心句位置与文章结构积累：-3"><a href="#段落中心句位置与文章结构积累：-3" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><p>第一段描述了从很久之前对于天才和神童就有了关注，也讲了天才这个单词的含义</p>
+<p>第二段讲了天才和有天赋的概念成为了民间文化的一部分，并且描述了一些人对于天才的误会。</p>
+<p>第三段</p>
+<h4 id="同义替换：-3"><a href="#同义替换：-3" class="headerlink" title="同义替换："></a>同义替换：</h4><h4 id="错题及蒙题复盘：-3"><a href="#错题及蒙题复盘：-3" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><h4 id="长难句不回读阅读训练：（每天练五个）-3"><a href="#长难句不回读阅读训练：（每天练五个）-3" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、However，the difficulty with the evidence produced by these studies, fascinating as they are in collecting together with the evidence and apparent similarities and exceptions, is that they are not what we would today call norm-referenced.</p>
+<p><strong>翻译：</strong>尽管在研究中搜集的轶闻趣事、显著相似点以及例外状况都非常吸引人，但是，想要利用这些研究得出的证据也有一定困难，因为他们不符合我们今天所谓的模板参照。</p>
+<p><strong>笔记：</strong>with和and不同，and有并列的意思，但是with是伴随，A with B， B伴随着A，上面这句话其实可以翻译成 “利用这些研究得出证据伴随着困难”</p>
+<p>2、Perhaps for us today， two of the most significant aspects of the most of these studies of genius are frequency with which early encouragement and teaching by parents and tutors had beneficial effects on the intellectual， artistic or musical development of the children but caused great difficulties of adjustment later in their lives， and the frequency with which abilities went unrecognized by teachers and schools.</p>
+<p><strong>翻译：</strong>或许现在对于我们来说，大部分对天才的研究包含以下两个最重要的方面：其一，早期教育中父母和教师对孩子进行的频繁的鼓励和教导对孩子在智力、艺术或音乐方面的发展是有益的，但这也给孩子以后对生活的适应方面带来了巨大的困难；其二，老师和学校常常认识不到孩子所具备的才能。</p>
+<hr>
+<h3 id="剑-test-p"><a href="#剑-test-p" class="headerlink" title="剑 test  p"></a>剑 test  p</h3><p><strong>关键词：</strong></p>
+<h4 id="单词：-4"><a href="#单词：-4" class="headerlink" title="单词："></a>单词：</h4><table>
 <thead>
 <tr>
 <th>学科词</th>
@@ -1654,7 +1815,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h4 id="同义替换：-3"><a href="#同义替换：-3" class="headerlink" title="同义替换："></a>同义替换：</h4><h4 id="错题及蒙题复盘：-3"><a href="#错题及蒙题复盘：-3" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><h4 id="长难句不回读阅读训练：（每天练五个）-3"><a href="#长难句不回读阅读训练：（每天练五个）-3" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><h4 id="段落中心句位置与文章结构积累：-3"><a href="#段落中心句位置与文章结构积累：-3" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><hr>
+<h4 id="段落中心句位置与文章结构积累：-4"><a href="#段落中心句位置与文章结构积累：-4" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><h4 id="同义替换：-4"><a href="#同义替换：-4" class="headerlink" title="同义替换："></a>同义替换：</h4><h4 id="错题及蒙题复盘：-4"><a href="#错题及蒙题复盘：-4" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><h4 id="长难句不回读阅读训练：（每天练五个）-4"><a href="#长难句不回读阅读训练：（每天练五个）-4" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><hr>
 ]]></content>
       <categories>
         <category>雅思</category>
