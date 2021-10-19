@@ -6,7 +6,7 @@
   <link href="https://rdxsun.github.io/atom.xml" rel="self"/>
   
   <link href="https://rdxsun.github.io/"/>
-  <updated>2021-10-17T03:30:31.858Z</updated>
+  <updated>2021-10-19T07:27:02.639Z</updated>
   <id>https://rdxsun.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>雅思精读6</title>
+    <link href="https://rdxsun.github.io/2021/10/19/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB6/"/>
+    <id>https://rdxsun.github.io/2021/10/19/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB6/</id>
+    <published>2021-10-19T07:22:05.000Z</published>
+    <updated>2021-10-19T07:27:02.639Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;介绍：精读雅思笔记，环境类&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="雅思" scheme="https://rdxsun.github.io/categories/%E9%9B%85%E6%80%9D/"/>
+    
+    
+    <category term="雅思精读" scheme="https://rdxsun.github.io/tags/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB/"/>
+    
+    <category term="environment" scheme="https://rdxsun.github.io/tags/environment/"/>
+    
+  </entry>
   
   <entry>
     <title>雅思精读5</title>
@@ -42,7 +63,7 @@
     <link href="https://rdxsun.github.io/2021/10/11/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB4/"/>
     <id>https://rdxsun.github.io/2021/10/11/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB4/</id>
     <published>2021-10-11T12:00:43.000Z</published>
-    <updated>2021-10-19T03:32:34.990Z</updated>
+    <updated>2021-10-19T07:04:00.520Z</updated>
     
     
     <summary type="html">&lt;p&gt;介绍：雅思精读笔记，语言类&lt;/p&gt;</summary>
@@ -63,7 +84,7 @@
     <link href="https://rdxsun.github.io/2021/10/10/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB3/"/>
     <id>https://rdxsun.github.io/2021/10/10/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB3/</id>
     <published>2021-10-10T13:01:32.000Z</published>
-    <updated>2021-10-11T12:44:25.796Z</updated>
+    <updated>2021-10-19T11:04:51.992Z</updated>
     
     
     <summary type="html">&lt;p&gt;介绍：雅思精读笔记，教育类&lt;/p&gt;</summary>
@@ -187,9 +208,9 @@
     <category term="cpp基础" scheme="https://rdxsun.github.io/categories/cpp%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="侯捷课程" scheme="https://rdxsun.github.io/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/"/>
-    
     <category term="Cpp基础" scheme="https://rdxsun.github.io/tags/Cpp%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="侯捷课程" scheme="https://rdxsun.github.io/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/"/>
     
   </entry>
   
@@ -208,9 +229,9 @@
     <category term="cpp基础" scheme="https://rdxsun.github.io/categories/cpp%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="侯捷课程" scheme="https://rdxsun.github.io/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/"/>
-    
     <category term="Cpp基础" scheme="https://rdxsun.github.io/tags/Cpp%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="侯捷课程" scheme="https://rdxsun.github.io/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/"/>
     
   </entry>
   
@@ -229,9 +250,9 @@
     <category term="cpp基础" scheme="https://rdxsun.github.io/categories/cpp%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="侯捷课程" scheme="https://rdxsun.github.io/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/"/>
-    
     <category term="Cpp基础" scheme="https://rdxsun.github.io/tags/Cpp%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="侯捷课程" scheme="https://rdxsun.github.io/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/"/>
     
   </entry>
   
@@ -250,9 +271,9 @@
     <category term="cpp基础" scheme="https://rdxsun.github.io/categories/cpp%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="侯捷课程" scheme="https://rdxsun.github.io/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/"/>
-    
     <category term="Cpp基础" scheme="https://rdxsun.github.io/tags/Cpp%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="侯捷课程" scheme="https://rdxsun.github.io/tags/%E4%BE%AF%E6%8D%B7%E8%AF%BE%E7%A8%8B/"/>
     
   </entry>
   
