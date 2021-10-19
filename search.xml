@@ -71,6 +71,80 @@
       </tags>
   </entry>
   <entry>
+    <title>侯捷C++面向对象笔记（二）带指针的类</title>
+    <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
+<span id="more"></span>
+
+<h3 id="一-复习Complex类的实现过程"><a href="#一-复习Complex类的实现过程" class="headerlink" title="一 复习Complex类的实现过程"></a>一 复习Complex类的实现过程</h3><p>1 好习惯：防卫式声明</p>
+<p>2 写出class 的head</p>
+<p>3 写class的body：数据和函数</p>
+<p>4 写构造函数，考虑是否需要默认值，在考虑函数传递是by value还是reference</p>
+<p>5 考虑写构造函数的初值列</p>
+<p>6 考虑功能，设计操作数：成员函数还是全局函数</p>
+<p>7 设计成员函数：考虑传递参数和返回值是否能用reference</p>
+<p><strong>没想清楚的问题：为什么有的全局函数也要用inline修饰</strong></p>
+<p>以String作为例子讲述带指针的类，先通过一些字符串的用法来确定如何编写，重点在“<strong>拷贝构造</strong>”和“<strong>拷贝赋值</strong>”，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202250.png"></p>
+<p>如果不写拷贝赋值的话，那编译器默认的是一个位一个位的<strong>拷贝构造</strong>和<strong>拷贝赋值</strong>，但是对于指针时，是拷贝那个地址，两个指针指向同一个地址，这并不是常规意义的拷贝。</p>
+<p>如下就是String的class</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202718.png"></p>
+<p>上述四个函数，二三四在西方叫做big three</p>
+<p>第二个函数是拷贝构造，第三个函数是拷贝赋值，</p>
+<p>第四个函数<strong>析构函数</strong>，当这个类死亡的时候，析构函数会被调出。</p>
+<p>第五个函数就是普通的成员函数，是一个inline function</p>
+<h3 id="二-ctor和dtor（构造函数和析构函数）"><a href="#二-ctor和dtor（构造函数和析构函数）" class="headerlink" title="二 ctor和dtor（构造函数和析构函数）"></a>二 ctor和dtor（构造函数和析构函数）</h3><p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809203608657.png" alt="image-20210809203608657"></p>
+<p>因为构造函数里动态分配了内存，如果不释放就会造成内存泄漏，所以要采用析构函数来<strong>释放空间</strong>。</p>
+<h3 id="三-拷贝构造与拷贝赋值"><a href="#三-拷贝构造与拷贝赋值" class="headerlink" title="三 拷贝构造与拷贝赋值"></a>三 拷贝构造与拷贝赋值</h3><p>⭐ 注意：带指针的类必须要有<strong>拷贝赋值</strong>和<strong>拷贝构造</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809204828.png"></p>
+<p>上述例子讲述了如果没有这两个操作，就会有两个指针指向同一个地址，那另一个地址的内存就算内存泄露了。这被称作<strong>浅拷贝</strong>，拷贝赋值和拷贝构造是<strong>深拷贝</strong>。</p>
+<p>a的别名（alias）是b，别名是一件很危险的事。</p>
+<h4 id="3-1-拷贝构造函数"><a href="#3-1-拷贝构造函数" class="headerlink" title="3.1 拷贝构造函数"></a>3.1 拷贝构造函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205124.png"></p>
+<p>蓝色的这两行其实是完全相同的意思，第三句因为s2也是新创建出来的对象，也需要构造函数，所以第二和第三是完全一致的。</p>
+<h4 id="3-2-拷贝赋值函数"><a href="#3-2-拷贝赋值函数" class="headerlink" title="3.2 拷贝赋值函数"></a>3.2 拷贝赋值函数</h4><p>拷贝赋值需要先清空原来的空间，再分配一块与赋值相同的内存，最后进行拷贝。但是需要检测是不是<strong>自己给自己赋值</strong>，不仅是为了效率，实际上也是为了正确性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205617.png"></p>
+<p>如果不检测自我赋值，会出现下述问题：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809210356.png"></p>
+<hr>
+<h3 id="四-output函数"><a href="#四-output函数" class="headerlink" title="四 output函数"></a>四 output函数</h3><p>重载操作符&lt;&lt;，<strong>不可以是一个成员函数</strong>，因为如果是字符串的成员函数，用的时候方向会相反，cout本来在左边现在在右边（？没动）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213623.png"></p>
+<hr>
+<h3 id="五-栈（stack）和堆（heap）"><a href="#五-栈（stack）和堆（heap）" class="headerlink" title="五 栈（stack）和堆（heap）"></a>五 栈（stack）和堆（heap）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213756.png"></p>
+<p>stack还会存放local object（在函数内部创建的对象）</p>
+<p>上述两种创建方式的不同在于，new可以在程序的任何地方创建，创建就要对它负责，需要delete。因为它是在堆里，如果在栈里的话，离开该作用域就会消失。</p>
+<h4 id="5-1-stack-objects的生命期"><a href="#5-1-stack-objects的生命期" class="headerlink" title="5.1 stack objects的生命期"></a>5.1 stack objects的生命期</h4><p>离开作用域就消失了，会调用析构函数清理自己，所以也叫做auto object。</p>
+<h4 id="5-2-static-local-objects的生命期"><a href="#5-2-static-local-objects的生命期" class="headerlink" title="5.2 static local objects的生命期"></a>5.2 static local objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line">&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>c2是static object，生命周期在整个作用域，结束之后仍然存在，直到整个程序结束。</p>
+<h4 id="5-3-global-objects的生命期"><a href="#5-3-global-objects的生命期" class="headerlink" title="5.3 global objects的生命期"></a>5.3 global objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> main</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>c3是global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，但是作用域为<strong>整个程序</strong>！</p>
+<h4 id="5-4-heap-objects的生命期"><a href="#5-4-heap-objects的生命期" class="headerlink" title="5.4 heap objects的生命期"></a>5.4 heap objects的生命期</h4><p>new的正确写法是在同一个作用域里创建和释放</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214649.png"></p>
+<h4 id="5-5-new的机制"><a href="#5-5-new的机制" class="headerlink" title="5.5 new的机制"></a>5.5 new的机制</h4><p>绝大多数都是变成以下三个动作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214929.png"></p>
+<h4 id="5-6-delete的机制"><a href="#5-6-delete的机制" class="headerlink" title="5.6 delete的机制"></a>5.6 delete的机制</h4><p>转换为以下两个动作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220305.png"></p>
+<hr>
+<h3 id="六-动态分配所得到的内存块（很宝贵的知识）"><a href="#六-动态分配所得到的内存块（很宝贵的知识）" class="headerlink" title="六 动态分配所得到的内存块（很宝贵的知识）"></a>六 动态分配所得到的内存块（很宝贵的知识）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220538.png"></p>
+<p>第一张图：在调试模式下，不止得到了所要分配的内存，还得到了灰色和下面的内存。由于在VC下，每一块内存都是16的倍数，所以就要填补深绿色的pad成64字节。上下的红色为cookie，记录整块的大小，为什么要记录？因为系统回收的时候只给了指针，必须要有个地方记录大小。</p>
+<p>第二张图是release模式。</p>
+<hr>
+<h3 id="七-动态分配所得的数组"><a href="#七-动态分配所得的数组" class="headerlink" title="七 动态分配所得的数组"></a>七 动态分配所得的数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221403.png"></p>
+<p>vc的做法，需要用一个整数记录数组中元素的个数。</p>
+<p><strong>为什么动态分配的数组要搭配delete [] （array delete）呢？</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221731.png"></p>
+<p>不管加不加[]，都不会影响删掉的大小，因为已经记录了是21h，问题是出在如果不加[]，只会调用一次析构函数；而加了[]，才会把各自的对象用析构函数释放内存。</p>
+]]></content>
+      <categories>
+        <category>cpp基础</category>
+      </categories>
+      <tags>
+        <tag>侯捷课程</tag>
+        <tag>Cpp基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cpp基础知识</title>
     <url>/2021/08/06/C-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<p><strong>介绍：</strong>仅作个人笔记，侵删，通过①  <a href="https://light-city.club/sc">https://light-city.club/sc</a> ② 《C++primer》等途径复习及完全掌握C++，本文包含以下内容：</p>
@@ -287,82 +361,44 @@
         <category>cpp基础</category>
       </categories>
       <tags>
-        <tag>Cpp基础</tag>
         <tag>侯捷课程</tag>
+        <tag>Cpp基础</tag>
       </tags>
   </entry>
   <entry>
-    <title>侯捷C++面向对象笔记（二）带指针的类</title>
-    <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
+    <title>侯捷C++面向对象笔记（三）补充</title>
+    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
 <span id="more"></span>
 
-<h3 id="一-复习Complex类的实现过程"><a href="#一-复习Complex类的实现过程" class="headerlink" title="一 复习Complex类的实现过程"></a>一 复习Complex类的实现过程</h3><p>1 好习惯：防卫式声明</p>
-<p>2 写出class 的head</p>
-<p>3 写class的body：数据和函数</p>
-<p>4 写构造函数，考虑是否需要默认值，在考虑函数传递是by value还是reference</p>
-<p>5 考虑写构造函数的初值列</p>
-<p>6 考虑功能，设计操作数：成员函数还是全局函数</p>
-<p>7 设计成员函数：考虑传递参数和返回值是否能用reference</p>
-<p><strong>没想清楚的问题：为什么有的全局函数也要用inline修饰</strong></p>
-<p>以String作为例子讲述带指针的类，先通过一些字符串的用法来确定如何编写，重点在“<strong>拷贝构造</strong>”和“<strong>拷贝赋值</strong>”，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202250.png"></p>
-<p>如果不写拷贝赋值的话，那编译器默认的是一个位一个位的<strong>拷贝构造</strong>和<strong>拷贝赋值</strong>，但是对于指针时，是拷贝那个地址，两个指针指向同一个地址，这并不是常规意义的拷贝。</p>
-<p>如下就是String的class</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202718.png"></p>
-<p>上述四个函数，二三四在西方叫做big three</p>
-<p>第二个函数是拷贝构造，第三个函数是拷贝赋值，</p>
-<p>第四个函数<strong>析构函数</strong>，当这个类死亡的时候，析构函数会被调出。</p>
-<p>第五个函数就是普通的成员函数，是一个inline function</p>
-<h3 id="二-ctor和dtor（构造函数和析构函数）"><a href="#二-ctor和dtor（构造函数和析构函数）" class="headerlink" title="二 ctor和dtor（构造函数和析构函数）"></a>二 ctor和dtor（构造函数和析构函数）</h3><p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809203608657.png" alt="image-20210809203608657"></p>
-<p>因为构造函数里动态分配了内存，如果不释放就会造成内存泄漏，所以要采用析构函数来<strong>释放空间</strong>。</p>
-<h3 id="三-拷贝构造与拷贝赋值"><a href="#三-拷贝构造与拷贝赋值" class="headerlink" title="三 拷贝构造与拷贝赋值"></a>三 拷贝构造与拷贝赋值</h3><p>⭐ 注意：带指针的类必须要有<strong>拷贝赋值</strong>和<strong>拷贝构造</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809204828.png"></p>
-<p>上述例子讲述了如果没有这两个操作，就会有两个指针指向同一个地址，那另一个地址的内存就算内存泄露了。这被称作<strong>浅拷贝</strong>，拷贝赋值和拷贝构造是<strong>深拷贝</strong>。</p>
-<p>a的别名（alias）是b，别名是一件很危险的事。</p>
-<h4 id="3-1-拷贝构造函数"><a href="#3-1-拷贝构造函数" class="headerlink" title="3.1 拷贝构造函数"></a>3.1 拷贝构造函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205124.png"></p>
-<p>蓝色的这两行其实是完全相同的意思，第三句因为s2也是新创建出来的对象，也需要构造函数，所以第二和第三是完全一致的。</p>
-<h4 id="3-2-拷贝赋值函数"><a href="#3-2-拷贝赋值函数" class="headerlink" title="3.2 拷贝赋值函数"></a>3.2 拷贝赋值函数</h4><p>拷贝赋值需要先清空原来的空间，再分配一块与赋值相同的内存，最后进行拷贝。但是需要检测是不是<strong>自己给自己赋值</strong>，不仅是为了效率，实际上也是为了正确性。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205617.png"></p>
-<p>如果不检测自我赋值，会出现下述问题：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809210356.png"></p>
-<hr>
-<h3 id="四-output函数"><a href="#四-output函数" class="headerlink" title="四 output函数"></a>四 output函数</h3><p>重载操作符&lt;&lt;，<strong>不可以是一个成员函数</strong>，因为如果是字符串的成员函数，用的时候方向会相反，cout本来在左边现在在右边（？没动）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213623.png"></p>
-<hr>
-<h3 id="五-栈（stack）和堆（heap）"><a href="#五-栈（stack）和堆（heap）" class="headerlink" title="五 栈（stack）和堆（heap）"></a>五 栈（stack）和堆（heap）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213756.png"></p>
-<p>stack还会存放local object（在函数内部创建的对象）</p>
-<p>上述两种创建方式的不同在于，new可以在程序的任何地方创建，创建就要对它负责，需要delete。因为它是在堆里，如果在栈里的话，离开该作用域就会消失。</p>
-<h4 id="5-1-stack-objects的生命期"><a href="#5-1-stack-objects的生命期" class="headerlink" title="5.1 stack objects的生命期"></a>5.1 stack objects的生命期</h4><p>离开作用域就消失了，会调用析构函数清理自己，所以也叫做auto object。</p>
-<h4 id="5-2-static-local-objects的生命期"><a href="#5-2-static-local-objects的生命期" class="headerlink" title="5.2 static local objects的生命期"></a>5.2 static local objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line">&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c2是static object，生命周期在整个作用域，结束之后仍然存在，直到整个程序结束。</p>
-<h4 id="5-3-global-objects的生命期"><a href="#5-3-global-objects的生命期" class="headerlink" title="5.3 global objects的生命期"></a>5.3 global objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> main</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c3是global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，但是作用域为<strong>整个程序</strong>！</p>
-<h4 id="5-4-heap-objects的生命期"><a href="#5-4-heap-objects的生命期" class="headerlink" title="5.4 heap objects的生命期"></a>5.4 heap objects的生命期</h4><p>new的正确写法是在同一个作用域里创建和释放</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214649.png"></p>
-<h4 id="5-5-new的机制"><a href="#5-5-new的机制" class="headerlink" title="5.5 new的机制"></a>5.5 new的机制</h4><p>绝大多数都是变成以下三个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214929.png"></p>
-<h4 id="5-6-delete的机制"><a href="#5-6-delete的机制" class="headerlink" title="5.6 delete的机制"></a>5.6 delete的机制</h4><p>转换为以下两个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220305.png"></p>
-<hr>
-<h3 id="六-动态分配所得到的内存块（很宝贵的知识）"><a href="#六-动态分配所得到的内存块（很宝贵的知识）" class="headerlink" title="六 动态分配所得到的内存块（很宝贵的知识）"></a>六 动态分配所得到的内存块（很宝贵的知识）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220538.png"></p>
-<p>第一张图：在调试模式下，不止得到了所要分配的内存，还得到了灰色和下面的内存。由于在VC下，每一块内存都是16的倍数，所以就要填补深绿色的pad成64字节。上下的红色为cookie，记录整块的大小，为什么要记录？因为系统回收的时候只给了指针，必须要有个地方记录大小。</p>
-<p>第二张图是release模式。</p>
-<hr>
-<h3 id="七-动态分配所得的数组"><a href="#七-动态分配所得的数组" class="headerlink" title="七 动态分配所得的数组"></a>七 动态分配所得的数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221403.png"></p>
-<p>vc的做法，需要用一个整数记录数组中元素的个数。</p>
-<p><strong>为什么动态分配的数组要搭配delete [] （array delete）呢？</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221731.png"></p>
-<p>不管加不加[]，都不会影响删掉的大小，因为已经记录了是21h，问题是出在如果不加[]，只会调用一次析构函数；而加了[]，才会把各自的对象用析构函数释放内存。</p>
+<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
+<p>注意：</p>
+<p>1 static的函数没有this指针</p>
+<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
+<p><strong>一个例子</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
+<p>静态的数据一定要在class外定义它初值。</p>
+<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
+<p><strong>前面的例子：只能创建一个对象</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
+<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
+<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
+<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
+<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
+<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
+<p>算法的那个库用了很多函数模板</p>
+<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
+<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
 ]]></content>
       <categories>
         <category>cpp基础</category>
       </categories>
       <tags>
-        <tag>Cpp基础</tag>
         <tag>侯捷课程</tag>
+        <tag>Cpp基础</tag>
       </tags>
   </entry>
   <entry>
@@ -419,92 +455,8 @@
         <category>cpp基础</category>
       </categories>
       <tags>
-        <tag>Cpp基础</tag>
         <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>侯捷C++面向对象笔记（三）补充</title>
-    <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
-<span id="more"></span>
-
-<h3 id="一-static"><a href="#一-static" class="headerlink" title="一 static"></a>一 static</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814205043.png"></p>
-<p>注意：</p>
-<p>1 static的函数没有this指针</p>
-<p>2 static的数据和函数只有一份，静态的函数只能处理静态的数据</p>
-<p><strong>一个例子</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814210608.png"></p>
-<p>静态的数据一定要在class外定义它初值。</p>
-<p>通过class name调用static函数时，不会像之前的普通成员函数一样，把它的地址放入this指针中。</p>
-<p><strong>前面的例子：只能创建一个对象</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210814211622.png"></p>
-<p><strong>更好的写法：如果没有人使用就只有一份，如果有人使用后就会创建，但永远只有这一份</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192512.png"></p>
-<h3 id="二-cout"><a href="#二-cout" class="headerlink" title="二 cout"></a>二 cout</h3><p>cout对&lt;&lt;符号进行了很多重载</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815192746.png"></p>
-<h3 id="三-class-template，类模板"><a href="#三-class-template，类模板" class="headerlink" title="三 class template，类模板"></a>三 class template，类模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815193119.png"></p>
-<p>上述double和int其实是两份代码，会把T替换。有人说会造成代码的膨胀，但是这种膨胀是必要的。</p>
-<h3 id="四-function-template，函数模板"><a href="#四-function-template，函数模板" class="headerlink" title="四 function template，函数模板"></a>四 function template，函数模板</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815194348.png"></p>
-<p>算法的那个库用了很多函数模板</p>
-<h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
-<h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
-]]></content>
-      <categories>
-        <category>cpp基础</category>
-      </categories>
-      <tags>
         <tag>Cpp基础</tag>
-        <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>leetCode101:双指针</title>
-    <url>/2021/09/04/leetCode101-%E5%8F%8C%E6%8C%87%E9%92%88/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>玩转双指针部分</p>
-<span id="more"></span>
-
-<h3 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a>167. 两数之和 II - 输入有序数组</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904183144.png" style="zoom:80%;" />
-
-<h4 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h4><p>这题没什么难度，但是我的写法虽然和答案写法一致，但是慢了很多。</p>
-<p>我的如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum = numbers[i] + numbers[j];</span><br><span class="line">        <span class="keyword">while</span>( sum != target)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sum &gt; target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>答案写法：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum;</span><br><span class="line">        <span class="keyword">while</span>( i &lt; j)&#123;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">            <span class="keyword">if</span>(sum  == target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                ++i;</span><br><span class="line">            &#125;<span class="keyword">else</span> --j;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>我觉得是使用if else的话，整个循环只需要判断两次，但是我写的需要判断三次。还有就是**++i和i++的速度区别**</p>
-<p>由这篇文章可见<a href="https://cloud.tencent.com/developer/article/1506229">https://cloud.tencent.com/developer/article/1506229</a></p>
-<h3 id="88-合并两个有序数组"><a href="#88-合并两个有序数组" class="headerlink" title="88 合并两个有序数组"></a>88 合并两个有序数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904223243.png"></p>
-<h4 id="我的思路-1"><a href="#我的思路-1" class="headerlink" title="我的思路"></a>我的思路</h4><p>这其实就是归并排序其中一步。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p3 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            <span class="keyword">if</span>(p1 &lt; <span class="number">0</span> )&#123;</span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">                --p3;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(p2 &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>( nums1[p1] &gt; nums2[p2])&#123;</span><br><span class="line">                nums1[p3] = nums1[p1];</span><br><span class="line">                cout&lt;&lt;nums1[p3]&lt;&lt;endl;</span><br><span class="line">                --p1;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                </span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">            &#125;</span><br><span class="line">            --p3;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>答案的解法看起来更加的简短，但是意思就是一样的，因为两个数组合并到最后会有两种情况，1：第一个数组完了，第二个数组没完 2：第一个数组没完，第二个数组完了，对于第二种情况来说，已经结束了，因为数组1是已经排序好的。由此可见可以写出以下规范代码</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span>  &amp;&amp; p2 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            nums1[p3--] =nums1[p1] &gt; nums2[p2]?nums1[p1--]:nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p2 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            nums1[p3--] = nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="142-环形链表II（重要：快慢指针）"><a href="#142-环形链表II（重要：快慢指针）" class="headerlink" title="142 环形链表II（重要：快慢指针）"></a>142 环形链表II（重要：快慢指针）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210907162125.png"></p>
-<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>看答案才知道原来这种题目有固定解法，用快慢指针，快慢指针的原理如下面链接所示。快慢指针所<strong>占用的空间是O(1)。</strong></p>
-<p><a href="https://zhuanlan.zhihu.com/p/361049436">深入理解快慢指针算法 – 链表环路检测 - 知乎 (zhihu.com)</a></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span> <span class="comment">//思考：1、可以用map解决:不行，因为value值不是唯一的</span></span><br><span class="line">                <span class="comment">//思考：2、改变val值，用于寻找</span></span><br><span class="line">                <span class="comment">//思考3：用快慢指针</span></span><br><span class="line">                </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == <span class="literal">NULL</span> || fast-&gt;next == <span class="literal">NULL</span>)<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;<span class="keyword">while</span>(head!=<span class="literal">NULL</span> &amp;&amp; slow != fast);</span><br><span class="line">        </span><br><span class="line">        fast = head;</span><br><span class="line">        <span class="keyword">while</span>(fast!=slow)&#123;</span><br><span class="line">            fast = fast-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fast;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="76-最小覆盖字串（滑动窗口，不会做）"><a href="#76-最小覆盖字串（滑动窗口，不会做）" class="headerlink" title="76 最小覆盖字串（滑动窗口，不会做）"></a>76 最小覆盖字串（滑动窗口，不会做）</h3>]]></content>
-      <categories>
-        <category>leetcode</category>
-        <category>算法</category>
-        <category>贪心算法</category>
-      </categories>
-      <tags>
-        <tag>Cpp</tag>
-        <tag>算法学习</tag>
       </tags>
   </entry>
   <entry>
@@ -590,6 +542,54 @@
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prices.<span class="built_in">size</span>() == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> min = prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> key = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> size = (<span class="keyword">int</span>)prices.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(key == <span class="number">0</span> &amp;&amp; prices[i] &lt; min) <span class="comment">//找小</span></span><br><span class="line">            &#123;</span><br><span class="line">                min = prices[i];</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="number">0</span> &amp;&amp; prices[i] &gt; min)&#123; <span class="comment">//找到最小了，开始找大</span></span><br><span class="line">                key = <span class="number">1</span>;</span><br><span class="line">                max = prices[i];</span><br><span class="line">                <span class="keyword">if</span>(i == size <span class="number">-1</span> )&#123;</span><br><span class="line">                    profit += max-min;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(key == <span class="number">1</span> &amp;&amp; prices[i] &gt;= max)&#123; <span class="comment">//找大</span></span><br><span class="line">                max=prices[i];</span><br><span class="line">                <span class="keyword">if</span>(i == size <span class="number">-1</span> )&#123;</span><br><span class="line">                    profit += max-min;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(key == <span class="number">1</span> &amp;&amp; prices[i] &lt; max)&#123; <span class="comment">//找到最大了，或者没有最大</span></span><br><span class="line">                profit += max-min;</span><br><span class="line">                min = prices[i];</span><br><span class="line">                key = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;   </span><br><span class="line">        <span class="keyword">return</span> profit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>贪心算法</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>算法学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leetCode101:双指针</title>
+    <url>/2021/09/04/leetCode101-%E5%8F%8C%E6%8C%87%E9%92%88/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>玩转双指针部分</p>
+<span id="more"></span>
+
+<h3 id="167-两数之和-II-输入有序数组"><a href="#167-两数之和-II-输入有序数组" class="headerlink" title="167. 两数之和 II - 输入有序数组"></a>167. 两数之和 II - 输入有序数组</h3><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904183144.png" style="zoom:80%;" />
+
+<h4 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h4><p>这题没什么难度，但是我的写法虽然和答案写法一致，但是慢了很多。</p>
+<p>我的如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum = numbers[i] + numbers[j];</span><br><span class="line">        <span class="keyword">while</span>( sum != target)&#123;</span><br><span class="line">            <span class="keyword">if</span>(sum &gt; target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>答案写法：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; numbers, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = numbers.<span class="built_in">size</span>() <span class="number">-1</span> ;</span><br><span class="line">        <span class="keyword">int</span> sum;</span><br><span class="line">        <span class="keyword">while</span>( i &lt; j)&#123;</span><br><span class="line">            sum = numbers[i] + numbers[j];</span><br><span class="line">            <span class="keyword">if</span>(sum  == target)&#123; <span class="comment">//和大，右边向左</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(sum &lt; target)&#123; <span class="comment">//和小，左边向右</span></span><br><span class="line">                ++i;</span><br><span class="line">            &#125;<span class="keyword">else</span> --j;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vector&lt;<span class="keyword">int</span>&gt;&#123;i+<span class="number">1</span>, j+<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我觉得是使用if else的话，整个循环只需要判断两次，但是我写的需要判断三次。还有就是**++i和i++的速度区别**</p>
+<p>由这篇文章可见<a href="https://cloud.tencent.com/developer/article/1506229">https://cloud.tencent.com/developer/article/1506229</a></p>
+<h3 id="88-合并两个有序数组"><a href="#88-合并两个有序数组" class="headerlink" title="88 合并两个有序数组"></a>88 合并两个有序数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210904223243.png"></p>
+<h4 id="我的思路-1"><a href="#我的思路-1" class="headerlink" title="我的思路"></a>我的思路</h4><p>这其实就是归并排序其中一步。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p3 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            <span class="keyword">if</span>(p1 &lt; <span class="number">0</span> )&#123;</span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">                --p3;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(p2 &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>( nums1[p1] &gt; nums2[p2])&#123;</span><br><span class="line">                nums1[p3] = nums1[p1];</span><br><span class="line">                cout&lt;&lt;nums1[p3]&lt;&lt;endl;</span><br><span class="line">                --p1;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                </span><br><span class="line">                nums1[p3] = nums2[p2];</span><br><span class="line">                --p2;</span><br><span class="line">            &#125;</span><br><span class="line">            --p3;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>答案的解法看起来更加的简短，但是意思就是一样的，因为两个数组合并到最后会有两种情况，1：第一个数组完了，第二个数组没完 2：第一个数组没完，第二个数组完了，对于第二种情况来说，已经结束了，因为数组1是已经排序好的。由此可见可以写出以下规范代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums1, <span class="keyword">int</span> m, vector&lt;<span class="keyword">int</span>&gt;&amp; nums2, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p1 = m - <span class="number">1</span>, p2 = n<span class="number">-1</span>, p3 = m+n<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p1 &gt;= <span class="number">0</span>  &amp;&amp; p2 &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            nums1[p3--] =nums1[p1] &gt; nums2[p2]?nums1[p1--]:nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p2 &gt;= <span class="number">0</span> )&#123;</span><br><span class="line">            nums1[p3--] = nums2[p2--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="142-环形链表II（重要：快慢指针）"><a href="#142-环形链表II（重要：快慢指针）" class="headerlink" title="142 环形链表II（重要：快慢指针）"></a>142 环形链表II（重要：快慢指针）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210907162125.png"></p>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>看答案才知道原来这种题目有固定解法，用快慢指针，快慢指针的原理如下面链接所示。快慢指针所<strong>占用的空间是O(1)。</strong></p>
+<p><a href="https://zhuanlan.zhihu.com/p/361049436">深入理解快慢指针算法 – 链表环路检测 - 知乎 (zhihu.com)</a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span> <span class="comment">//思考：1、可以用map解决:不行，因为value值不是唯一的</span></span><br><span class="line">                <span class="comment">//思考：2、改变val值，用于寻找</span></span><br><span class="line">                <span class="comment">//思考3：用快慢指针</span></span><br><span class="line">                </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">do</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == <span class="literal">NULL</span> || fast-&gt;next == <span class="literal">NULL</span>)<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;<span class="keyword">while</span>(head!=<span class="literal">NULL</span> &amp;&amp; slow != fast);</span><br><span class="line">        </span><br><span class="line">        fast = head;</span><br><span class="line">        <span class="keyword">while</span>(fast!=slow)&#123;</span><br><span class="line">            fast = fast-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fast;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="76-最小覆盖字串（滑动窗口，不会做）"><a href="#76-最小覆盖字串（滑动窗口，不会做）" class="headerlink" title="76 最小覆盖字串（滑动窗口，不会做）"></a>76 最小覆盖字串（滑动窗口，不会做）</h3>]]></content>
       <categories>
         <category>leetcode</category>
         <category>算法</category>
@@ -1391,27 +1391,6 @@
       </tags>
   </entry>
   <entry>
-    <title>留存纪念的介绍</title>
-    <url>/2021/08/05/hello-world/</url>
-    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
-<span id="more"></span>
-
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>雅思精读1</title>
     <url>/2021/10/02/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB1/</url>
     <content><![CDATA[<p>介绍：精读雅思笔记，生物类</p>
@@ -2131,5 +2110,26 @@
         <tag>雅思精读</tag>
         <tag>biology</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>留存纪念的介绍</title>
+    <url>/2021/08/05/hello-world/</url>
+    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
+<span id="more"></span>
+
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
 </search>
