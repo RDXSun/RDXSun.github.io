@@ -57,73 +57,77 @@
       </tags>
   </entry>
   <entry>
-    <title>剑指offer03</title>
-    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
-    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
-<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
-<p>示例 1：</p>
-<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
-<p>限制：</p>
-<p>2 &lt;= n &lt;= 100000</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+    <title>侯捷C++面向对象笔记（二）带指针的类</title>
+    <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
 <span id="more"></span>
 
-<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="一-复习Complex类的实现过程"><a href="#一-复习Complex类的实现过程" class="headerlink" title="一 复习Complex类的实现过程"></a>一 复习Complex类的实现过程</h3><p>1 好习惯：防卫式声明</p>
+<p>2 写出class 的head</p>
+<p>3 写class的body：数据和函数</p>
+<p>4 写构造函数，考虑是否需要默认值，在考虑函数传递是by value还是reference</p>
+<p>5 考虑写构造函数的初值列</p>
+<p>6 考虑功能，设计操作数：成员函数还是全局函数</p>
+<p>7 设计成员函数：考虑传递参数和返回值是否能用reference</p>
+<p><strong>没想清楚的问题：为什么有的全局函数也要用inline修饰</strong></p>
+<p>以String作为例子讲述带指针的类，先通过一些字符串的用法来确定如何编写，重点在“<strong>拷贝构造</strong>”和“<strong>拷贝赋值</strong>”，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202250.png"></p>
+<p>如果不写拷贝赋值的话，那编译器默认的是一个位一个位的<strong>拷贝构造</strong>和<strong>拷贝赋值</strong>，但是对于指针时，是拷贝那个地址，两个指针指向同一个地址，这并不是常规意义的拷贝。</p>
+<p>如下就是String的class</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202718.png"></p>
+<p>上述四个函数，二三四在西方叫做big three</p>
+<p>第二个函数是拷贝构造，第三个函数是拷贝赋值，</p>
+<p>第四个函数<strong>析构函数</strong>，当这个类死亡的时候，析构函数会被调出。</p>
+<p>第五个函数就是普通的成员函数，是一个inline function</p>
+<h3 id="二-ctor和dtor（构造函数和析构函数）"><a href="#二-ctor和dtor（构造函数和析构函数）" class="headerlink" title="二 ctor和dtor（构造函数和析构函数）"></a>二 ctor和dtor（构造函数和析构函数）</h3><p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809203608657.png" alt="image-20210809203608657"></p>
+<p>因为构造函数里动态分配了内存，如果不释放就会造成内存泄漏，所以要采用析构函数来<strong>释放空间</strong>。</p>
+<h3 id="三-拷贝构造与拷贝赋值"><a href="#三-拷贝构造与拷贝赋值" class="headerlink" title="三 拷贝构造与拷贝赋值"></a>三 拷贝构造与拷贝赋值</h3><p>⭐ 注意：带指针的类必须要有<strong>拷贝赋值</strong>和<strong>拷贝构造</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809204828.png"></p>
+<p>上述例子讲述了如果没有这两个操作，就会有两个指针指向同一个地址，那另一个地址的内存就算内存泄露了。这被称作<strong>浅拷贝</strong>，拷贝赋值和拷贝构造是<strong>深拷贝</strong>。</p>
+<p>a的别名（alias）是b，别名是一件很危险的事。</p>
+<h4 id="3-1-拷贝构造函数"><a href="#3-1-拷贝构造函数" class="headerlink" title="3.1 拷贝构造函数"></a>3.1 拷贝构造函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205124.png"></p>
+<p>蓝色的这两行其实是完全相同的意思，第三句因为s2也是新创建出来的对象，也需要构造函数，所以第二和第三是完全一致的。</p>
+<h4 id="3-2-拷贝赋值函数"><a href="#3-2-拷贝赋值函数" class="headerlink" title="3.2 拷贝赋值函数"></a>3.2 拷贝赋值函数</h4><p>拷贝赋值需要先清空原来的空间，再分配一块与赋值相同的内存，最后进行拷贝。但是需要检测是不是<strong>自己给自己赋值</strong>，不仅是为了效率，实际上也是为了正确性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205617.png"></p>
+<p>如果不检测自我赋值，会出现下述问题：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809210356.png"></p>
+<hr>
+<h3 id="四-output函数"><a href="#四-output函数" class="headerlink" title="四 output函数"></a>四 output函数</h3><p>重载操作符&lt;&lt;，<strong>不可以是一个成员函数</strong>，因为如果是字符串的成员函数，用的时候方向会相反，cout本来在左边现在在右边（？没动）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213623.png"></p>
+<hr>
+<h3 id="五-栈（stack）和堆（heap）"><a href="#五-栈（stack）和堆（heap）" class="headerlink" title="五 栈（stack）和堆（heap）"></a>五 栈（stack）和堆（heap）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213756.png"></p>
+<p>stack还会存放local object（在函数内部创建的对象）</p>
+<p>上述两种创建方式的不同在于，new可以在程序的任何地方创建，创建就要对它负责，需要delete。因为它是在堆里，如果在栈里的话，离开该作用域就会消失。</p>
+<h4 id="5-1-stack-objects的生命期"><a href="#5-1-stack-objects的生命期" class="headerlink" title="5.1 stack objects的生命期"></a>5.1 stack objects的生命期</h4><p>离开作用域就消失了，会调用析构函数清理自己，所以也叫做auto object。</p>
+<h4 id="5-2-static-local-objects的生命期"><a href="#5-2-static-local-objects的生命期" class="headerlink" title="5.2 static local objects的生命期"></a>5.2 static local objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line">&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
-<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
-<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
-<p>参数：sort（start，end，cmp）</p>
-<p>（1）若是数组：则可以sort(a, a+10)</p>
-<p>（2）若是vector：sort(a.start(), a.end() )</p>
-<p>（3）若想降序排列，可以</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
+<p>c2是static object，生命周期在整个作用域，结束之后仍然存在，直到整个程序结束。</p>
+<h4 id="5-3-global-objects的生命期"><a href="#5-3-global-objects的生命期" class="headerlink" title="5.3 global objects的生命期"></a>5.3 global objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> main</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
-<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
-<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
-<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
-<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
-<p>在VC中编译： </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
-
-<p> 在GCC中编译：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
-
-<p>所以使用unordered_map（与map用法一致）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>发现也没有自己的解法高</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
-<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
-<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
-<p><strong>算法流程：</strong></p>
-<ol>
-<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
-<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
-<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
-<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
-</ol>
-</li>
-<li>若遍历完毕尚未返回，则返回 -1 。</li>
-</ol>
-<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
-<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>由此写出代码如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
-<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
+<p>c3是global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，但是作用域为<strong>整个程序</strong>！</p>
+<h4 id="5-4-heap-objects的生命期"><a href="#5-4-heap-objects的生命期" class="headerlink" title="5.4 heap objects的生命期"></a>5.4 heap objects的生命期</h4><p>new的正确写法是在同一个作用域里创建和释放</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214649.png"></p>
+<h4 id="5-5-new的机制"><a href="#5-5-new的机制" class="headerlink" title="5.5 new的机制"></a>5.5 new的机制</h4><p>绝大多数都是变成以下三个动作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214929.png"></p>
+<h4 id="5-6-delete的机制"><a href="#5-6-delete的机制" class="headerlink" title="5.6 delete的机制"></a>5.6 delete的机制</h4><p>转换为以下两个动作</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220305.png"></p>
+<hr>
+<h3 id="六-动态分配所得到的内存块（很宝贵的知识）"><a href="#六-动态分配所得到的内存块（很宝贵的知识）" class="headerlink" title="六 动态分配所得到的内存块（很宝贵的知识）"></a>六 动态分配所得到的内存块（很宝贵的知识）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220538.png"></p>
+<p>第一张图：在调试模式下，不止得到了所要分配的内存，还得到了灰色和下面的内存。由于在VC下，每一块内存都是16的倍数，所以就要填补深绿色的pad成64字节。上下的红色为cookie，记录整块的大小，为什么要记录？因为系统回收的时候只给了指针，必须要有个地方记录大小。</p>
+<p>第二张图是release模式。</p>
+<hr>
+<h3 id="七-动态分配所得的数组"><a href="#七-动态分配所得的数组" class="headerlink" title="七 动态分配所得的数组"></a>七 动态分配所得的数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221403.png"></p>
+<p>vc的做法，需要用一个整数记录数组中元素的个数。</p>
+<p><strong>为什么动态分配的数组要搭配delete [] （array delete）呢？</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221731.png"></p>
+<p>不管加不加[]，都不会影响删掉的大小，因为已经记录了是21h，问题是出在如果不加[]，只会调用一次析构函数；而加了[]，才会把各自的对象用析构函数释放内存。</p>
 ]]></content>
       <categories>
-        <category>leetcode</category>
-        <category>算法</category>
-        <category>原地置换</category>
+        <category>cpp基础</category>
       </categories>
       <tags>
-        <tag>Cpp</tag>
-        <tag>sort排序</tag>
-        <tag>哈希表</tag>
-        <tag>原地置换</tag>
+        <tag>Cpp基础</tag>
+        <tag>侯捷课程</tag>
       </tags>
   </entry>
   <entry>
@@ -292,6 +296,76 @@
       </tags>
   </entry>
   <entry>
+    <title>剑指offer03</title>
+    <url>/2021/08/06/%E5%89%91%E6%8C%87offer03/</url>
+    <content><![CDATA[<p><strong>介绍：找出数组中重复的数字。</strong></p>
+<p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p>示例 1：</p>
+<p>输入：<br>[2, 3, 1, 0, 2, 5, 3]<br>输出：2 或 3 </p>
+<p>限制：</p>
+<p>2 &lt;= n &lt;= 100000</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<span id="more"></span>
+
+<h4 id="自己解法：排序比对"><a href="#自己解法：排序比对" class="headerlink" title="自己解法：排序比对"></a>自己解法：排序比对</h4><p>因为题目给的nums是vector，所以想到直接用sort函数，排序后比对</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; (int)nums.size() - 1; i++) &#123;</span><br><span class="line">            if (nums[i] == nums[i + 1]) &#123;</span><br><span class="line">                return nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806162347.png"></p>
+<h4 id="sort函数解释"><a href="#sort函数解释" class="headerlink" title="sort函数解释"></a>sort函数解释</h4><p>sort函数包含在头文件为#include&lt; algorithm &gt; 的C++标准库中。</p>
+<p>时间复杂度为n*log2(n)，类似于快速排序的方法。</p>
+<p>参数：sort（start，end，cmp）</p>
+<p>（1）若是数组：则可以sort(a, a+10)</p>
+<p>（2）若是vector：sort(a.start(), a.end() )</p>
+<p>（3）若想降序排列，可以</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">compare</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">sort</span>(a, a+<span class="number">10</span>, compare);<span class="comment">//在这里不需要对compare函数传入参数</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）若是自己定义的结构体，则比较函数一定要自己写</p>
+<h4 id="题解方法一：空间换时间hash-map或map"><a href="#题解方法一：空间换时间hash-map或map" class="headerlink" title="题解方法一：空间换时间hash_map或map"></a>题解方法一：空间换时间hash_map或map</h4><p>今天想查一下c++ hashmap的使用方法，搜出来的一些文章实在辣眼睛，竟然很多都混淆了c++中map和hashmap的区别。</p>
+<p>首先，c++ 标准库的std::map内部是排序的，内部使用的是红黑树实现，不管是增加还是查找的时间复杂度 O(logN)O(logN)O(logN)。</p>
+<p>而c++ 标准库的hashmap其实叫作std::unordered_map，其增加和查询的时间复杂度才是 O ( 1 ) O(1)O(1)。它提供了类似map的方法。在c++11下直接使用头文件#include <unordered_map> 就可以了，如果不在c++11标准下，也可以使用#include &lt;tr1/unordered_map&gt; 来支持hashmap.<br>————————————————<br>版权声明：本文为CSDN博主「mgsweet」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mgsweet/article/details/105649792">https://blog.csdn.net/mgsweet/article/details/105649792</a></p>
+<p>上文是找到的hash_map和map的区别，map的使用很简单，但是效果比排序后找还差。所以尝试使用hash_map，但是hash_map未加入C++11标准中。</p>
+<p>在VC中编译： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;hash_map&gt;</span><br><span class="line">2 using namespace stdext;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p> 在GCC中编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 #include &lt;ext/hash_map&gt;</span><br><span class="line">2 using namespace __gnu_cxx;</span><br><span class="line">3 hash_map&lt;int ,int&gt; myhash;</span><br></pre></td></tr></table></figure>
+
+<p>所以使用unordered_map（与map用法一致）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findRepeatNumber</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; new_nums;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (<span class="keyword">int</span>)nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(new_nums[nums[i]] == <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            new_nums[nums[i]] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>发现也没有自己的解法高</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806170727.png"></p>
+<h4 id="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"><a href="#题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）" class="headerlink" title="题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）"></a>题解方法二（最牛的方法）：原地置换法（索引值与值若无重复应该一一对应）</h4><p>题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。<br>因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = inums[i]=i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。</p>
+<p>​    遍历中，第一次遇到数字 xx 时，将其交换至索引 xx 处；而当第二次遇到数字 xx 时，一定有 nums[x] = xnums[x]=x ，此时即可得到一组重复数字。</p>
+<p><strong>算法流程：</strong></p>
+<ol>
+<li>遍历数组 numsnums ，设索引初始值为 i = 0i=0 :<ol>
+<li>若 nums[i] =i ： 说明此数字已在对应索引位置，无需交换，因此跳过；</li>
+<li>若 nums[nums[i]] = nums[i] ： 代表索引 nums[i] 处和索引 i 处的元素值都为 nums[i] ，即找到一组重复值，返回此值 nums[i] ；</li>
+<li>否则： 交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置。</li>
+</ol>
+</li>
+<li>若遍历完毕尚未返回，则返回 -1 。</li>
+</ol>
+<p>复杂度分析：<br>时间复杂度 O(N)O(N) ： 遍历数组使用 O(N)O(N) ，每轮遍历的判断和交换操作使用 O(1)O(1) 。<br>空间复杂度 O(1)O(1) ： 使用常数复杂度的额外空间。</p>
+<p>作者：jyd<br>链接：<a href="https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/">https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/solution/mian-shi-ti-03-shu-zu-zhong-zhong-fu-de-shu-zi-yua/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>由此写出代码如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210806171947.png"></p>
+<p>多次提交发现执行内速度差那么几ms就会差很多，做不到beat100%。</p>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+        <category>算法</category>
+        <category>原地置换</category>
+      </categories>
+      <tags>
+        <tag>Cpp</tag>
+        <tag>sort排序</tag>
+        <tag>哈希表</tag>
+        <tag>原地置换</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>侯捷C++面向对象笔记（三）补充</title>
     <url>/2021/08/14/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E8%A1%A5%E5%85%85/</url>
     <content><![CDATA[<p><strong>介绍：</strong>侯捷课程扩展补充：类模板，函数模板及其他等</p>
@@ -318,138 +392,6 @@
 <h3 id="五-namespace"><a href="#五-namespace" class="headerlink" title="五 namespace"></a>五 namespace</h3><p>有三种用法</p>
 <p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815195720.png"></p>
 <h3 id="六-一些没有讲的问题"><a href="#六-一些没有讲的问题" class="headerlink" title="六 一些没有讲的问题"></a>六 一些没有讲的问题</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210815202300.png"></p>
-]]></content>
-      <categories>
-        <category>cpp基础</category>
-      </categories>
-      <tags>
-        <tag>Cpp基础</tag>
-        <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>侯捷C++面向对象笔记（二）带指针的类</title>
-    <url>/2021/08/09/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>接着（一）的部分，这部分讲的是带指针的类，从复习开始</p>
-<span id="more"></span>
-
-<h3 id="一-复习Complex类的实现过程"><a href="#一-复习Complex类的实现过程" class="headerlink" title="一 复习Complex类的实现过程"></a>一 复习Complex类的实现过程</h3><p>1 好习惯：防卫式声明</p>
-<p>2 写出class 的head</p>
-<p>3 写class的body：数据和函数</p>
-<p>4 写构造函数，考虑是否需要默认值，在考虑函数传递是by value还是reference</p>
-<p>5 考虑写构造函数的初值列</p>
-<p>6 考虑功能，设计操作数：成员函数还是全局函数</p>
-<p>7 设计成员函数：考虑传递参数和返回值是否能用reference</p>
-<p><strong>没想清楚的问题：为什么有的全局函数也要用inline修饰</strong></p>
-<p>以String作为例子讲述带指针的类，先通过一些字符串的用法来确定如何编写，重点在“<strong>拷贝构造</strong>”和“<strong>拷贝赋值</strong>”，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202250.png"></p>
-<p>如果不写拷贝赋值的话，那编译器默认的是一个位一个位的<strong>拷贝构造</strong>和<strong>拷贝赋值</strong>，但是对于指针时，是拷贝那个地址，两个指针指向同一个地址，这并不是常规意义的拷贝。</p>
-<p>如下就是String的class</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809202718.png"></p>
-<p>上述四个函数，二三四在西方叫做big three</p>
-<p>第二个函数是拷贝构造，第三个函数是拷贝赋值，</p>
-<p>第四个函数<strong>析构函数</strong>，当这个类死亡的时候，析构函数会被调出。</p>
-<p>第五个函数就是普通的成员函数，是一个inline function</p>
-<h3 id="二-ctor和dtor（构造函数和析构函数）"><a href="#二-ctor和dtor（构造函数和析构函数）" class="headerlink" title="二 ctor和dtor（构造函数和析构函数）"></a>二 ctor和dtor（构造函数和析构函数）</h3><p><img src="C:/Users/97660/AppData/Roaming/Typora/typora-user-images/image-20210809203608657.png" alt="image-20210809203608657"></p>
-<p>因为构造函数里动态分配了内存，如果不释放就会造成内存泄漏，所以要采用析构函数来<strong>释放空间</strong>。</p>
-<h3 id="三-拷贝构造与拷贝赋值"><a href="#三-拷贝构造与拷贝赋值" class="headerlink" title="三 拷贝构造与拷贝赋值"></a>三 拷贝构造与拷贝赋值</h3><p>⭐ 注意：带指针的类必须要有<strong>拷贝赋值</strong>和<strong>拷贝构造</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809204828.png"></p>
-<p>上述例子讲述了如果没有这两个操作，就会有两个指针指向同一个地址，那另一个地址的内存就算内存泄露了。这被称作<strong>浅拷贝</strong>，拷贝赋值和拷贝构造是<strong>深拷贝</strong>。</p>
-<p>a的别名（alias）是b，别名是一件很危险的事。</p>
-<h4 id="3-1-拷贝构造函数"><a href="#3-1-拷贝构造函数" class="headerlink" title="3.1 拷贝构造函数"></a>3.1 拷贝构造函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205124.png"></p>
-<p>蓝色的这两行其实是完全相同的意思，第三句因为s2也是新创建出来的对象，也需要构造函数，所以第二和第三是完全一致的。</p>
-<h4 id="3-2-拷贝赋值函数"><a href="#3-2-拷贝赋值函数" class="headerlink" title="3.2 拷贝赋值函数"></a>3.2 拷贝赋值函数</h4><p>拷贝赋值需要先清空原来的空间，再分配一块与赋值相同的内存，最后进行拷贝。但是需要检测是不是<strong>自己给自己赋值</strong>，不仅是为了效率，实际上也是为了正确性。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809205617.png"></p>
-<p>如果不检测自我赋值，会出现下述问题：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809210356.png"></p>
-<hr>
-<h3 id="四-output函数"><a href="#四-output函数" class="headerlink" title="四 output函数"></a>四 output函数</h3><p>重载操作符&lt;&lt;，<strong>不可以是一个成员函数</strong>，因为如果是字符串的成员函数，用的时候方向会相反，cout本来在左边现在在右边（？没动）</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213623.png"></p>
-<hr>
-<h3 id="五-栈（stack）和堆（heap）"><a href="#五-栈（stack）和堆（heap）" class="headerlink" title="五 栈（stack）和堆（heap）"></a>五 栈（stack）和堆（heap）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809213756.png"></p>
-<p>stack还会存放local object（在函数内部创建的对象）</p>
-<p>上述两种创建方式的不同在于，new可以在程序的任何地方创建，创建就要对它负责，需要delete。因为它是在堆里，如果在栈里的话，离开该作用域就会消失。</p>
-<h4 id="5-1-stack-objects的生命期"><a href="#5-1-stack-objects的生命期" class="headerlink" title="5.1 stack objects的生命期"></a>5.1 stack objects的生命期</h4><p>离开作用域就消失了，会调用析构函数清理自己，所以也叫做auto object。</p>
-<h4 id="5-2-static-local-objects的生命期"><a href="#5-2-static-local-objects的生命期" class="headerlink" title="5.2 static local objects的生命期"></a>5.2 static local objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line">&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c2是static object，生命周期在整个作用域，结束之后仍然存在，直到整个程序结束。</p>
-<h4 id="5-3-global-objects的生命期"><a href="#5-3-global-objects的生命期" class="headerlink" title="5.3 global objects的生命期"></a>5.3 global objects的生命期</h4><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span>...&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">static</span> Complex <span class="title">c2</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> main</span><br><span class="line">&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>c3是global object，其生命在整个程序结束之后才结束，也可以把它视为一种static object，但是作用域为<strong>整个程序</strong>！</p>
-<h4 id="5-4-heap-objects的生命期"><a href="#5-4-heap-objects的生命期" class="headerlink" title="5.4 heap objects的生命期"></a>5.4 heap objects的生命期</h4><p>new的正确写法是在同一个作用域里创建和释放</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214649.png"></p>
-<h4 id="5-5-new的机制"><a href="#5-5-new的机制" class="headerlink" title="5.5 new的机制"></a>5.5 new的机制</h4><p>绝大多数都是变成以下三个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809214929.png"></p>
-<h4 id="5-6-delete的机制"><a href="#5-6-delete的机制" class="headerlink" title="5.6 delete的机制"></a>5.6 delete的机制</h4><p>转换为以下两个动作</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220305.png"></p>
-<hr>
-<h3 id="六-动态分配所得到的内存块（很宝贵的知识）"><a href="#六-动态分配所得到的内存块（很宝贵的知识）" class="headerlink" title="六 动态分配所得到的内存块（很宝贵的知识）"></a>六 动态分配所得到的内存块（很宝贵的知识）</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809220538.png"></p>
-<p>第一张图：在调试模式下，不止得到了所要分配的内存，还得到了灰色和下面的内存。由于在VC下，每一块内存都是16的倍数，所以就要填补深绿色的pad成64字节。上下的红色为cookie，记录整块的大小，为什么要记录？因为系统回收的时候只给了指针，必须要有个地方记录大小。</p>
-<p>第二张图是release模式。</p>
-<hr>
-<h3 id="七-动态分配所得的数组"><a href="#七-动态分配所得的数组" class="headerlink" title="七 动态分配所得的数组"></a>七 动态分配所得的数组</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221403.png"></p>
-<p>vc的做法，需要用一个整数记录数组中元素的个数。</p>
-<p><strong>为什么动态分配的数组要搭配delete [] （array delete）呢？</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210809221731.png"></p>
-<p>不管加不加[]，都不会影响删掉的大小，因为已经记录了是21h，问题是出在如果不加[]，只会调用一次析构函数；而加了[]，才会把各自的对象用析构函数释放内存。</p>
-]]></content>
-      <categories>
-        <category>cpp基础</category>
-      </categories>
-      <tags>
-        <tag>Cpp基础</tag>
-        <tag>侯捷课程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>侯捷C++面向对象笔记（四）OOP，OOD</title>
-    <url>/2021/08/17/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程的基于对象设计，面向对象的编程</p>
-<span id="more"></span>
-
-
-
-<h3 id="一-Composition（复合）其实就是组合"><a href="#一-Composition（复合）其实就是组合" class="headerlink" title="一 Composition（复合）其实就是组合"></a>一 Composition（复合）其实就是组合</h3><p>代表has - a关系</p>
-<p>整体由多种部分组成，当整体不在了则部分就消失了。生命周期是同步的。</p>
-<p>下面是一个特殊的例子，是Adapter的设计模式</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817090712.png"></p>
-<h4 id="复合关系下的构造和析构"><a href="#复合关系下的构造和析构" class="headerlink" title="复合关系下的构造和析构"></a>复合关系下的构造和析构</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817091045.png"></p>
-<p>构造由内而外，析构由外而内</p>
-<h3 id="二-Delegation（委托）其实就是聚合"><a href="#二-Delegation（委托）其实就是聚合" class="headerlink" title="二 Delegation（委托）其实就是聚合"></a>二 Delegation（委托）其实就是聚合</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817091617.png"></p>
-<p>有一个指针指向另一个东西。跟复合的关系其实就像是Composition by reference。</p>
-<p>如果整个东西不存在了，那聚合的东西仍然存在。生命周期是不同步的。</p>
-<p>上述的设计模式是Handle/Body（编译防火墙）。右边去实现不影响左边。</p>
-<h3 id="三-Inheritance（继承）"><a href="#三-Inheritance（继承）" class="headerlink" title="三 Inheritance（继承）"></a>三 Inheritance（继承）</h3><p>代表is - a关系</p>
-<p>C++有三种继承关系：private、public、protected，JAVA只有private一种。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817092632.png"></p>
-<h4 id="问题：struct和class的关系"><a href="#问题：struct和class的关系" class="headerlink" title="问题：struct和class的关系"></a>问题：struct和class的关系</h4><p>从内存的角度来看继承</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817092751.png"></p>
-<p>与组成的过程差不多。</p>
-<h4 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171055302.jpg"></p>
-<p><strong>非常常见的调用：子类调用父类的函数</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171104416.png"></p>
-<p>但是如果子类对于父类函数里调用的一个函数进行了重载，那就会执行子类重载的函数。</p>
-<p>这种设计模式叫做Template Method 模板方法 </p>
-<h4 id="继承-组成关系下的构造和析构"><a href="#继承-组成关系下的构造和析构" class="headerlink" title="继承+组成关系下的构造和析构"></a>继承+组成关系下的构造和析构</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171233019.png"></p>
-<p>第一种情况谁先谁后自己探究，</p>
-<p>第二种情况是最先调用component，再Base，再到Derived</p>
-<h4 id="聚合-继承的关系最经典写法"><a href="#聚合-继承的关系最经典写法" class="headerlink" title="聚合+继承的关系最经典写法"></a>聚合+继承的关系最经典写法</h4><p>用于实现只有一份数据，但是有多种表现，如下图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171237850.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171238141.png"></p>
-<p>子类都是Observer，最上图就是不同的observer有三个</p>
-<h3 id="四-委托相关设计"><a href="#四-委托相关设计" class="headerlink" title="四 委托相关设计"></a>四 委托相关设计</h3><p><strong>委托+继承</strong></p>
-<h4 id="Composite模式"><a href="#Composite模式" class="headerlink" title="Composite模式"></a>Composite模式</h4><p>面临的问题：要写一个Windows system或者file system</p>
-<p>考虑目录与文件的关系</p>
-<p>把Primitive当作文件，Composite当作目录。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817130003.png"></p>
-<h4 id="Prototype模式（没听懂）"><a href="#Prototype模式（没听懂）" class="headerlink" title="Prototype模式（没听懂）"></a>Prototype模式（没听懂）</h4><p>背景：需要一个树状继承，想要创建未来才会出现的子类。子类是被客户买去才创建的，那我怎么去创建子类呢？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817182635.png"></p>
-<p>解决：让下面派生的子类都创建一个自己，让父类能看到它。</p>
-<p>比如上述，在子类里安排一个静态的自己（有下划线就是<strong>静态</strong>）。</p>
-<p>构造函数是私有的，写为private，因为前面加了“-”号，若是+或者不写就是public。#号是protected </p>
-<p>clone函数让客户端通过原型制造副本。</p>
-<p><strong>为什么需要第二个构造函数？又为什么放在保护区域？</strong></p>
-<p>因为第一个构造函数是创建静态的自己，但是clone的时候是new一个新的自己，用的是第二个构造函数。因为如果调用第一个，就会又把原型加入框架中。所以才有第二个构造函数。放在私有区域或保护区域，因为不打算被外界创建，要通过原型来创建。</p>
 ]]></content>
       <categories>
         <category>cpp基础</category>
@@ -598,6 +540,64 @@
       <tags>
         <tag>Cpp</tag>
         <tag>算法学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>侯捷C++面向对象笔记（四）OOP，OOD</title>
+    <url>/2021/08/17/%E4%BE%AF%E6%8D%B7C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<p><strong>介绍：</strong>侯捷课程的基于对象设计，面向对象的编程</p>
+<span id="more"></span>
+
+
+
+<h3 id="一-Composition（复合）其实就是组合"><a href="#一-Composition（复合）其实就是组合" class="headerlink" title="一 Composition（复合）其实就是组合"></a>一 Composition（复合）其实就是组合</h3><p>代表has - a关系</p>
+<p>整体由多种部分组成，当整体不在了则部分就消失了。生命周期是同步的。</p>
+<p>下面是一个特殊的例子，是Adapter的设计模式</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817090712.png"></p>
+<h4 id="复合关系下的构造和析构"><a href="#复合关系下的构造和析构" class="headerlink" title="复合关系下的构造和析构"></a>复合关系下的构造和析构</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817091045.png"></p>
+<p>构造由内而外，析构由外而内</p>
+<h3 id="二-Delegation（委托）其实就是聚合"><a href="#二-Delegation（委托）其实就是聚合" class="headerlink" title="二 Delegation（委托）其实就是聚合"></a>二 Delegation（委托）其实就是聚合</h3><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817091617.png"></p>
+<p>有一个指针指向另一个东西。跟复合的关系其实就像是Composition by reference。</p>
+<p>如果整个东西不存在了，那聚合的东西仍然存在。生命周期是不同步的。</p>
+<p>上述的设计模式是Handle/Body（编译防火墙）。右边去实现不影响左边。</p>
+<h3 id="三-Inheritance（继承）"><a href="#三-Inheritance（继承）" class="headerlink" title="三 Inheritance（继承）"></a>三 Inheritance（继承）</h3><p>代表is - a关系</p>
+<p>C++有三种继承关系：private、public、protected，JAVA只有private一种。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817092632.png"></p>
+<h4 id="问题：struct和class的关系"><a href="#问题：struct和class的关系" class="headerlink" title="问题：struct和class的关系"></a>问题：struct和class的关系</h4><p>从内存的角度来看继承</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817092751.png"></p>
+<p>与组成的过程差不多。</p>
+<h4 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171055302.jpg"></p>
+<p><strong>非常常见的调用：子类调用父类的函数</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171104416.png"></p>
+<p>但是如果子类对于父类函数里调用的一个函数进行了重载，那就会执行子类重载的函数。</p>
+<p>这种设计模式叫做Template Method 模板方法 </p>
+<h4 id="继承-组成关系下的构造和析构"><a href="#继承-组成关系下的构造和析构" class="headerlink" title="继承+组成关系下的构造和析构"></a>继承+组成关系下的构造和析构</h4><p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171233019.png"></p>
+<p>第一种情况谁先谁后自己探究，</p>
+<p>第二种情况是最先调用component，再Base，再到Derived</p>
+<h4 id="聚合-继承的关系最经典写法"><a href="#聚合-继承的关系最经典写法" class="headerlink" title="聚合+继承的关系最经典写法"></a>聚合+继承的关系最经典写法</h4><p>用于实现只有一份数据，但是有多种表现，如下图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171237850.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/202108171238141.png"></p>
+<p>子类都是Observer，最上图就是不同的observer有三个</p>
+<h3 id="四-委托相关设计"><a href="#四-委托相关设计" class="headerlink" title="四 委托相关设计"></a>四 委托相关设计</h3><p><strong>委托+继承</strong></p>
+<h4 id="Composite模式"><a href="#Composite模式" class="headerlink" title="Composite模式"></a>Composite模式</h4><p>面临的问题：要写一个Windows system或者file system</p>
+<p>考虑目录与文件的关系</p>
+<p>把Primitive当作文件，Composite当作目录。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817130003.png"></p>
+<h4 id="Prototype模式（没听懂）"><a href="#Prototype模式（没听懂）" class="headerlink" title="Prototype模式（没听懂）"></a>Prototype模式（没听懂）</h4><p>背景：需要一个树状继承，想要创建未来才会出现的子类。子类是被客户买去才创建的，那我怎么去创建子类呢？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/RDXSun/img_warehouse/img/20210817182635.png"></p>
+<p>解决：让下面派生的子类都创建一个自己，让父类能看到它。</p>
+<p>比如上述，在子类里安排一个静态的自己（有下划线就是<strong>静态</strong>）。</p>
+<p>构造函数是私有的，写为private，因为前面加了“-”号，若是+或者不写就是public。#号是protected </p>
+<p>clone函数让客户端通过原型制造副本。</p>
+<p><strong>为什么需要第二个构造函数？又为什么放在保护区域？</strong></p>
+<p>因为第一个构造函数是创建静态的自己，但是clone的时候是new一个新的自己，用的是第二个构造函数。因为如果调用第一个，就会又把原型加入框架中。所以才有第二个构造函数。放在私有区域或保护区域，因为不打算被外界创建，要通过原型来创建。</p>
+]]></content>
+      <categories>
+        <category>cpp基础</category>
+      </categories>
+      <tags>
+        <tag>Cpp基础</tag>
+        <tag>侯捷课程</tag>
       </tags>
   </entry>
   <entry>
@@ -771,187 +771,6 @@
       </tags>
   </entry>
   <entry>
-    <title>雅思精读4</title>
-    <url>/2021/10/11/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB4/</url>
-    <content><![CDATA[<p>介绍：雅思精读笔记，语言类</p>
-<span id="more"></span>
-
-<h3 id="剑5-test2-p3"><a href="#剑5-test2-p3" class="headerlink" title="剑5 test2  p3"></a>剑5 test2  p3</h3><p><strong>关键词：Scientific English</strong></p>
-<h4 id="单词："><a href="#单词：" class="headerlink" title="单词："></a>单词：</h4><table>
-<thead>
-<tr>
-<th>学科词</th>
-<th></th>
-<th>生词</th>
-<th></th>
-<th>眼熟词</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>lingua franca（通用语）</td>
-<td>encyclopedias</td>
-<td>prominence</td>
-<td>cartography</td>
-<td>empirical</td>
-<td>rational</td>
-</tr>
-<tr>
-<td>audience</td>
-<td>intellectual property</td>
-<td>curator</td>
-<td>formative</td>
-<td>original science</td>
-<td>commercial exploitation</td>
-</tr>
-<tr>
-<td>humanist notion of the individual</td>
-<td>cipher</td>
-<td>industrial revolution</td>
-<td></td>
-<td>inadequate</td>
-<td></td>
-</tr>
-<tr>
-<td>vocabulary</td>
-<td>grammatical</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>objective</td>
-<td>impersonal</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>monograph</td>
-<td>lexical</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>discipline</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h4 id="同义替换："><a href="#同义替换：" class="headerlink" title="同义替换："></a>同义替换：</h4><h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、cling the most keenly to something.</p>
-<p><strong>翻译：</strong>对…万分钟爱</p>
-<h4 id="段落中心句位置与文章结构积累："><a href="#段落中心句位置与文章结构积累：" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><p>第一段讲了英语是世界上使用最广泛的科学语言，但是在十七世纪以前，拉丁语才是通用语言、</p>
-<p>第二段讲了文艺复兴对于英语的影响。</p>
-<p>第三段讲了两个人促进经验科学的研究</p>
-<p>第四段讲了英语发展初期的情况</p>
-<p>第五段讲了为什么最初的科学用拉丁文来写，后来又为什么变成英文了</p>
-<p>第六段讲了用拉丁文是为了保守秘密导致其流行。</p>
-<p>第七段讲了英文被用来当作科学语言推迟了是因为没有丰富的语言进行表达。</p>
-<p>第八段讲了几个皇家协会的人丰富英语的语言。</p>
-<p>第九段讲了1665年一本新的科学杂志鼓励新的科学写作风格，简洁、重点地描绘某一特定实验。</p>
-<hr>
-]]></content>
-      <categories>
-        <category>雅思</category>
-      </categories>
-      <tags>
-        <tag>雅思精读</tag>
-        <tag>language</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>留存纪念的介绍</title>
-    <url>/2021/08/05/hello-world/</url>
-    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
-<span id="more"></span>
-
-<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>雅思精读3</title>
     <url>/2021/10/10/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB3/</url>
     <content><![CDATA[<p>介绍：雅思精读笔记，教育类</p>
@@ -1103,6 +922,501 @@
         <tag>雅思精读</tag>
         <tag>Education</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>雅思精读5</title>
+    <url>/2021/10/17/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB5/</url>
+    <content><![CDATA[<p>介绍：雅思精读笔记，地理类</p>
+<span id="more"></span>
+
+<h3 id="剑8-test2-p2"><a href="#剑8-test2-p2" class="headerlink" title="剑8 test2  p2"></a>剑8 test2  p2</h3><p><strong>关键词：</strong>时期演变</p>
+<h4 id="单词："><a href="#单词：" class="headerlink" title="单词："></a>单词：</h4><table>
+<thead>
+<tr>
+<th>学科词</th>
+<th></th>
+<th>生词</th>
+<th></th>
+<th>眼熟词</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>climatic shifts = climate change</td>
+<td>glacial</td>
+<td></td>
+<td></td>
+<td>embark on</td>
+<td>dazzling</td>
+</tr>
+<tr>
+<td>episode</td>
+<td>famine</td>
+<td></td>
+<td></td>
+<td>respond to （响应，应对）</td>
+<td><strong>at the mercy of 在……的控制下</strong></td>
+</tr>
+<tr>
+<td>seesaw</td>
+<td>quarter-century 25年</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="段落中心句位置与文章结构积累："><a href="#段落中心句位置与文章结构积累：" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><h4 id="同义替换："><a href="#同义替换：" class="headerlink" title="同义替换："></a>同义替换：</h4><h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><p>1、heading题可以通过首二末原则来找答案，不需要看完所有</p>
+<p>2、matching题如果有题目，通过题目定位具体的段落，可能不止一段，而且带选项的matching题目可能乱序。</p>
+<h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><hr>
+]]></content>
+      <categories>
+        <category>雅思</category>
+      </categories>
+      <tags>
+        <tag>雅思精读</tag>
+        <tag>Geography</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>雅思精读4</title>
+    <url>/2021/10/11/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB4/</url>
+    <content><![CDATA[<p>介绍：雅思精读笔记，语言类</p>
+<span id="more"></span>
+
+<h3 id="剑5-test2-p3"><a href="#剑5-test2-p3" class="headerlink" title="剑5 test2  p3"></a>剑5 test2  p3</h3><p><strong>关键词：Scientific English</strong></p>
+<h4 id="单词："><a href="#单词：" class="headerlink" title="单词："></a>单词：</h4><table>
+<thead>
+<tr>
+<th>学科词</th>
+<th></th>
+<th>生词</th>
+<th></th>
+<th>眼熟词</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lingua franca（通用语）</td>
+<td>encyclopedias</td>
+<td>prominence</td>
+<td>cartography</td>
+<td>empirical</td>
+<td>rational</td>
+</tr>
+<tr>
+<td>audience</td>
+<td>intellectual property</td>
+<td>curator</td>
+<td>formative</td>
+<td>original science</td>
+<td>commercial exploitation</td>
+</tr>
+<tr>
+<td>humanist notion of the individual</td>
+<td>cipher</td>
+<td>industrial revolution</td>
+<td>emergent</td>
+<td>inadequate</td>
+<td>dominate</td>
+</tr>
+<tr>
+<td>vocabulary</td>
+<td>grammatical</td>
+<td>publicise（宣扬）</td>
+<td>perversely（反常地、倔强地、荒谬地、变态地）</td>
+<td>magnetism</td>
+<td><strong>astronomy</strong></td>
+</tr>
+<tr>
+<td>objective</td>
+<td>impersonal</td>
+<td><strong>perseverely</strong>（坚持不懈地）</td>
+<td>cipher</td>
+<td>in relation to （相关的）</td>
+<td>Copernicus 哥白尼</td>
+</tr>
+<tr>
+<td>monograph</td>
+<td>lexical</td>
+<td>obscure</td>
+<td>inaugurate</td>
+<td>star（恒星）</td>
+<td><strong>enthusiasm</strong></td>
+</tr>
+<tr>
+<td>discipline</td>
+<td>intellectuals</td>
+<td></td>
+<td></td>
+<td>distinction</td>
+<td>men of trade</td>
+</tr>
+<tr>
+<td>the European Renaissance</td>
+<td>c. = circa（大约）</td>
+<td></td>
+<td></td>
+<td>domain</td>
+<td>seal</td>
+</tr>
+<tr>
+<td>revival</td>
+<td>empirical</td>
+<td></td>
+<td></td>
+<td>deposit</td>
+<td>keenly</td>
+</tr>
+<tr>
+<td>academy</td>
+<td>treatise</td>
+<td></td>
+<td></td>
+<td>exploitation</td>
+<td>genre</td>
+</tr>
+<tr>
+<td>hypothetical</td>
+<td>linguistic</td>
+<td></td>
+<td></td>
+<td>account（记述）</td>
+<td>momentum</td>
+</tr>
+<tr>
+<td>narrative（描述性的，记叙性质的）</td>
+<td>transcript</td>
+<td></td>
+<td></td>
+<td>estimate</td>
+<td></td>
+</tr>
+<tr>
+<td>oral</td>
+<td>transaction（学术团体的学报，交易）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Japanese（日语）</td>
+<td>German（德语）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>French（法语）</td>
+<td>Latin（拉丁语）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="同义替换："><a href="#同义替换：" class="headerlink" title="同义替换："></a>同义替换：</h4><h4 id="错题及蒙题复盘："><a href="#错题及蒙题复盘：" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><p>SUMMARY题（技巧是耐心）</p>
+<p>1、28</p>
+<p><strong>原因：</strong>这题需要通过多段进行解读，但是由于这里是填一个名词，而这句话后面有一个it，肯定是指代所填写的名词。这题的定位词也找错了，应该通过这句话的前一句或后一句来找，而且At first很重要，也是定位词</p>
+<p>2、29</p>
+<p><strong>原因：</strong> <strong>and</strong>，这题我找的时候只通过mathematicians判断出了后面需要填名词，但是应该想到，mathematicians是一个职业，所以后面也应该填写职业。</p>
+<p>3、32</p>
+<p><strong>原因：</strong>答案填的是Royal Society（皇家学会），society不止有社会的意思，还有社团协会的意思。我填写的是后面的society’s members，虽然看起来对，但是这个society不一定是皇家学会的呀，所以还是要找更具体一点。</p>
+<p>4、33</p>
+<p><strong>原因：</strong>这题错完全是因为我是傻逼，因为定位找对了，但是没往文章前面看，所以漏掉了German</p>
+<p>5、并列词的空格不限制词序，通过名词来定位，有时也会通过动词和一些副词（如 At first这些）</p>
+<h4 id="长难句不回读阅读训练：（每天练五个）"><a href="#长难句不回读阅读训练：（每天练五个）" class="headerlink" title="长难句不回读阅读训练：（每天练五个）"></a>长难句不回读阅读训练：（每天练五个）</h4><p>1、cling the most keenly to something.</p>
+<p><strong>翻译：</strong>对…万分钟爱</p>
+<h4 id="段落中心句位置与文章结构积累："><a href="#段落中心句位置与文章结构积累：" class="headerlink" title="段落中心句位置与文章结构积累："></a>段落中心句位置与文章结构积累：</h4><p>第一段讲了英语是世界上使用最广泛的科学语言，但是在十七世纪以前，拉丁语才是通用语言、</p>
+<p>第二段讲了文艺复兴对于英语的影响。</p>
+<p>第三段讲了两个人促进经验科学的研究</p>
+<p>第四段讲了英语发展初期的情况</p>
+<p>第五段讲了为什么最初的科学用拉丁文来写，后来又为什么变成英文了</p>
+<p>第六段讲了用拉丁文是为了保守秘密导致其流行。</p>
+<p>第七段讲了英文被用来当作科学语言推迟了是因为没有丰富的语言进行表达。</p>
+<p>第八段讲了几个皇家协会的人丰富英语的语言。</p>
+<p>第九段讲了1665年一本新的科学杂志鼓励新的科学写作风格，简洁、重点地描绘某一特定实验。</p>
+<hr>
+<h2 id="略读挑重点"><a href="#略读挑重点" class="headerlink" title="略读挑重点"></a>略读挑重点</h2><h3 id="剑2-test2-p1"><a href="#剑2-test2-p1" class="headerlink" title="剑2 test2  p1"></a>剑2 test2  p1</h3><h4 id="单词：-1"><a href="#单词：-1" class="headerlink" title="单词："></a>单词：</h4><table>
+<thead>
+<tr>
+<th>学科词</th>
+<th></th>
+<th>生词</th>
+<th></th>
+<th>眼熟词</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Native American（印第安人，Indian）</td>
+<td>linguist（语言学家）</td>
+<td>sprawl（v. 散布；无计划地拓展）</td>
+<td>rebound</td>
+<td>dying</td>
+<td>middle-age（adj ,中年人）</td>
+</tr>
+<tr>
+<td>linguistic（adj， 语言学的）</td>
+<td>linguistics（n，语言学）</td>
+<td>breed（培育养育，导致，产生）</td>
+<td>pepper（辣椒粉，V.使布满，使充满）</td>
+<td>elderly（adj, 上了年纪的）</td>
+<td>head for（引向好（坏）的结果）</td>
+</tr>
+<tr>
+<td>diversity</td>
+<td>evolutionary（adj，进化的，演化的）</td>
+<td>dire</td>
+<td></td>
+<td>extinction</td>
+<td>necessarily（adv，必然地，必定，而不是需要地）</td>
+</tr>
+<tr>
+<td>minority</td>
+<td>globalisation</td>
+<td></td>
+<td></td>
+<td>relatively（adv. 相对地，比较而言地）</td>
+<td>critically（adv. 危急地；严重地）</td>
+</tr>
+<tr>
+<td>socio-economic</td>
+<td>unwritten（未成文的，口头的）</td>
+<td></td>
+<td></td>
+<td>alongside</td>
+<td>teens</td>
+</tr>
+<tr>
+<td>perception</td>
+<td>foster</td>
+<td></td>
+<td></td>
+<td>induce</td>
+<td>discourage（使气馁，阻止，阻拦）</td>
+</tr>
+<tr>
+<td>ancestral</td>
+<td>tongue（舌头，语言）</td>
+<td></td>
+<td></td>
+<td>conservation</td>
+<td>reservation</td>
+</tr>
+<tr>
+<td>bilingualism（双语制，两种语言的使用）</td>
+<td>apprentice（学徒，初学者）</td>
+<td></td>
+<td></td>
+<td>chair（任…主席）</td>
+<td>intimately</td>
+</tr>
+<tr>
+<td>indigenous（当地的，本土的）</td>
+<td>revive 与 revival</td>
+<td></td>
+<td></td>
+<td><strong>be bound up with</strong></td>
+<td>shift</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>mount与amount</td>
+<td>pattern</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>identity</td>
+<td>erosion</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>rekindle</td>
+<td>approach（方式，方法）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>pair up</td>
+<td>weave</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>exclusively（专门地）</td>
+<td>transmit（传输；传送；传播）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>die out 灭绝</td>
+<td>preservation</td>
+</tr>
+</tbody></table>
+<p><strong>同义替换：</strong></p>
+<table>
+<thead>
+<tr>
+<th>bilingual  = more than one language</th>
+<th>shift = change</th>
+<th></th>
+</tr>
+</thead>
+</table>
+<h4 id="错题及蒙题复盘：-1"><a href="#错题及蒙题复盘：-1" class="headerlink" title="错题及蒙题复盘："></a>错题及蒙题复盘：</h4><p>1、SUMMARY题建议先做，因为基本是对整篇文章的总结，可以顺便把文章浏览一遍。</p>
+<p>2、MATCHING在出现了特定的人名或事件，可以在读文章的时候有意识画出来，最好带一支红笔。</p>
+<p>3、YES/NO/NOT GIVEN题，不要这么死板，合理推导是必须的，但是要有意识积累一些不能推导的情况，比如这篇文章中不能从政府的一些错误行为推导出政府能保护（因为在我的思想里，如果政府不这么做就能保护），实际上是过度推导。合理的推导比如说尽管语言学家已经竭尽全力，但是许多语言到了下个世纪还是会消失——从而推导出语言的消失是不可能避免的</p>
+<hr>
+]]></content>
+      <categories>
+        <category>雅思</category>
+      </categories>
+      <tags>
+        <tag>雅思精读</tag>
+        <tag>language</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>留存纪念的介绍</title>
+    <url>/2021/08/05/hello-world/</url>
+    <content><![CDATA[<p>系统生成介绍，忽略就好</p>
+<span id="more"></span>
+
+<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>雅思精读5</title>
+    <url>/2021/10/19/%E9%9B%85%E6%80%9D%E7%B2%BE%E8%AF%BB5/</url>
+    <content><![CDATA[<p>介绍：</p>
+<span id="more"></span>
+]]></content>
   </entry>
   <entry>
     <title>雅思精读1</title>
